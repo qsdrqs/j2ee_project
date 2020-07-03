@@ -27,3 +27,8 @@ hs_err_pid*
 build
 
 target
+
+.settings
+
+.classpath
+.project
