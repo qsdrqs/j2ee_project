@@ -12,11 +12,11 @@
 
 	<context:annotation-config />
 
-	<!-- 自动扫描 -->
-	<context:component-scan
-		base-package="grp.wudi.j2ee">
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
+
+	<!-- 开启注解的扫描,只希望处理service和dao ,controller不需要Spring去处理-->
+	<context:component-scan base-package="grp.wudi.j2ee">
+		<!-- 配置那些注解不扫描 -->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 
 	<!-- 引入配置文件 -->

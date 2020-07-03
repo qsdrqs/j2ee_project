@@ -10,6 +10,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import grp.wudi.j2ee.entity.User;
 
+import java.util.List;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-context.xml"})
@@ -46,5 +48,12 @@ public class UserServiceTest {
 	public void testGetUserByAccount() {
 		System.out.println(userService.getUserByAccount("交大"));
 	}
-
+	@Test
+	public void testFindAll(){
+		List<User> list = userService.findAll();
+		for (User user:list) {
+			System.out.println(user);
+		}
+	}
 }
+

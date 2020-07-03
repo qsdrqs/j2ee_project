@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int add(User user) {
+		System.out.println("业务层执行了");
 		return userDao.addUser(user);
 	}
 
@@ -34,5 +35,12 @@ public class UserServiceImpl implements UserService {
 	public List<User> getUserByAccount(String account) {
 		return userDao.findByAccount(account);
 	}
+
+	@Override
+	public List<User> findAll(){
+		System.out.println("业务层执行了");
+		return userDao.findAll();
+	}
+
 
 }

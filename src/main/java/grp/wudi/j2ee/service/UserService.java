@@ -10,4 +10,5 @@ public interface UserService {
 	public int add(User user);
 	public int update(User user);
 	public List<User> getUserByAccount(String account);
+	public List<User> findAll();
 }

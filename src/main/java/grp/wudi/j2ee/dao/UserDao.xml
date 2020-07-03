@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dingpang.test.mapper.UserMapper">
+<mapper namespace="grp.wudi.j2ee.dao.UserDao">
 	<select id="findById" parameterType="int"
 		resultType="grp.wudi.j2ee.entity.User">
 		SELECT
@@ -13,6 +13,9 @@
 		FROM
 		user
 		WHERE user_id = #{id}
+	</select>
+	<select id="findAll" resultType="grp.wudi.j2ee.entity.User">
+		select * from USER
 	</select>
 	
 	<select id="findByAccount" resultType="grp.wudi.j2ee.entity.User">
