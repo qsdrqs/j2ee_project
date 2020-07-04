@@ -61,8 +61,9 @@
 							<i class="fa fa-circle-o"></i> 用户管理
 					</a></li>
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/user/findAll1?page=1&pageSize=3"> <i
-							class="fa fa-circle-o"></i> 订单管理
+<%--						href="${pageContext.request.contextPath}/user/findAll1?page=1&pageSize=3"> <i--%>
+							href="../agent/findAll"> <i
+							class="fa fa-circle-o"></i> 经纪人管理
 					</a></li>
 
 				</ul></li>

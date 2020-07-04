@@ -17,6 +17,22 @@
     账号：<input type="text" name="userAccount"/><br/>
     <input type="submit" value="提交"/>
 </form>
-<jsp:forward page="./pages/main.jsp"></jsp:forward>
+<a href="agent/findAll">测试查询所有经纪人信息 </a>
+<form action="agent/findById" method="post">
+    输入要查询的经纪人ID：<input type="text" name="id"/>
+    <input type="submit" value="提交查询"/>
+</form>
+
+<h3>添加经纪人信息</h3>
+<form action="${pageContext.request.contextPath}/agent/addagent" method="post">
+    姓名：<input type="text" name="agentName"><br/>
+    性别：<input type="text" name="agentSex"><br/>
+    电话:<input type="text" name="agentTel"><br/>
+    邮件:<input type="text" name="agentEmail"><br/>
+    个人说明：<input type="text" name="agentProfile"><br/>
+    账户名称:<input type="text" name="agentAccount"><br/>
+    密码：<input type="password" name="agentPassword"><br/>
+    <input type="submit" value="提交">
+</form>
 </body>
 </html>
