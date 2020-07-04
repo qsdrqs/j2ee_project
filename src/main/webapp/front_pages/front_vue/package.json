@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "element-ui": "^2.2.1",
+    "element-ui": "^2.13.2",
     "npm": "^5.8.0",
     "vue": "^2.5.2",
     "vue-baidu-map": "^0.20.7",
