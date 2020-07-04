@@ -179,7 +179,7 @@
 											<td>${user.userName }</td>
 											<td>${user.userSex }</td>
 											<td>${user.userAccount }</td>
-											<td>${user.userPassword }</td>
+											<td>${user.userPasswordsha256 }</td>
 											<td>${user.userTelephone }</td>
 											<td>${user.userMail }</td>
 											<td class="text-center">
