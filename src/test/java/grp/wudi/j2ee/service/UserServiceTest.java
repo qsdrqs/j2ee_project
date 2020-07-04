@@ -41,10 +41,10 @@ public class UserServiceTest {
 	public void testUpdate() {
 		User user = new User();
 		user.setUserId(1);
-		user.setUserName("赵七");
+		user.setUserName("王五");
 		user.setUserSex(1);
 		user.setUserAccount("沙坡小白龙");
-		user.setUserPasswordsha256("123456");
+		user.setUserPasswordsha256("234567");
 		user.setUserMail("123456@qq.com");
 		user.setUserTelephone("123456");
 		userService.update(user);
