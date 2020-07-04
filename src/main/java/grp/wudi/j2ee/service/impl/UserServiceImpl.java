@@ -1,6 +1,5 @@
 package grp.wudi.j2ee.service.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -29,10 +28,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int update(User user) {
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
-		String dateStr=sdf.format(date);
-		user.setUserUpdatetime(dateStr);
+		user.setUserUpdatetime(date);
 		return userDao.update(user);
 	}
 

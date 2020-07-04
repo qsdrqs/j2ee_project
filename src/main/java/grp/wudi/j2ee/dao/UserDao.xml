@@ -40,8 +40,10 @@
 	
 	<insert id="addUser" keyProperty="userId" useGeneratedKeys="true"
 		parameterType="grp.wudi.j2ee.entity.User">
-		INSERT INTO user(user_name,user_sex,user_account,user_password,user_mail,user_telephone,user_updatetime,user_createtime)
-		VALUES(#{userName},#{userSex},#{userAccount},#{userPassword},#{userMail},#{userTelephone},#{userUpdatetime},#{userCreatetime})
+		INSERT INTO 
+		user(user_name,user_sex,user_account,user_passwordsha256,user_mail,user_telephone,user_updatetime,user_createtime)
+		VALUES
+		(#{userName},#{userSex},#{userAccount},#{userPasswordsha256},#{userMail},#{userTelephone},#{userUpdatetime},#{userCreatetime})
 	</insert>
 	
 	<update id="update"
@@ -51,7 +53,7 @@
 		user_name=#{userName}, 
 		user_sex=#{userSex},
 		user_account = #{userAccount},
-		user_password = #{userPassword},
+		user_passwordsha256 = #{userPasswordsha256},
 		user_mail = #{userMail},
 		user_telephone = #{userTelephone},
 		user_updatetime = #{userUpdatetime}

@@ -23,9 +23,12 @@ public class UserServiceTest {
 	@Test
 	public void testAdd() {
 		User user = new User();
-		user.setUserName("李四");
+		user.setUserName("赵四");
 		user.setUserSex(1);
-		user.setUserAccount("交大吴彦祖");
+		user.setUserAccount("交大蔡徐坤");
+		user.setUserPasswordsha256("123456");
+		user.setUserMail("123456@qq.com");
+		user.setUserTelephone("123456");
 		userService.add(user);
 	}
 	
@@ -37,10 +40,13 @@ public class UserServiceTest {
 	@Test
 	public void testUpdate() {
 		User user = new User();
-		user.setUserId(6);
+		user.setUserId(1);
 		user.setUserName("赵七");
 		user.setUserSex(1);
 		user.setUserAccount("沙坡小白龙");
+		user.setUserPasswordsha256("123456");
+		user.setUserMail("123456@qq.com");
+		user.setUserTelephone("123456");
 		userService.update(user);
 	}
 	
@@ -61,7 +67,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void testDeleteUser() {
-		userService.deleteUser(8);
+		userService.deleteUser(2);
 	}
 }
 
