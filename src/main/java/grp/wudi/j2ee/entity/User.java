@@ -1,5 +1,6 @@
 package grp.wudi.j2ee.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class User {
@@ -12,6 +13,8 @@ public class User {
 	private String userTelephone; //用户电话
 	private Date userCreatetime;//用户注册时间
 	private Date userUpdatetime;//用户最后一次修改时间
+	private String userCreatetimeStr;
+	private String userUpdatetimeStr;
 	
 	
 	public User() {
@@ -104,6 +107,34 @@ public class User {
 
 	public void setUserUpdatetime(Date userUpdatetime) {
 		this.userUpdatetime = userUpdatetime;
+	}
+	
+	
+
+	public String getUserCreatetimeStr() {
+		if(null!= this.userCreatetime) {
+			SimpleDateFormat date =  new SimpleDateFormat("yyyy-MM-dd");
+			userCreatetimeStr = date.format(this.userCreatetime);
+			return userCreatetimeStr;
+		}
+		return null;
+	}
+
+	public void setUserCreatetimeStr(String userCreatetimeStr) {
+		this.userCreatetimeStr = userCreatetimeStr;
+	}
+
+	public String getUserUpdatetimeStr() {
+		if(null!= this.userUpdatetime) {
+			SimpleDateFormat date =  new SimpleDateFormat("yyyy-MM-dd");
+			userUpdatetimeStr = date.format(this.userUpdatetime);
+			return userUpdatetimeStr;
+		}
+		return null;
+	}
+
+	public void setUserUpdatetimeStr(String userUpdatetimeStr) {
+		this.userUpdatetimeStr = userUpdatetimeStr;
 	}
 
 	@Override

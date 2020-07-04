@@ -165,6 +165,8 @@
 										<th class="sorting">账户密码</th>
 										<th class="text-center sorting">用户电话</th>
 										<th class="sorting">用户邮箱</th>
+										<th class="sorting">用户创建时间</th>
+										<th class="sorting">最后修改时间</th>
 
 									</tr>
 								</thead>
@@ -182,6 +184,8 @@
 											<td>${user.userPasswordsha256 }</td>
 											<td>${user.userTelephone }</td>
 											<td>${user.userMail }</td>
+											<td>${user.userCreatetimeStr}</td>
+											<td>${user.userUpdatetimeStr }</td>
 											<td class="text-center">
 												<button type="button" class="btn bg-olive btn-xs">订单</button>
 												<button type="button" class="btn bg-olive btn-xs">详情</button>
