@@ -28,6 +28,8 @@ build
 
 target
 
+j2ee.iml
+
 .settings
 
 .classpath
