@@ -21,14 +21,19 @@
     <bean   id="internalResourceViewResolver"
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 
-        <property name="prefix" value="/WEB-INF/pages/"></property>
+        <property name="prefix" value="/pages/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
 
+    <!-- 设置不过滤的静态资源 -->
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/img/**" location="/img/"/>
+    <mvc:resources mapping="/plugins/**" location="/plugins/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
 
-    <!-- 过滤静态资源 -->
 
-<!--    <mvc:resources mapping="" location=""-->
+
+    <!--    <mvc:resources mapping="" location=""-->
 
     <mvc:annotation-driven></mvc:annotation-driven>
 </beans>

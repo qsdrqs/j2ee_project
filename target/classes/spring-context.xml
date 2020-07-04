@@ -44,7 +44,7 @@
 			</bean>
 		</property>
 		<property name="typeAliasesPackage"
-			value="com.dingpang.test.entity" />
+			value="grp.wudi.j2ee.entity" />
 		<property name="mapperLocations"
 			value="classpath*:grp/wudi/j2ee/dao/*.xml" />
 	</bean>
