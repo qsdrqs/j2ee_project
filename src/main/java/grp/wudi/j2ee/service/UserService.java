@@ -9,6 +9,7 @@ public interface UserService {
 	public User getUserById(int id);
 	public int add(User user);
 	public int update(User user);
-	public List<User> getUserByAccount(String account);
+	public List<User> getUserByKeyword(User user);
 	public List<User> findAll();
+	public int deleteUser(int id);
 }

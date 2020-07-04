@@ -1,5 +1,7 @@
 package grp.wudi.j2ee.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,24 +24,31 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int add(User user) {
-		System.out.println("业务层执行了");
 		return userDao.addUser(user);
 	}
 
 	@Override
 	public int update(User user) {
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String dateStr=sdf.format(date);
+		user.setUserUpdatetime(dateStr);
 		return userDao.update(user);
 	}
 
 	@Override
-	public List<User> getUserByAccount(String account) {
-		return userDao.findByAccount(account);
+	public List<User> getUserByKeyword(User user) {
+		return userDao.findByKeyword(user);
 	}
 
 	@Override
 	public List<User> findAll(){
-		System.out.println("业务层执行了");
 		return userDao.findAll();
+	}
+
+	@Override
+	public int deleteUser(int id) {
+		return userDao.removeUser(id);
 	}
 
 

@@ -23,9 +23,9 @@ public class UserServiceTest {
 	@Test
 	public void testAdd() {
 		User user = new User();
-		user.setUserName("张三");
+		user.setUserName("李四");
 		user.setUserSex(1);
-		user.setUserAccount("交大蔡徐坤");
+		user.setUserAccount("交大吴彦祖");
 		userService.add(user);
 	}
 	
@@ -37,23 +37,31 @@ public class UserServiceTest {
 	@Test
 	public void testUpdate() {
 		User user = new User();
-		user.setUserId(1);
-		user.setUserName("李四");
+		user.setUserId(6);
+		user.setUserName("赵七");
 		user.setUserSex(1);
-		user.setUserAccount("交大蔡徐坤");
+		user.setUserAccount("沙坡小白龙");
 		userService.update(user);
 	}
 	
 	@Test
-	public void testGetUserByAccount() {
-		System.out.println(userService.getUserByAccount("交大"));
+	public void testGetUserByKeyword() {
+		User user = new User();
+		user.setUserId(1);
+		System.out.println(userService.getUserByKeyword(user));
 	}
+	
 	@Test
 	public void testFindAll(){
 		List<User> list = userService.findAll();
 		for (User user:list) {
 			System.out.println(user);
 		}
+	}
+	
+	@Test
+	public void testDeleteUser() {
+		userService.deleteUser(8);
 	}
 }
 
