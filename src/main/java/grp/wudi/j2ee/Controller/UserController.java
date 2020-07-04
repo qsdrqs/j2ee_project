@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.github.pagehelper.PageInfo;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,16 +27,12 @@ public class UserController {
     private UserServiceImpl userService;
 
     /**
-     * 查询所有用户信息
-     * @param model
-     * @return
-     * @throws Exception
+     * 	查询所有用户信息
      */
     @RequestMapping(path = "/findAll")
-    public String findAll(Model model) throws Exception {
-        System.out.println("表现层执行了查询所有用户信息");
-        List<User> list = userService.findAll();
-        model.addAttribute("list",list);
+    public String findAll(@RequestParam(value = "p", defaultValue = "1") int p,Model model) throws Exception {
+    	PageInfo<User> pi = userService.finAll(p);
+    	model.addAttribute("pi", pi);
         return "user-list";
     }
 
@@ -49,12 +48,22 @@ public class UserController {
         return mv;
     }
     /**
-     * 保存用户信息
+     * 	保存用户信息
      */
     @RequestMapping(path = "/save")
     public void save(User user, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("表现层执行了保存用户...");
         userService.add(user);
+        request.getRequestDispatcher("/user/findAll").forward(request,response);
+    }
+    
+    /**
+     * 	删除用户信息
+     */
+    @RequestMapping(path = "/delete/{id}")
+    public void delete(int id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("表现层执行了删除用户...");
+        userService.deleteUser(id);
         request.getRequestDispatcher("/user/findAll").forward(request,response);
     }
 

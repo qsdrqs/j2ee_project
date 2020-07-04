@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import grp.wudi.j2ee.dao.UserDao;
 import grp.wudi.j2ee.entity.User;
 import grp.wudi.j2ee.service.UserService;
@@ -15,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Override
 	public User getUserById(int id) {
 		return userDao.findById(id);
@@ -39,7 +42,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> findAll(){
+	public List<User> findAll() {
 		return userDao.findAll();
 	}
 
@@ -48,5 +51,11 @@ public class UserServiceImpl implements UserService {
 		return userDao.removeUser(id);
 	}
 
+	@Override
+	public PageInfo<User> finAll(int p) {
+		PageHelper.startPage(p, 5);
+		List<User> users = userDao.findAll();
+		return new PageInfo<User>(users);
+	}
 
 }

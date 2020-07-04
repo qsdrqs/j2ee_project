@@ -57,7 +57,7 @@
 				<ul class="treeview-menu">
 
 					<li id="system-setting"><a
-						href="../user/findAll1">
+						href="../user/findAll">
 							<i class="fa fa-circle-o"></i> 用户管理
 					</a></li>
 					<li id="system-setting"><a

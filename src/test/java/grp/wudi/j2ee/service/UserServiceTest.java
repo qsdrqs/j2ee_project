@@ -23,10 +23,10 @@ public class UserServiceTest {
 	@Test
 	public void testAdd() {
 		User user = new User();
-		user.setUserName("赵四");
+		user.setUserName("赵3四");
 		user.setUserSex(1);
-		user.setUserAccount("交大蔡徐坤");
-		user.setUserPasswordsha256("123456");
+		user.setUserAccount("交大彭于晏");
+		user.setUserPasswordsha256("123456789");
 		user.setUserMail("123456@qq.com");
 		user.setUserTelephone("123456");
 		userService.add(user);
