@@ -14,6 +14,54 @@ public class House {
     private boolean hasLift;//房子是否有电梯
     private int type;//房子种类:0表示卖，1表示租
 
+    /**
+     * 设置价格区间
+     */
+    private int highestPrice;
+    private int lowestPrice;
+
+
+    /**
+     * 设置面积区间
+     */
+    private int maxArea;
+    private int minArea;
+
+    public int getMaxArea() {
+        return maxArea;
+    }
+
+    public void setMaxArea(int maxArea) {
+        this.maxArea = maxArea;
+    }
+
+    public int getMinArea() {
+        return minArea;
+    }
+
+    public void setMinArea(int minArea) {
+        this.minArea = minArea;
+    }
+
+    public int getLowestPrice() {
+        return lowestPrice;
+    }
+
+    public void setLowestPrice(int lowestPrice) {
+        this.lowestPrice = lowestPrice;
+    }
+
+    public int getHighestPrice() {
+        return highestPrice;
+    }
+
+    public void setHighestPrice(int highestPrice) {
+        this.highestPrice = highestPrice;
+    }
+
+
+
+
     public House(int houseId, int userId, String housePicture, String address, int unitPrice, int area, int status, int floor, String description, boolean hasLift, int type) {
         this.houseId = houseId;
         this.userId = userId;

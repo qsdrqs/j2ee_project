@@ -43,10 +43,29 @@
 				<property name="useGeneratedKeys" value="true" />
 			</bean>
 		</property>
+
 		<property name="typeAliasesPackage"
 			value="grp.wudi.j2ee.entity" />
 		<property name="mapperLocations"
 			value="classpath*:grp/wudi/j2ee/dao/*.xml" />
+
+
+
+		<!--分页插件的配置-->
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageInterceptor">
+					<property name="properties">
+						<value>
+							helperDialect=mysql
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
+
+
+		
 	</bean>
 
 	<!-- 配置扫描器 -->

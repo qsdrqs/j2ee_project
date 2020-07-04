@@ -1,7 +1,6 @@
 package grp.wudi.j2ee.service;
 
 import grp.wudi.j2ee.entity.House;
-import grp.wudi.j2ee.entity.HouseQuery;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class HouseServiceTest {
 
     @Test
     public  void findByKeyword(){
-        HouseQuery house = new HouseQuery();
+        House house = new House();
         house.setHighestPrice(60000);
         house.setLowestPrice(20000);
         house.setMinArea(150000);
