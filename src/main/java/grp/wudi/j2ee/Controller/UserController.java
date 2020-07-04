@@ -34,7 +34,19 @@ public class UserController {
         System.out.println("表现层执行了查询所有用户信息");
         List<User> list = userService.findAll();
         model.addAttribute("list",list);
-        return "success";
+        return "user-list";
+    }
+
+
+    @RequestMapping(path = "/findAll1")
+    public ModelAndView findAll() throws Exception {
+        ModelAndView mv =new ModelAndView();
+
+        System.out.println("表现层执行了查询所有用户信息");
+        List<User> list = userService.findAll();
+        mv.addObject("list",list);
+        mv.setViewName("user-list");
+        return mv;
     }
     /**
      * 保存用户信息
