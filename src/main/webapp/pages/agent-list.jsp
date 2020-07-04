@@ -110,7 +110,7 @@
 				<!-- .box-body -->
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title">列表</h3>
+						<h3 class="box-title" style="align-content: center;font-family: 'Courier New', Monospace">经纪人列表</h3>
 					</div>
 
 					<div class="box-body">
@@ -123,19 +123,20 @@
 								<div class="form-group form-inline">
 									<div class="btn-group">
 										<button type="button" class="btn btn-default" title="新建"
-											onclick="location.href='../pages/product-add.jsp'">
+											onclick="location.href='../pages/agent-add.jsp'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										<button type="button" class="btn btn-default" title="删除">
 											<i class="fa fa-trash-o"></i> 删除
 										</button>
-										<button type="button" class="btn btn-default" title="开启">
-											<i class="fa fa-check"></i> 开启
-										</button>
-										<button type="button" class="btn btn-default" title="屏蔽">
-											<i class="fa fa-ban"></i> 屏蔽
-										</button>
-										<button type="button" class="btn btn-default" title="刷新">
+<%--										<button type="button" class="btn btn-default" title="开启">--%>
+<%--											<i class="fa fa-check"></i> 开启--%>
+<%--										</button>--%>
+<%--										<button type="button" class="btn btn-default" title="屏蔽">--%>
+<%--											<i class="fa fa-ban"></i> 屏蔽--%>
+<%--										</button>--%>
+										<button type="button" class="btn btn-default" title="刷新"
+												onclick="location.href='../agent/findAll'">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 									</div>
@@ -214,19 +215,21 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									<div class="btn-group">
-										<button type="button" class="btn btn-default" title="新建">
+										<button type="button" class="btn btn-default" title="新建"
+												onclick="location.href='../pages/agent-add.jsp'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										<button type="button" class="btn btn-default" title="删除">
 											<i class="fa fa-trash-o"></i> 删除
 										</button>
-										<button type="button" class="btn btn-default" title="开启">
-											<i class="fa fa-check"></i> 开启
-										</button>
-										<button type="button" class="btn btn-default" title="屏蔽">
-											<i class="fa fa-ban"></i> 屏蔽
-										</button>
-										<button type="button" class="btn btn-default" title="刷新">
+										<%--										<button type="button" class="btn btn-default" title="开启">--%>
+										<%--											<i class="fa fa-check"></i> 开启--%>
+										<%--										</button>--%>
+										<%--										<button type="button" class="btn btn-default" title="屏蔽">--%>
+										<%--											<i class="fa fa-ban"></i> 屏蔽--%>
+										<%--										</button>--%>
+										<button type="button" class="btn btn-default" title="刷新"
+												onclick="location.href='../agent/findAll'">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 									</div>
@@ -295,8 +298,8 @@
 			<div class="pull-right hidden-xs">
 				<b>Version</b> 1.0.8
 			</div>
-			<strong>Copyright &copy; 2014-2017 <a
-				href="http://www.itcast.cn">研究院研发部</a>.
+			<strong>Copyright &copy; 2020-2024 <a
+				href="http://www.baidu.com/s?wd=西安交通大学">J2EE无敌小组</a>.
 			</strong> All rights reserved.
 		</footer>
 		<!-- 底部导航 /-->

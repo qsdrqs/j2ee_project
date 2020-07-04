@@ -33,6 +33,8 @@
     账户名称:<input type="text" name="agentAccount"><br/>
     密码：<input type="password" name="agentPassword"><br/>
     <input type="submit" value="提交">
+
 </form>
+
 </body>
 </html>
