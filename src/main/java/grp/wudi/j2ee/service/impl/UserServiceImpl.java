@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 	public PageInfo<User> finAll(int p) {
 		PageHelper.startPage(p, 5);
 		List<User> users = userDao.findAll();
-		return new PageInfo<User>(users);
+		return new PageInfo<User>(users,5);
 	}
 
 }

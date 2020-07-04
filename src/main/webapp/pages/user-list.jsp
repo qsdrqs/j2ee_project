@@ -9,15 +9,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-
-
-
 <title>用户信息表</title>
 <meta name="description" content="AdminLTE2定制版">
 <meta name="keywords" content="AdminLTE2定制版">
-
-
-
+<%
+	pageContext.setAttribute("APP_PATH", request.getContextPath());
+%>
 
 <!-- Tell the browser to be responsive to screen width -->
 <meta
@@ -164,31 +161,25 @@
 
 
 								<tbody>
-									<c:choose>
-										<c:when test="${not empty requestScope.pi }">
-											<c:forEach items="${requestScope.pi.list }" var="user">
-												<tr>
-													<td><input name="ids" type="checkbox"></td>
-													<td>${user.userId }</td>
-													<td>${user.userName }</td>
-													<td>${user.userSex }</td>
-													<td>${user.userAccount }</td>
-													<td>${user.userPasswordsha256 }</td>
-													<td>${user.userTelephone }</td>
-													<td>${user.userMail }</td>
-													<td>${user.userCreatetimeStr}</td>
-													<td>${user.userUpdatetimeStr }</td>
-													<td class="text-center">
-														<button type="button" class="btn bg-olive btn-xs">订单</button>
-														<button type="button" class="btn bg-olive btn-xs">详情</button>
-														<button type="button" class="btn bg-olive btn-xs">编辑</button>
-													</td>
-												</tr>
-											</c:forEach>
-										</c:when>
-										<c:otherwise>
-										</c:otherwise>
-									</c:choose>
+									<c:forEach items="${requestScope.pi.list }" var="user">
+										<tr>
+											<td><input name="ids" type="checkbox"></td>
+											<td>${user.userId }</td>
+											<td>${user.userName }</td>
+											<td>${user.userSex }</td>
+											<td>${user.userAccount }</td>
+											<td>${user.userPasswordsha256 }</td>
+											<td>${user.userTelephone }</td>
+											<td>${user.userMail }</td>
+											<td>${user.userCreatetimeStr}</td>
+											<td>${user.userUpdatetimeStr }</td>
+											<td class="text-center">
+												<button type="button" class="btn bg-olive btn-xs">订单</button>
+												<button type="button" class="btn bg-olive btn-xs">详情</button>
+												<button type="button" class="btn bg-olive btn-xs">编辑</button>
+											</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 							<!--数据列表/-->
@@ -231,21 +222,34 @@
 					<!-- .box-footer-->
 					<div class="box-footer">
 						<div class="pull-left">
-							<div class="form-group form-inline">共${pi.total }条/共${pi.pages }页。
-								每页${pi.pageSize}条</div>
+							<div class="form-group form-inline">当前 ${pi.pageNum }页,总${pi.pages }
+								页,总 ${pi.total } 条记录</div>
 						</div>
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="#" aria-label="Previous">首页</a></li>
-								<li><c:if test="${pi.hasPreviousPage }">
-										<a href="/findAll?p=${pi.pageNum -1 }">上一页</a>
-									</c:if></li>
-								<li><c:forEach begin="1" end="${pi.pages }" step="1"
-										var="i">
-										<a href="/findAll?p=${i }">${i }</a>
-									</c:forEach> <c:if test="${pi.hasNextPage }">
-										<a href="/findAll?p=${pi.pageNum +1 }">下一页</a>
-									</c:if></li>
+								<li><a href="${APP_PATH }?p=1">首页</a></li>
+								<c:if test="${pi.hasPreviousPage }">
+									<li><a href="${APP_PATH }?p=${pi.pageNum-1}"
+										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+									</a></li>
+								</c:if>
+
+
+								<c:forEach items="${pi.navigatepageNums }" var="page_Num">
+									<c:if test="${page_Num == pi.pageNum }">
+										<li class="active"><a href="#">${page_Num }</a></li>
+									</c:if>
+									<c:if test="${page_Num != pi.pageNum }">
+										<li><a href="${APP_PATH }?p=${page_Num }">${page_Num }</a></li>
+									</c:if>
+
+								</c:forEach>
+								<c:if test="${pi.hasNextPage }">
+									<li><a href="${APP_PATH }?p=${pi.pageNum+1 }"
+										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+									</a></li>
+								</c:if>
+								<li><a href="${APP_PATH }?p=${pi.pages}">末页</a></li>
 							</ul>
 						</div>
 					</div>
@@ -257,18 +261,6 @@
 		</div>
 		<!-- @@close -->
 		<!-- 内容区域 /-->
-
-		<!-- 底部导航 -->
-		<footer class="main-footer">
-			<div class="pull-right hidden-xs">
-				<b>Version</b> 1.0.8
-			</div>
-			<strong>Copyright &copy; 2014-2017 <a
-				href="http://www.itcast.cn">研究院研发部</a>.
-			</strong> All rights reserved.
-		</footer>
-		<!-- 底部导航 /-->
-
 	</div>
 
 
@@ -364,6 +356,7 @@
 				$(this).data("clicks", !clicks);
 			});
 		});
+		
 	</script>
 </body>
 

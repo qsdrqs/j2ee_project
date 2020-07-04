@@ -36,17 +36,6 @@ public class UserController {
         return "user-list";
     }
 
-
-    @RequestMapping(path = "/findAll1")
-    public ModelAndView findAll() throws Exception {
-        ModelAndView mv =new ModelAndView();
-
-        System.out.println("表现层执行了查询所有用户信息");
-        List<User> list = userService.findAll();
-        mv.addObject("list",list);
-        mv.setViewName("user-list");
-        return mv;
-    }
     /**
      * 	保存用户信息
      */
@@ -62,7 +51,6 @@ public class UserController {
      */
     @RequestMapping(path = "/delete/{id}")
     public void delete(int id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("表现层执行了删除用户...");
         userService.deleteUser(id);
         request.getRequestDispatcher("/user/findAll").forward(request,response);
     }
