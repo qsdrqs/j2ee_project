@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="grp.wudi.j2ee.dao.HouseDao">
+    <select id="findAll" resultType="grp.wudi.j2ee.entity.House">
+        SELECT * FROM house;
+    </select>
+
+    <select id="findById" parameterType="int" resultType="grp.wudi.j2ee.entity.House">
+        SELECT * FROM house WHERE house_id = #{id}
+    </select>
+
+    <select id="findByKeyword" resultType="grp.wudi.j2ee.entity.House">
+
+        SELECT
+        house_id,
+        user_id,
+        house_picture,
+
+        <if test="lowestPrice > 0 or highestPrice > 0">
+            unit_price,
+        </if>
+        <if test="minArea > 0 or maxArea > 0">
+            area,
+        </if>
+
+        address
+        FROM
+        house
+        <where>
+            <if test="houseId != 0">
+                house_id LIKE '%${userId}%'
+            </if>
+
+            <if test="address != null">
+                AND address LIKE '%${address}%'
+            </if>
+
+
+
+            <if test="lowestPrice > 0">
+                AND unit_price > #{lowestPrice}
+            </if>
+
+            <if test="highestPrice > 0">
+                AND #{highestPrice} > unit_price
+            </if>
+
+
+
+            <if test="minArea > 0">
+                AND area > #{minArea}
+            </if>
+            <if test="maxArea > 0">
+                AND #{maxArea} > area
+            </if>
+
+
+        </where>
+
+
+
+
+
+
+
+
+
+
+
+    </select>
+
+
+
+    <insert id="addHouse" keyProperty="houseId" useGeneratedKeys="true" parameterType="grp.wudi.j2ee.entity.House" >
+        INSERT INTO
+        house(house_id,user_id,house_picture,address,unit_price,area,status,floor,description,has_lift,type)
+        VALUE (#{houseId},#{userId},#{housePicture},#{address},#{unitPrice},#{area},#{status},#{floor},#{description},#{hasLift},#{type})
+    </insert>
+
+    <update id="updateHouse" parameterType="grp.wudi.j2ee.entity.House">
+        UPDATE house SET
+        user_id = #{userId},
+        house_picture = #{housePicture},
+        address = #{address},
+        unit_price = #{unitPrice},
+        area = #{area},
+        status = #{status},
+        floor = #{floor},
+        description = #{description},
+        has_lift = #{hasLift},
+        type = #{type}
+        WHERE house_id = #{houseId}
+    </update>
+
+    <delete id="deleteHouse" parameterType="int">
+        DELETE FROM house
+        WHERE house_id = #{houseId}
+    </delete>
+
+
+</mapper>
