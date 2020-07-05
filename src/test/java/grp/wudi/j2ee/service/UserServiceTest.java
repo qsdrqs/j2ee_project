@@ -1,14 +1,13 @@
 package grp.wudi.j2ee.service;
 
 
-
+import grp.wudi.j2ee.entity.User;
+import grp.wudi.j2ee.utils.SHA256Util;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import grp.wudi.j2ee.entity.User;
 
 import java.util.List;
 
@@ -34,7 +33,10 @@ public class UserServiceTest {
 	
 	@Test
 	public void testGetUserById() {
-		System.out.println(userService.getUserById(1));
+		User user = userService.getUserById(14);
+		System.out.println(user.getUserPasswordsha256());
+		System.out.println(SHA256Util.stringToSHA256("123456"));
+
 	}
 	
 	@Test

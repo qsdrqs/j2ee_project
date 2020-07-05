@@ -29,4 +29,8 @@ VALUES
 	(#{agentName},#{agentSex},#{agentTel},#{agentEmail},#{agentProfile},#{agentRegistertime},#{agentAccount},#{agentPassword})
 
     </insert>
+    <delete id="dateleAgent" parameterType="int">
+		DELETE FROM tb_agent
+		WHERE agent_id =#{id}
+	</delete>
 </mapper>

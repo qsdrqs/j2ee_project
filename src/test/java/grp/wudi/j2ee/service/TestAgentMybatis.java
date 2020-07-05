@@ -56,5 +56,8 @@ public class TestAgentMybatis {
         agent.setAgentTel("123456789098");
         agentService.addAgent(agent);
     }
-
+    @Test
+    public void testDeleteUser() {
+        agentService.dateleAgent(1);
+    }
 }

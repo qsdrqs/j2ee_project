@@ -194,6 +194,8 @@
 												<%--												<button type="button" class="btn bg-olive btn-xs">订单</button>--%>
 											<button type="button" class="btn bg-olive btn-xs">详情</button>
 											<button type="button" class="btn bg-olive btn-xs">编辑</button>
+													<button type="button" class="btn bg-olive btn-xs"
+															onclick="location.href='../agent/deleteAgent?id=${agent.agentId}'">删除</button>
 										</td>
 									</tr>
 								</c:forEach>
