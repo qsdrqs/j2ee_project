@@ -32,7 +32,6 @@
 	<mvc:resources mapping="/js/**" location="/js/" />
 
 
-
 	<!-- <mvc:resources mapping="" location="" -->
 
 	<mvc:annotation-driven></mvc:annotation-driven>

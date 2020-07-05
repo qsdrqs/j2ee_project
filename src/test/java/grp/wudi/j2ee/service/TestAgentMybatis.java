@@ -1,7 +1,7 @@
 package grp.wudi.j2ee.service;
 
 import grp.wudi.j2ee.entity.Agent;
-import grp.wudi.j2ee.entity.User;
+import grp.wudi.j2ee.utils.SHA256Util;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-context.xml"})
@@ -26,7 +28,13 @@ public class TestAgentMybatis {
 
     @Test
     public void testGetUserById() {
-        System.out.println(agentService.findById(1));
+        String str1 = agentService.findById(15).getAgentPassword();
+        String str2 = SHA256Util.stringToSHA256("123456");
+        System.out.println(str1);
+        System.out.println(str2);
+        System.out.println(str1.equals(str2));
+        assertEquals(agentService.findById(15).getAgentPassword(), SHA256Util.stringToSHA256("123456"));
+
     }
 
     @Test

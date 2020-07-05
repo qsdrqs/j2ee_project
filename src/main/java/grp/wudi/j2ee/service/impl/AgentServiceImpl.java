@@ -3,6 +3,7 @@ package grp.wudi.j2ee.service.impl;
 import grp.wudi.j2ee.dao.AgentDao;
 import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.service.AgentService;
+import grp.wudi.j2ee.utils.SHA256Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,7 @@ public class AgentServiceImpl implements AgentService {
     @Override
     public int addAgent(Agent agent) {
         System.out.println("业务层执行了...");
+        agent.setAgentPassword(SHA256Util.stringToSHA256(agent.getAgentPassword()));
         return dao.addAgent(agent);
     }
 }

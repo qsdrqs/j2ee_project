@@ -8,6 +8,7 @@ public class Agent implements Serializable {
     private Integer agentId;    //房产经纪人的唯一标识ID
     private String agentName;   //房产经纪人的姓名
     private Integer agentSex;   //房产经纪人的性别
+    private String agentSexStr;
     private String agentTel;    //经纪人的联系电话
     private String agentEmail;  //经纪人的电子邮件
     private Date agentRegistertime;  //经纪人的注册时间
@@ -24,7 +25,7 @@ public class Agent implements Serializable {
     public Agent(){
         this.agentRegistertime = new Date();
         //初始化离职时间为2099-12-30
-        this.agentLeavetime = new Date(2099,12,30);
+        this.agentLeavetime = new Date(300,12,30);
     }
 
     public Integer getAgentId() {
@@ -49,6 +50,21 @@ public class Agent implements Serializable {
 
     public void setAgentSex(Integer agentSex) {
         this.agentSex = agentSex;
+    }
+
+    public String getAgentSexStr() {
+        if(null != agentSex){
+            if(agentSex == 1){
+                return "男";
+            }if (agentSex == 2){
+                return "女";
+            }
+        }
+        return "未知";
+    }
+
+    public void setAgentSexStr(String agentSexStr) {
+        this.agentSexStr = agentSexStr;
     }
 
     public String getAgentTel() {
