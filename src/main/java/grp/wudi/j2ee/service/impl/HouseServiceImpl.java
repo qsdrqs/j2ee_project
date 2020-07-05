@@ -6,6 +6,9 @@ import grp.wudi.j2ee.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import java.util.List;
 
 @Service
@@ -38,6 +41,11 @@ public class HouseServiceImpl implements HouseService {
     public House getHouseById(int id) {
         return houseDao.findById(id);
     }
+    
+    @Override
+	public List<House> getHouseByUserId(int uid) {
+		return houseDao.findByUserId(uid);
+	}
 
     @Override
     public int add(House house) {
@@ -53,4 +61,12 @@ public class HouseServiceImpl implements HouseService {
     public int delete(int id) {
         return houseDao.deleteHouse(id);
     }
+
+	@Override
+	public PageInfo<House> getHouseByUserId(int uid, int p) {
+		PageHelper.startPage(p, 5);
+		List<House> houses = houseDao.findByUserId(uid);
+		return new PageInfo<House>(houses,5);
+	}
+
 }

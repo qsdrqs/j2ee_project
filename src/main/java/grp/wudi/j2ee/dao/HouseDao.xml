@@ -10,6 +10,10 @@
     <select id="findById" parameterType="int" resultType="grp.wudi.j2ee.entity.House">
         SELECT * FROM house WHERE house_id = #{id}
     </select>
+    
+    <select id="findByUserId" parameterType="int" resultType="grp.wudi.j2ee.entity.House">
+        SELECT * FROM house WHERE user_id = #{uid}
+    </select>
 
     <select id="findByKeyword" resultType="grp.wudi.j2ee.entity.House">
 
