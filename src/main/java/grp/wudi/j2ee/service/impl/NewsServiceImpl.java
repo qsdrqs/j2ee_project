@@ -22,7 +22,9 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public List<News> getNewsByKeyWord(String keyword) {
-        return newsDao.findByKeyword(keyword);
+        News news =new News();
+        news.setTitle(keyword);
+        return newsDao.findByKeyword(news);
     }
 
     @Override

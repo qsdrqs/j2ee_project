@@ -8,7 +8,7 @@
         title,
         content_path,
         type,
-        create_time,
+        create_time
         FROM
         news
         WHERE news_id = #{id}
@@ -19,39 +19,44 @@
     </select>
 
     <!-- 糢糊查询，只能查标题-->
-    <select id="findByKeyword" resultType="grp.wudi.j2ee.entity.User">
+    <select id="findByKeyword" resultType="grp.wudi.j2ee.entity.News">
         SELECT
         news_id,
         title,
         content_path,
         type,
-        create_time,
+        create_time
         FROM
         news
-        WHERE 
-        <!--TODO:$映射-->
-        news_id LIKE '%${keyword}%'
+        WHERE
+        title LIKE '%${title}%'
     </select>
 
     <insert id="addNews" keyProperty="newsId" useGeneratedKeys="true" parameterType="grp.wudi.j2ee.entity.News">
         INSERT INTO 
         news(title,content_path,type,create_time)
         VALUES
-        (#{newsId},#{title},#{contentPath},#{type},#{createTime})
+        (#{title},#{contentPath},#{type},#{createTime})
     </insert>
 
     <update id="update" parameterType="grp.wudi.j2ee.entity.News">
         UPDATE news
-        SET
-        title = #{title},
-        content_path = #{contentPath},
-        type = #{type},
-
-        WHERE user_id = #{userId}
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="contentPath != null">
+                content_path = #{contentPath},
+            </if>
+            <if test="type != null">
+                type = #{type}
+            </if>
+        </set>
+        WHERE news_id = #{newsId}
     </update>
 
     <delete id="removeNews" parameterType="int">
         DELETE FROM news
-        WHERE user_id = #{id}
+        WHERE news_id = #{id}
     </delete>
 </mapper>

@@ -10,6 +10,10 @@ public class News {
     private int type; //新闻类型：0.房地产新闻 1.房价走向 2.二手房市场
     private Date createTime;
 
+    public News(){
+        setCreateTime(new Date());
+    }
+
     public News(String title, String contentPath, int type) {
         this.title = title;
         this.contentPath = contentPath;
@@ -51,6 +55,11 @@ public class News {
     }
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    @Override
+    public String toString(){
+        return "newsId=" + newsId + "title=" + title + "contentPath=" + contentPath;
     }
 
 
