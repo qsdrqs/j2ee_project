@@ -35,9 +35,9 @@ public class AgentServiceImpl implements AgentService {
     }
 
     @Override
-    public int dateleAgent(int id) {
+    public int deleteAgent(int id) {
         System.out.println("业务层执行了...");
-        return dao.dateleAgent(id);
+        return dao.deleteAgent(id);
 
     }
     @Override

@@ -33,6 +33,12 @@ public class HouseServiceTest {
 
         System.out.println(houseService.getHouseById(2));
     }
+    
+    @Test
+    public void findByUserIdTest(){
+
+        System.out.println(houseService.getHouseByUserId(1));
+    }
 
 
 

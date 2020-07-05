@@ -4,40 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="grp.wudi.j2ee.dao.AgentDao">
     <select id="findAll" resultType="grp.wudi.j2ee.entity.Agent">
-        select * from tb_agent
-        <!--TODO:修改数据库中的表，包括一些SQL语句，映射的内容 -->
+        select * from agent
     </select>
-<!--    <resultMap id="agentMap" type="grp.wudi.j2ee.entity.Agent">-->
-<!--        <id property="agentId" column="agent_id"></id>-->
-<!--        <result property="agentName" column="agent_name"></result>-->
-<!--        <result property="agentSex" column="sex"></result>-->
-<!--        <result property="agentTel" column="telephone"></result>-->
-<!--        <result property="agentEmail" column="email"></result>-->
-<!--        <result property="registerTime" column="register_time"></result>-->
-<!--        <result property="leaveTime" column="leave_time"></result>-->
-<!--        <result property="agentProfile" column="profile"></result>-->
-<!--        <result property="agentAccount" column="account"></result>-->
-<!--        <result property="agentPassword" column="password_sha256"></result>-->
-<!--    </resultMap>-->
     <select id="findById" resultType="grp.wudi.j2ee.entity.Agent">
-        select * from tb_agent where agent_id =#{id}
+        select * from agent where agent_id =#{id}
     </select>
 
     <insert id="addAgent" parameterType="grp.wudi.j2ee.entity.Agent">
-INSERT INTO tb_agent ( agent_name, agent_sex, agent_tel, agent_email, agent_profile, agent_registertime, agent_account, agent_password)
+INSERT INTO agent ( agent_name, agent_sex, agent_tel, agent_email, agent_profile, agent_registertime, agent_account, agent_password)
 VALUES
 	(#{agentName},#{agentSex},#{agentTel},#{agentEmail},#{agentProfile},#{agentRegistertime},#{agentAccount},#{agentPassword})
 
     </insert>
-    <delete id="dateleAgent" parameterType="int">
-		DELETE FROM tb_agent
+    <delete id="deleteAgent" parameterType="int">
+		DELETE FROM agent
 		WHERE agent_id =#{id}
 	</delete>
 
-
     <update id="updateAgent"
             parameterType="grp.wudi.j2ee.entity.Agent">
-		UPDATE tb_agent
+		UPDATE agent
 		SET
 		agent_tel = #{agentTel},
 		agent_email = #{agentEmail},
@@ -47,3 +33,4 @@ VALUES
 		WHERE agent_id = #{agent_id}
 	</update>
 </mapper>
+
