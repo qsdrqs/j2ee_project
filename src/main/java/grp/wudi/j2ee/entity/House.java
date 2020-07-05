@@ -2,17 +2,20 @@ package grp.wudi.j2ee.entity;
 
 public class House {
 
-    private int houseId;//房子编号
-    private int userId;//用户ID
-    private String housePicture;//房子图片，存放链接
-    private String address;//房子的位置
-    private int unitPrice;//房子的单位价格
-    private int area;//房子的面积
-    private int status;//房子的状态：0表示审核中，1表示通过,2表示审核不通过，3表示已出售
-    private int floor;//房子的楼层
-    private String description;//对房子的描述
-    private boolean hasLift;//房子是否有电梯
-    private int type;//房子种类:0表示卖，1表示租
+    private int houseId;            //房子编号
+    private int userId;             //用户ID
+    private String housePicture;    //房子图片，存放链接
+    private String address;         //房子的位置
+    private int unitPrice;          //房子的单位价格
+    private int area;               //房子的面积
+
+    private int status;             //房子的状态：0表示审核中，1表示通过,2表示审核不通过，3表示已出售
+    private String statusStr;
+
+    private int floor;              //房子的楼层
+    private String description;     //对房子的描述
+    private boolean hasLift;        //房子是否有电梯
+    private int type;               //房子种类:0表示卖，1表示租
 
     /**
      * 设置价格区间
@@ -60,7 +63,23 @@ public class House {
     }
 
 
+    public String getStatusStr() {
+        switch (status){
+            case 0:
+                return "审核中";
+            case 1:
+                return "审核通过";
+            case 2:
+                return "审核未通过";
+            case 3:
+                return "已出售";
+        }
+        return "错误";
+    }
 
+    public void setStatusStr(String statusStr) {
+        this.statusStr = statusStr;
+    }
 
     public House(int houseId, int userId, String housePicture, String address, int unitPrice, int area, int status, int floor, String description, boolean hasLift, int type) {
         this.houseId = houseId;

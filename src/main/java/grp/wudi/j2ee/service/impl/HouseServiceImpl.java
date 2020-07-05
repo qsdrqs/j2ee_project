@@ -30,6 +30,11 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
+    public String getStatus(House house) {
+        return house.getStatusStr();
+    }
+
+    @Override
     public House getHouseById(int id) {
         return houseDao.findById(id);
     }
