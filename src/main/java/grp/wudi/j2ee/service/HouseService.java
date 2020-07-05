@@ -16,4 +16,6 @@ public interface HouseService {
 
     public int delete(int id);
 
+    public String getStatus(House house);
+
 }
