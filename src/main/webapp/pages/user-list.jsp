@@ -112,8 +112,8 @@
 											onclick="location.href='../pages/product-add.jsp'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
-										<button type="button" class="btn btn-default" title="删除"
-											onclick="location.href='../pages/delete/ '+user.userId">
+										<button type="button" class="btn btn-default" id="user_delete"
+											title="删除">
 											<i class="fa fa-trash-o"></i> 删除
 										</button>
 										<button type="button" class="btn btn-default" title="开启">
@@ -139,10 +139,10 @@
 
 							<!--数据列表-->
 							<table id="dataList"
-								   class="table table-bordered table-striped table-hover dataTable">
+								class="table table-bordered table-striped table-hover dataTable">
 								<thead>
-								<tr>
-									<th class="" style="padding-right: 0px;"><input
+									<tr>
+										<th class="" style="padding-right: 0px;"><input
 											id="selall" type="checkbox" class="icheckbox_square-blue">
 
 										</th>
@@ -163,7 +163,7 @@
 								<tbody>
 									<c:forEach items="${requestScope.pi.list }" var="user">
 										<tr>
-											<td><input name="ids" type="checkbox"></td>
+											<td><input name="ids" type="checkbox" value="isCheck"></td>
 											<td>${user.userId }</td>
 											<td>${user.userName }</td>
 											<td>${user.userSex }</td>
@@ -176,7 +176,10 @@
 											<td class="text-center">
 												<button type="button" class="btn bg-olive btn-xs">订单</button>
 												<button type="button" class="btn bg-olive btn-xs">详情</button>
-												<button type="button" class="btn bg-olive btn-xs">编辑</button>
+												<button type="button" class="btn bg-olive btn-xs"
+													onclick="window.location.href='/user/update?id=${user.userId }'">编辑</button>
+												<button type="button" class="btn bg-olive btn-xs"
+													onclick="window.location.href='/user/delete?id=${user.userId }'">删除</button>
 											</td>
 										</tr>
 									</c:forEach>
@@ -356,7 +359,19 @@
 				$(this).data("clicks", !clicks);
 			});
 		});
-		
+
+		function deliver() {
+			var check_val = [];
+			var check = $("input[name=isCheck]:checked");
+			check.each(function() {
+				var row = $(this).parent("td").parent("tr");
+				var id = row.find("[name='${user.userId}']").val();
+				check_val.push({
+					id : id
+				});
+			})
+			console.log(check_val);
+		};
 	</script>
 </body>
 

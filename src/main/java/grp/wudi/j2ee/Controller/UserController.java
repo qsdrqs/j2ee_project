@@ -6,17 +6,10 @@ import grp.wudi.j2ee.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.github.pagehelper.PageInfo;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -35,30 +28,31 @@ public class UserController {
     	model.addAttribute("pi", pi);
         return "user-list";
     }
-
-    /**
-     * 	保存用户信息
-     */
-    @RequestMapping(path = "/save")
-    public void save(User user, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("表现层执行了保存用户...");
-        userService.add(user);
-        request.getRequestDispatcher("/user/findAll").forward(request,response);
-    }
     
     /**
      * 	删除用户信息
      */
-    @RequestMapping(path = "/delete/{id}")
-    public void delete(int id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @RequestMapping(path = "/delete")
+    public String delete(@RequestParam(value="id",required=true )int id) {
         userService.deleteUser(id);
-        request.getRequestDispatcher("/user/findAll").forward(request,response);
+        return "redirect:/user/findAll";
     }
 
-    @RequestMapping(path = "/add")
-    public void add(User user, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("表现层执行了保存用户...");
-        userService.add(user);
-        request.getRequestDispatcher("/user/findAll").forward(request,response);
+    /**
+     * 	修改用户信息
+     */
+    @RequestMapping(path = "/update")
+    public String update(@RequestParam(value="id",required=true) int id,Model model) {
+    	User user = userService.getUserById(id);
+    	System.out.println(user);
+    	model.addAttribute("user",user);
+    	return "user-update";
     }
+    
+    @PostMapping("/update")
+	public String update(User user) {
+		System.out.println(user);
+		return "redirect:/user/findAll";
+	}
+    
 }
