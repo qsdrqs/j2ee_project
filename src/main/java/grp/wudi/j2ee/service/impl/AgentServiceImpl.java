@@ -1,5 +1,7 @@
 package grp.wudi.j2ee.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import grp.wudi.j2ee.dao.AgentDao;
 import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.service.AgentService;
@@ -37,5 +39,11 @@ public class AgentServiceImpl implements AgentService {
         System.out.println("业务层执行了...");
         return dao.dateleAgent(id);
 
+    }
+    @Override
+    public PageInfo<Agent> finAll(int p) {
+        PageHelper.startPage(p, 5);
+        List<Agent> agents = dao.findAll();
+        return new PageInfo<Agent>(agents,5);
     }
 }

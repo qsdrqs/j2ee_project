@@ -62,7 +62,7 @@
 					</a></li>
 					<li id="system-setting"><a
 <%--						href="${pageContext.request.contextPath}/user/findAll1?page=1&pageSize=3"> <i--%>
-							href="../agent/findAll"> <i
+							href="../agent/findAll1"> <i
 							class="fa fa-circle-o"></i> 经纪人管理
 					</a></li>
 

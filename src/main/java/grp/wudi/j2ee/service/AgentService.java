@@ -1,5 +1,6 @@
 package grp.wudi.j2ee.service;
 
+import com.github.pagehelper.PageInfo;
 import grp.wudi.j2ee.entity.Agent;
 
 import java.util.List;
@@ -21,5 +22,9 @@ public interface AgentService {
 
     //删除经纪人的信息
     public int dateleAgent(int id);
+
+
+    //分页
+    PageInfo<Agent> finAll(int p);
 
 }

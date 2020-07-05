@@ -1,5 +1,6 @@
 package grp.wudi.j2ee.Controller;
 
+import com.github.pagehelper.PageInfo;
 import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.service.impl.AgentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,12 @@ public class AgentController {
         mv.setViewName("agent-list");
         return mv;
     }
+    @RequestMapping(path="/findAll1")
+    public String findAll(@RequestParam(value = "p", defaultValue = "1") int p,Model model) throws Exception {
+        PageInfo<Agent> pi = agentService.finAll(p);
+        model.addAttribute("pi", pi);
+        return "agent-list";
+    }
 
     @RequestMapping(path = "/findById")
     public ModelAndView findById(int id) {
@@ -44,7 +51,7 @@ public class AgentController {
     public void addAgent(Agent agent, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("表现层执行了保存用户...");
         agentService.addAgent(agent);
-        request.getRequestDispatcher("/agent/findAll").forward(request, response);
+        request.getRequestDispatcher("/agent/findAll1").forward(request, response);
     }
 
     @RequestMapping(path = "/deleteAgent")
