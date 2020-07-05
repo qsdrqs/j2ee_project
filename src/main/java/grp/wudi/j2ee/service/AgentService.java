@@ -21,7 +21,7 @@ public interface AgentService {
      */
 
     //删除经纪人的信息
-    public int dateleAgent(int id);
+    public int deleteAgent(int id);
 
 
     //分页

@@ -25,18 +25,6 @@ public class TestAgentMybatis {
             System.out.println(agent);
         }
     }
-
-    @Test
-    public void testGetUserById() {
-        String str1 = agentService.findById(15).getAgentPassword();
-        String str2 = SHA256Util.stringToSHA256("123456");
-        System.out.println(str1);
-        System.out.println(str2);
-        System.out.println(str1.equals(str2));
-        assertEquals(agentService.findById(15).getAgentPassword(), SHA256Util.stringToSHA256("123456"));
-
-    }
-
     @Test
     public void testAdd() {
 //        User user = new User();
@@ -56,8 +44,20 @@ public class TestAgentMybatis {
         agent.setAgentTel("123456789098");
         agentService.addAgent(agent);
     }
+
+    @Test
+    public void testGetUserById() {
+        String str1 = agentService.findById(34).getAgentPassword();
+        String str2 = SHA256Util.stringToSHA256("123456");
+        System.out.println(str1);
+        System.out.println(str2);
+        System.out.println(str1.equals(str2));
+        assertEquals(agentService.findById(34).getAgentPassword(), SHA256Util.stringToSHA256("123456"));
+    }
+
+
     @Test
     public void testDeleteUser() {
-        agentService.dateleAgent(1);
+        agentService.deleteAgent(1);
     }
 }

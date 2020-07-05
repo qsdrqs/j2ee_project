@@ -58,7 +58,7 @@ public class AgentController {
     public void deleteAgent(HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println("表现层执行了删除操作");
         String id = request.getParameter("id");
-        agentService.dateleAgent(Integer.parseInt(id));
+        agentService.deleteAgent(Integer.parseInt(id));
         request.getRequestDispatcher("/agent/findAll").forward(request, response);
         return;
     }

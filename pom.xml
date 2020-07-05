@@ -217,7 +217,10 @@
 					<version>2.2</version>
 					<configuration>
 						<!--端口号-->
-						<port>9000</port>
+                        <server>tomcat9</server>
+						<port>8080</port>
+                        <update>true</update>
+                        <path>/</path>
 
 					</configuration>
 				</plugin>
