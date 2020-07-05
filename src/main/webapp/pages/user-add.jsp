@@ -91,7 +91,7 @@
 			</section>
 			<!-- 内容头部 /-->
 			<!--FIXME!!! -->
-			<form action="../user/findAll"
+			<form action="../user/add"
 				method="post">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->

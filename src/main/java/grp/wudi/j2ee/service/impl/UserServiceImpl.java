@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
 	public int update(User user) {
 		Date date = new Date();
 		user.setUserUpdatetime(date);
+		user.setUserPasswordsha256(SHA256Util.stringToSHA256(user.getUserPasswordsha256()));
 		return userDao.update(user);
 	}
 
