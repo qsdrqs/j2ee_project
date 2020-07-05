@@ -75,6 +75,12 @@ export default new Router({
       path: '/book_house/:id',
       name: '预定此房',
       component: BookHouse
+    },
+    {
+	  path:'/news/:id',
+      name:'新闻资讯',
+      component:News
+	
     }
   ]
 })

@@ -4,12 +4,6 @@ package grp.wudi.j2ee.Controller;
 import grp.wudi.j2ee.entity.User;
 import grp.wudi.j2ee.service.impl.UserServiceImpl;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,7 +52,7 @@ public class UserController {
     
     @PostMapping("/update")
 	public String update(User user) {
-		System.out.println(user);
+		userService.update(user);
 		return "redirect:/user/findAll";
 	}
     
@@ -66,8 +60,8 @@ public class UserController {
      * 	增加用户信息
      */
     @RequestMapping(path = "/add")
-    public void addAgent(User user, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String addAuser(User user ) {
         userService.add(user);
-        request.getRequestDispatcher("/user/findAll").forward(request,response);
+        return "redirect:/user/findAll";
     }
 }
