@@ -20,34 +20,39 @@ import java.util.List;
 public class AgentController {
     @Autowired
     private AgentServiceImpl agentService;
-    @RequestMapping(path="/findAll")
-    public ModelAndView findAll(){
+
+    @RequestMapping(path = "/findAll")
+    public ModelAndView findAll() {
         System.out.println("表现层执行了...");
         ModelAndView mv = new ModelAndView();
         List<Agent> list = agentService.findAll();
-        mv.addObject("agentList",list);
+        mv.addObject("agentList", list);
         mv.setViewName("agent-list");
         return mv;
     }
+
     @RequestMapping(path = "/findById")
-    public ModelAndView findById(int id){
+    public ModelAndView findById(int id) {
         ModelAndView mv = new ModelAndView();
         Agent agent = agentService.findById(id);
-        mv.addObject("agentInfo",agent);
+        mv.addObject("agentInfo", agent);
         mv.setViewName("success");
         return mv;
     }
+
     @RequestMapping(path = "/addagent")
     public void addAgent(Agent agent, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("表现层执行了保存用户...");
         agentService.addAgent(agent);
-        request.getRequestDispatcher("/agent/findAll").forward(request,response);
+        request.getRequestDispatcher("/agent/findAll").forward(request, response);
     }
-    @RequestMapping(path="/deleteAgent")
-    public String deleteAgent(HttpServletRequest request,HttpServletResponse response){
+
+    @RequestMapping(path = "/deleteAgent")
+    public void deleteAgent(HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println("表现层执行了删除操作");
         String id = request.getParameter("id");
         agentService.dateleAgent(Integer.parseInt(id));
-        return ("agent-list");
+        request.getRequestDispatcher("/agent/findAll").forward(request, response);
+        return;
     }
 }
