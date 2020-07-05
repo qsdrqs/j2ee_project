@@ -16,8 +16,10 @@ public interface AgentService {
      /*
     //修改经纪人的信息
     public int updateAgent(Agent agent);
+
+     */
+
     //删除经纪人的信息
     public int dateleAgent(int id);
 
-     */
 }
