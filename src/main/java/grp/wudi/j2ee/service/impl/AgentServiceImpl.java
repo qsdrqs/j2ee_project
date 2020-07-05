@@ -46,4 +46,17 @@ public class AgentServiceImpl implements AgentService {
         List<Agent> agents = dao.findAll();
         return new PageInfo<Agent>(agents,5);
     }
+    @Override
+    public int updateAgent(Agent agent){
+        System.out.println("业务层执行了更新经纪人信息...");
+        if(agent.getAgentSexStr()!=null){
+            if(agent.getAgentSexStr().equals("男")){
+                agent.setAgentSex(1);
+            }else{
+                agent.setAgentSex(0);
+            }
+        }
+        agent.setAgentPassword(SHA256Util.stringToSHA256(agent.getAgentPassword()));
+        return dao.addAgent(agent);
+    }
 }

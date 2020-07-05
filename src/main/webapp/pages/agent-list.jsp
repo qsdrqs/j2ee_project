@@ -189,9 +189,13 @@
 										<td>${agent.agentAccount}</td>
 										<td>${agent.agentProfile}</td>
 										<td class="text-center">
-												<%--												<button type="button" class="btn bg-olive btn-xs">订单</button>--%>
+											<button type="button" class="btn bg-olive btn-xs"
+											onclick="location.href='../agent/PreupdateAgent?id=${agent.agentId}'">编辑</button>
+
+
 											<button type="button" class="btn bg-olive btn-xs">详情</button>
-											<button type="button" class="btn bg-olive btn-xs">编辑</button>
+
+
 													<button type="button" class="btn bg-olive btn-xs"
 															onclick="location.href='../agent/deleteAgent?id=${agent.agentId}'">删除</button>
 										</td>

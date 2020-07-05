@@ -60,4 +60,10 @@ public class TestAgentMybatis {
     public void testDeleteUser() {
         agentService.dateleAgent(1);
     }
+    @Test
+    public void testUpdateAgent(){
+        Agent agent = new Agent();
+
+    }
+
 }

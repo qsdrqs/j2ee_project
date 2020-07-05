@@ -33,4 +33,17 @@ VALUES
 		DELETE FROM tb_agent
 		WHERE agent_id =#{id}
 	</delete>
+
+
+    <update id="updateAgent"
+            parameterType="grp.wudi.j2ee.entity.Agent">
+		UPDATE tb_agent
+		SET
+		agent_tel = #{agentTel},
+		agent_email = #{agentEmail},
+		agent_account = #{agentAccount},
+		agent_password = #{agentPassword},
+		agent_profile = #{agentProfile}
+		WHERE agent_id = #{agent_id}
+	</update>
 </mapper>

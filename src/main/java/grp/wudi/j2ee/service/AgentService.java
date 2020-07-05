@@ -14,11 +14,10 @@ public interface AgentService {
 
     //添加经纪人信息
     public int addAgent(Agent agent);
-     /*
+
     //修改经纪人的信息
     public int updateAgent(Agent agent);
 
-     */
 
     //删除经纪人的信息
     public int dateleAgent(int id);
