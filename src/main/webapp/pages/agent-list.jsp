@@ -182,7 +182,7 @@
 										<td><input name="ids" type="checkbox"></td>
 										<td>${agent.agentId}</td>
 										<td>${agent.agentName}</td>
-										<td>${agent.agentSex }</td>
+										<td>${agent.agentSexStr }</td>
 										<td>${agent.agentTel }</td>
 										<td>${agent.agentEmail }</td>
 										<td>${agent.registerTimeStr }</td>
