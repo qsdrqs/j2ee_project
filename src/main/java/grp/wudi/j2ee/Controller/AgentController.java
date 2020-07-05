@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
@@ -41,5 +42,12 @@ public class AgentController {
         System.out.println("表现层执行了保存用户...");
         agentService.addAgent(agent);
         request.getRequestDispatcher("/agent/findAll").forward(request,response);
+    }
+    @RequestMapping(path="/deleteAgent")
+    public String deleteAgent(HttpServletRequest request,HttpServletResponse response){
+        System.out.println("表现层执行了删除操作");
+        String id = request.getParameter("id");
+        agentService.dateleAgent(Integer.parseInt(id));
+        return ("agent-list");
     }
 }

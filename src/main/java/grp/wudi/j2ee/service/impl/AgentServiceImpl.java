@@ -31,4 +31,11 @@ public class AgentServiceImpl implements AgentService {
         agent.setAgentPassword(SHA256Util.stringToSHA256(agent.getAgentPassword()));
         return dao.addAgent(agent);
     }
+
+    @Override
+    public int dateleAgent(int id) {
+        System.out.println("业务层执行了...");
+        return dao.dateleAgent(id);
+
+    }
 }

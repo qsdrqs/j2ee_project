@@ -1,17 +1,20 @@
 package grp.wudi.j2ee.service;
 
 
-
+import grp.wudi.j2ee.entity.User;
+import grp.wudi.j2ee.utils.SHA256Util;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+
 import grp.wudi.j2ee.entity.User;
 import grp.wudi.j2ee.utils.SHA256Util;
 
 import static org.junit.Assert.assertEquals;
+
 
 import java.util.List;
 
@@ -37,9 +40,10 @@ public class UserServiceTest {
 	
 	@Test
 	public void testGetUserById() {
+
 		System.out.println(userService.getUserById(19));
 		assertEquals(userService.getUserById(19).getUserPasswordsha256(), SHA256Util.stringToSHA256("123456789"));
-	}
+
 	
 	@Test
 	public void testUpdate() {
