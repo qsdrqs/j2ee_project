@@ -12,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import grp.wudi.j2ee.dao.UserDao;
 import grp.wudi.j2ee.entity.User;
 import grp.wudi.j2ee.service.UserService;
+import grp.wudi.j2ee.utils.SHA256Util;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,6 +27,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int add(User user) {
+		user.setUserPasswordsha256(SHA256Util.stringToSHA256(user.getUserPasswordsha256()));
 		return userDao.addUser(user);
 	}
 

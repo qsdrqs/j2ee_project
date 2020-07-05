@@ -3,7 +3,6 @@ package grp.wudi.j2ee.entity;
 import java.util.Date;
 
 import grp.wudi.j2ee.utils.DateFormat;
-import grp.wudi.j2ee.utils.SHA256Util;
 
 public class User {
 	private int userId;// 用户ID
@@ -83,7 +82,6 @@ public class User {
 	}
 
 	public void setUserPasswordsha256(String userPassword) {
-		userPassword = SHA256Util.stringToSHA256(userPassword);
 		this.userPasswordsha256 = userPassword;
 	}
 

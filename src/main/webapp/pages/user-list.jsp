@@ -109,7 +109,7 @@
 								<div class="form-group form-inline">
 									<div class="btn-group">
 										<button type="button" class="btn btn-default" title="新建"
-											onclick="location.href='../pages/product-add.jsp'">
+											onclick="location.href='../pages/user-add.jsp'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										<button type="button" class="btn btn-default" id="user_delete"
@@ -122,7 +122,7 @@
 										<button type="button" class="btn btn-default" title="屏蔽">
 											<i class="fa fa-ban"></i> 屏蔽
 										</button>
-										<button type="button" class="btn btn-default" title="刷新">
+										<button type="button" class="btn btn-default" title="刷新" onclick="location.href='../user/findAll'">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 									</div>

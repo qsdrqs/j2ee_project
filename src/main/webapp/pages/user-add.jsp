@@ -6,7 +6,7 @@
 <!-- 页面meta -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>经纪人添加</title>
+<title>添加用户</title>
 <meta name="description" content="AdminLTE2定制版">
 <meta name="keywords" content="AdminLTE2定制版">
 
@@ -79,114 +79,74 @@
 			<!-- 内容头部 -->
 			<section class="content-header">
 			<h1>
-				房产经纪人 <small>信息录入</small>
+				用户 <small>信息录入</small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="../pages/main.jsp"><i
 						class="fa fa-dashboard"></i>首页</a></li>
 				<li><a
-					href="../pages/agent-list.jsp">房产经纪人管理</a></li>
-				<li class="active">房产经纪人表单</li>
+					href="../pages/user-list.jsp">用户信息管理</a></li>
+				<li class="active">用户信息表单</li>
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
 			<!--FIXME!!! -->
-			<form action="../agent/findAll"
+			<form action="../user/findAll"
 				method="post">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
-
 				<div class="panel panel-default">
-					<div class="panel-heading">新增房产经纪人信息</div>
+					<div class="panel-heading">新增用户信息</div>
 					<div class="row data-type">
-
 						<div class="col-md-2 title">姓  名</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="agentName"
+							<input type="text" class="form-control" name="userName"
 								placeholder="姓名" value="">
 						</div>
 						<div class="col-md-2 title">性  别</div>
 						<div class="col-md-4 data">
 							<select class="form-control select2" style="width: 100%"
-									name="agentSex">
+									name="userSex">
 								<option value="0" selected="selected">女</option>
 								<option value="1">男</option>
 							</select>
 						</div>
-<%--						<div class="col-md-2 title">入职时间</div>--%>
-<%--						<div class="col-md-4 data">--%>
-<%--							<div class="input-group date">--%>
-<%--								<div class="input-group-addon">--%>
-<%--									<i class="fa fa-calendar"></i>--%>
-<%--								</div>--%>
-<%--								<input type="text" class="form-control pull-right"--%>
-<%--									id="datepicker-a3" name="agentRegistertime">--%>
-<%--							</div>--%>
-<%--						</div>--%>
-
-
 						<div class="col-md-2 title">电话/手机号码</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="agentTel"
+							<input type="text" class="form-control" name="userTelephone"
 								placeholder="电话/手机号码" value="">
 						</div>
 
 						<div class="col-md-2 title">电子邮箱/Email</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" placeholder="电子邮箱/Email"
-								name="agentEmail" value="">
+								name="userMail" value="">
 						</div>
 
-<%--						<div class="col-md-2 title">产品状态</div>--%>
-<%--						<div class="col-md-4 data">--%>
-<%--							<select class="form-control select2" style="width: 100%"--%>
-<%--								name="productStatus">--%>
-<%--								<option value="0" selected="selected">关闭</option>--%>
-<%--								<option value="1">开启</option>--%>
-<%--							</select>--%>
-<%--						</div>--%>
 						<div class="col-md-2 title">账号名称</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" placeholder="账号名称"
-								   name="agentAccount" value="">
+								   name="userAccount" value="">
 						</div>
 
 						<div class="col-md-2 title">密  码</div>
 						<div class="col-md-4 data">
-							<input type="password" class="form-control" placeholder="密码小于16位"
-								   name="agentPassword" value="">
+							<input type="password" class="form-control" placeholder="密码"
+								   name="userPasswordsha256" value="">
 						</div>
-
-						<div class="col-md-2 title rowHeight2x">履历/个人说明</div>
-						<div class="col-md-10 data rowHeight2x">
-							<textarea class="form-control" rows="3" placeholder="描述"
-								name="agentProfile"></textarea>
-						</div>
-
 					</div>
 				</div>
 				<!--订单信息/--> <!--工具栏-->
 				<div class="box-tools text-center">
 					<button type="submit" class="btn bg-maroon">保存</button>
 					<button type="button" class="btn bg-default"
-						onclick="history.back(-1);">返回</button>
+						onclick="window.location.href='/user/findAll'">返回</button>
 				</div>
 				<!--工具栏/--> </section>
 				<!-- 正文区域 /-->
 			</form>
 		</div>
 		<!-- 内容区域 /-->
-
-		<!-- 底部导航 -->
-		<footer class="main-footer">
-		<div class="pull-right hidden-xs">
-			<b>Version</b> 1.0.8
-		</div>
-		<strong>Copyright &copy; 2014-2017 <a
-			href="http://www.itcast.cn">研究院研发部</a>.
-		</strong> All rights reserved. </footer>
-		<!-- 底部导航 /-->
-
 	</div>
 
 
