@@ -51,6 +51,7 @@ public class AgentController {
     @RequestMapping(path = "/addagent")
     public void addAgent(Agent agent, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("表现层执行了保存用户...");
+        System.out.println("表现层从表单获取的agent :"+agent);
         agentService.addAgent(agent);
         request.getRequestDispatcher("/agent/findAll1").forward(request, response);
     }
@@ -64,18 +65,20 @@ public class AgentController {
     }
     @RequestMapping(path = "/PreupdateAgent")
     public ModelAndView PreupdateAgent(int id) {
-        System.out.println("业务层执行了修改...");
+        System.out.println("业务层正在执行修改...");
         ModelAndView mv = new ModelAndView();
         Agent agent = agentService.findById(id);
+        System.out.println("从数据库得到的agent信息"+agent);
         mv.addObject("agent", agent);
         mv.setViewName("agent-modify");
         return mv;
     }
     @RequestMapping(path = "/updateAgent")
      public String update(Agent agent) {
-
+        System.out.println("表现层从表单接受到的信息："+agent);
+        System.out.println("/update agent");
+        System.out.println(agent);
         agentService.updateAgent(agent);
-
         return "redirect:/agent/findAll1";
     }
 

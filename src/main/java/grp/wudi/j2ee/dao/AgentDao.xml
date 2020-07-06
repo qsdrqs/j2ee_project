@@ -25,12 +25,16 @@ VALUES
             parameterType="grp.wudi.j2ee.entity.Agent">
 		UPDATE agent
 		SET
+		agent_name=#{agentName},
+		agent_sex=#{agentSex},
+		agent_registertime=#{agentRegistertime},
+		agent_leavetime=#{agentLeavetime},
 		agent_tel = #{agentTel},
 		agent_email = #{agentEmail},
 		agent_account = #{agentAccount},
 		agent_password = #{agentPassword},
 		agent_profile = #{agentProfile}
-		WHERE agent_id = #{agent_id}
+		WHERE agent_id = #{agentId}
 	</update>
 </mapper>
 

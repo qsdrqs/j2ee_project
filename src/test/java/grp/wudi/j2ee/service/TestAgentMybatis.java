@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.security.Provider;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -47,12 +48,8 @@ public class TestAgentMybatis {
 
     @Test
     public void testGetUserById() {
-        String str1 = agentService.findById(34).getAgentPassword();
-        String str2 = SHA256Util.stringToSHA256("123456");
-        System.out.println(str1);
-        System.out.println(str2);
-        System.out.println(str1.equals(str2));
-        assertEquals(agentService.findById(34).getAgentPassword(), SHA256Util.stringToSHA256("123456"));
+       Agent agent = agentService.findById(75);
+        System.out.println(agent);
     }
 
 
@@ -60,10 +57,28 @@ public class TestAgentMybatis {
     public void testDeleteUser() {
         agentService.deleteAgent(1);
     }
+
     @Test
     public void testUpdateAgent(){
         Agent agent = new Agent();
+        agent.setAgentId(60);
+        agent.setAgentName("小春");
+        agent.setAgentSex(1);
+        agent.setAgentEmail("test");
+        agent.setAgentAccount("abc");
+        agent.setAgentTel("a1234");
+        agent.setAgentPassword("123456");
+        agentService.updateAgent(agent);
 
     }
+    @Test
+    public void run1(){
+        Agent agent = agentService.findById(70);
+        String str1 = agent.getAgentPassword();
+        System.out.println(str1);
+        System.out.println(SHA256Util.stringToSHA256("1234567"));
+        System.out.println(str1.equals(SHA256Util.stringToSHA256("1234567")));
+    }
+
 
 }

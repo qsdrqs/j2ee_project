@@ -88,7 +88,7 @@ public class HouseServiceTest {
         house.setUnitPrice(50000);
         house.setArea(1000000);
         house.setStatus(1);
-        house.setFloor(2);
+        house.setFloor(3);
         house.setDescription("University");
         house.setHasLift(true);
         house.setType(1);

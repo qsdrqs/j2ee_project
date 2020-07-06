@@ -94,6 +94,7 @@
 			<!-- TODO：modify -->
 			<form action="../agent/updateAgent"
 				method="post">
+				<input type="hidden" name="agentId" value="${agent.agentId}">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
 
@@ -151,7 +152,7 @@
 
 						<div class="col-md-2 title">密  码</div>
 						<div class="col-md-4 data">
-							<input type="password" class="form-control" placeholder=""
+							<input type="password" class="form-control" placeholder="请重新设置密码（默认不变）"
 								   name="agentPassword" value="${agent.agentPassword}">
 						</div>
 

@@ -110,7 +110,7 @@
 							<select class="form-control select2" style="width: 100%"
 									name="agentSex">
 								<option value="0" selected="selected">女</option>
-								<option value="1">男</option>
+								<option value="1" >男</option>
 							</select>
 						</div>
 <%--						<div class="col-md-2 title">入职时间</div>--%>
