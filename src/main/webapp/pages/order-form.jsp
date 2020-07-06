@@ -124,7 +124,7 @@
 										<th class="" style="padding-right: 0px;"><input
 											id="selall" type="checkbox" class="icheckbox_square-blue">
 										</th>
-										<th class="sorting_asc">ID</th>
+										<th class="sorting_asc">房屋ID</th>
 										<th class="sorting_asc sorting_asc_disabled">房屋地址</th>
 										<th class="sorting_desc sorting_desc_disabled">房屋单价</th>
 										<th class="sorting_desc sorting_desc_disabled">房屋面积</th>
@@ -143,14 +143,14 @@
 											<td>${house.unitPrice }</td>
 											<td>${house.area }</td>
 											<td>${house.floor }</td>
-											<td>${house.type }</td>
-											<td>${house.status }</td>
+											<td>${house.typeStr }</td>
+											<td>${house.statusStr }</td>
 											<td class="text-center">
-												<button type="button" class="btn bg-olive btn-xs">详情</button>
+											<c:if test="${house.status == 1 }">
+											<button type="button" class="btn bg-olive btn-xs" disabled ="disabled">通过</button>
+											</c:if>
 												<button type="button" class="btn bg-olive btn-xs"
-													onclick="window.location.href='/user/update?id='">编辑</button>
-												<button type="button" class="btn bg-olive btn-xs"
-													onclick="window.location.href='/user/delete?id='">删除</button>
+													onclick="window.location.href='/house/delete?id=${house.houseId }'">删除</button>
 											</td>
 										</tr>
 									</c:forEach>
@@ -166,7 +166,7 @@
 											<i class="fa fa-trash-o"></i> 删除
 										</button>
 										<button type="button" class="btn btn-default" title="刷新"
-											onclick="location.href='../user/findAll'">
+											onclick="location.href='../user/order?id=${param.id}'">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 									</div>
@@ -176,7 +176,7 @@
 								<div class="has-feedback">
 									<input type="text" class="form-control input-sm"
 										placeholder="搜索"> <span
-										class="glyphicon glyphicon-search form-control-feedback"></span>
+										class="glyphicon glyphicon-search form-control-feedback" id="search"></span>
 								</div>
 							</div>
 							<!--工具栏/-->
@@ -192,9 +192,9 @@
 						</div>
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="${APP_PATH }?p=1">首页</a></li>
+								<li><a href="${APP_PATH }?id=${param.id }&p=1">首页</a></li>
 								<c:if test="${pi.hasPreviousPage }">
-									<li><a href="${APP_PATH }?p=${pi.pageNum-1}"
+									<li><a href="${APP_PATH }?id=${param.id }&p=${pi.pageNum-1}"
 										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 									</a></li>
 								</c:if>
@@ -203,16 +203,16 @@
 										<li class="active"><a href="#">${page_Num }</a></li>
 									</c:if>
 									<c:if test="${page_Num != pi.pageNum }">
-										<li><a href="${APP_PATH }?p=${page_Num }">${page_Num }</a></li>
+										<li><a href="${APP_PATH }?id=${param.id }&p=${page_Num }">${page_Num }</a></li>
 									</c:if>
 
 								</c:forEach>
 								<c:if test="${pi.hasNextPage }">
-									<li><a href="${APP_PATH }?p=${pi.pageNum+1 }"
+									<li><a href="${APP_PATH }?id=${param.id }&p=${pi.pageNum+1 }"
 										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 									</a></li>
 								</c:if>
-								<li><a href="${APP_PATH }?id=${requestScope.pi.list.userId}&p=${pi.pages}">末页</a></li>
+								<li><a href="${APP_PATH }?id=${param.id }&p=${pi.pages}">末页</a></li>
 							</ul>
 						</div>
 					</div>

@@ -8,6 +8,7 @@ public class User {
 	private int userId;// 用户ID
 	private String userName;// 用户姓名
 	private int userSex;// 用户性别，1为男性，0为女性
+	private String userSexStr;
 	private String userAccount;// 用户名称
 	private String userPasswordsha256; // 用户密码
 	private String userMail;// 用户邮箱
@@ -63,6 +64,16 @@ public class User {
 
 	public int getUserSex() {
 		return userSex;
+	}
+	
+	public String getUserSexStr() {
+		 switch (userSex){
+         case 0:
+             return "女";
+         case 1:
+             return "男";
+     }
+     return "错误";
 	}
 
 	public void setUserSex(int userSex) {

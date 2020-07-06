@@ -40,11 +40,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> getUserByKeyword(User user) {
-		return userDao.findByKeyword(user);
-	}
-
-	@Override
 	public List<User> findAll() {
 		return userDao.findAll();
 	}
@@ -58,7 +53,24 @@ public class UserServiceImpl implements UserService {
 	public PageInfo<User> finAll(int p) {
 		PageHelper.startPage(p, 5);
 		List<User> users = userDao.findAll();
-		return new PageInfo<User>(users,5);
+		return new PageInfo<User>(users, 5);
 	}
 
+	@Override
+	public PageInfo<User> getUserByKeyword(String msg,int p) {
+		User user = new User();
+		if (msg.matches("\\d+")) {
+			int number = Integer.parseInt(msg);
+			user.setUserId(number);
+			user.setUserSex(number);
+		}else {
+			user.setUserId(0);
+			user.setUserSex(-1);
+		}
+		user.setUserAccount(msg);
+		user.setUserMail(msg);
+		user.setUserTelephone(msg);
+		List<User> users = userDao.findByKeyword(user);
+		return new PageInfo<User>(users, 5);
+	}
 }

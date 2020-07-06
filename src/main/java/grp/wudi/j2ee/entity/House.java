@@ -16,6 +16,7 @@ public class House {
     private String description;     //对房子的描述
     private boolean hasLift;        //房子是否有电梯
     private int type;               //房子种类:0表示卖，1表示租
+    private String typeStr;
 
 
     private int agentId;           //与房源对应的经纪人ID
@@ -77,6 +78,16 @@ public class House {
                 return "审核未通过";
             case 3:
                 return "已出售";
+        }
+        return "错误";
+    }
+    
+    public String getTypeStr() {
+        switch (type){
+            case 0:
+                return "卖房";
+            case 1:
+                return "出租";
         }
         return "错误";
     }

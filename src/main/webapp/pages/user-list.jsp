@@ -114,7 +114,7 @@
 							<div class="box-tools pull-right">
 								<div class="has-feedback">
 									<input type="text" class="form-control input-sm"
-										placeholder="搜索"> <span
+										placeholder="按回车搜索" id="search1"> <span
 										class="glyphicon glyphicon-search form-control-feedback"></span>
 								</div>
 							</div>
@@ -144,7 +144,7 @@
 											<td><input name="ids" type="checkbox" value="isCheck"></td>
 											<td>${user.userId }</td>
 											<td>${user.userName }</td>
-											<td>${user.userSex }</td>
+											<td>${user.userSexStr }</td>
 											<td>${user.userAccount }</td>
 											<td>${user.userTelephone }</td>
 											<td>${user.userMail }</td>
@@ -186,7 +186,7 @@
 							<div class="box-tools pull-right">
 								<div class="has-feedback">
 									<input type="text" class="form-control input-sm"
-										placeholder="搜索"> <span
+										placeholder="按回车搜索" id="search2"> <span
 										class="glyphicon glyphicon-search form-control-feedback"></span>
 								</div>
 							</div>
@@ -327,6 +327,13 @@
 				}
 				$(this).data("clicks", !clicks);
 			});
+
+			$("#search1").keypress(function() {
+				window.location.href = "/user/findAll"
+			});
+			$("#search2").keypress(function() {
+				window.alert("hello world!");
+			});
 		});
 
 		function deliver() {
@@ -343,5 +350,4 @@
 		};
 	</script>
 </body>
-
 </html>

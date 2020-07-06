@@ -23,7 +23,7 @@ public class UserController {
 	private HouseServiceImpl houseService;
 
 	/**
-	 * 查询所有用户信息
+	 * 	查询所有用户信息
 	 */
 	@RequestMapping(path = "/findAll")
 	public String findAll(@RequestParam(value = "p", defaultValue = "1") int p, Model model) throws Exception {
@@ -31,9 +31,19 @@ public class UserController {
 		model.addAttribute("pi", pi);
 		return "user-list";
 	}
+	
+	/**
+	 * 	模糊查询用户信息
+	 */
+	@RequestMapping(path = "/search")
+	public String search(String msg, @RequestParam(value = "p", defaultValue = "1") int p, Model model) throws Exception {
+		PageInfo<User> pi = userService.getUserByKeyword(msg, p);
+		model.addAttribute("pi", pi);
+		return "user-list";
+	}
 
 	/**
-	 * 删除用户信息
+	 * 	删除用户信息
 	 */
 	@RequestMapping(path = "/delete")
 	public String delete(@RequestParam(value = "id", required = true) int id) {
@@ -42,7 +52,7 @@ public class UserController {
 	}
 
 	/**
-	 * 修改用户信息
+	 * 	修改用户信息
 	 */
 	@RequestMapping(path = "/update")
 	public String update(@RequestParam(value = "id", required = true) int id, Model model) {
@@ -58,7 +68,7 @@ public class UserController {
 	}
 
 	/*
-	 * 增加用户信息
+	 * 	增加用户信息
 	 */
 	@RequestMapping(path = "/add")
 	public String addAuser(User user) {
@@ -67,7 +77,7 @@ public class UserController {
 	}
 
 	/*
-	 * 查看用户订单
+	 * 	查看用户订单
 	 */
 	@RequestMapping(path = "/order")
 	public String trackOrder(@RequestParam(value = "id", required = true) int id,
