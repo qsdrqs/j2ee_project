@@ -153,7 +153,6 @@
 											<td class="text-center">
 												<button type="button" class="btn bg-olive btn-xs"
 													onclick="window.location.href='/user/order?id=${user.userId }'">订单</button>
-												<button type="button" class="btn bg-olive btn-xs">详情</button>
 												<button type="button" class="btn bg-olive btn-xs"
 													onclick="window.location.href='/user/update?id=${user.userId }'">编辑</button>
 												<button type="button" class="btn bg-olive btn-xs"
@@ -328,26 +327,37 @@
 				$(this).data("clicks", !clicks);
 			});
 
+<<<<<<< HEAD
 			$("#search1").keypress(function() {
 				window.location.href = "/user/findAll"
 			});
 			$("#search2").keypress(function() {
 				window.alert("hello world!");
+=======
+			$("#search1").keypress(function(e) {
+				if(e.keyCode == 13){
+					var msg1 = $("#search1").val();
+					if(msg1 == ""){
+						window.location.href = "/user/findAll"
+					}else{
+						window.location.href = "/user/search?msg="+msg1
+					}
+				}
+			});
+			
+			$("#search2").keypress(function(e) {
+				if(e.keyCode == 13){
+					var msg1 = $("#search2").val();
+					if(msg1 == ""){
+						window.location.href = "/user/findAll"
+					}else{
+						window.location.href = "/user/search?msg="+msg1
+					}
+				}
+>>>>>>> modify
 			});
 		});
 
-		function deliver() {
-			var check_val = [];
-			var check = $("input[name=isCheck]:checked");
-			check.each(function() {
-				var row = $(this).parent("td").parent("tr");
-				var id = row.find("[name='${user.userId}']").val();
-				check_val.push({
-					id : id
-				});
-			})
-			console.log(check_val);
-		};
 	</script>
 </body>
 </html>

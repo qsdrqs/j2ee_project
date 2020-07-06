@@ -6,13 +6,7 @@
 	<select id="findById" parameterType="int"
 		resultType="grp.wudi.j2ee.entity.User">
 		SELECT
-			user_id,
-			user_name,
-			user_sex,
-			user_account,
-			user_passwordsha256,
-			user_mail,
-			user_telephone
+			*
 		FROM
 			user
 		WHERE user_id = #{id}

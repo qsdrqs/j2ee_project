@@ -39,7 +39,8 @@ public class UserController {
 	public String search(String msg, @RequestParam(value = "p", defaultValue = "1") int p, Model model) throws Exception {
 		PageInfo<User> pi = userService.getUserByKeyword(msg, p);
 		model.addAttribute("pi", pi);
-		return "user-list";
+		return "user-searchlist";
+
 	}
 
 	/**

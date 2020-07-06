@@ -8,7 +8,7 @@
 <!-- 页面meta -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>用户订单</title>
+<title>用户信息表</title>
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
@@ -96,12 +96,16 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									<div class="btn-group">
+										<button type="button" class="btn btn-default" title="新建"
+											onclick="location.href='../pages/user-add.jsp'">
+											<i class="fa fa-file-o"></i> 新建
+										</button>
 										<button type="button" class="btn btn-default" id="user_delete"
 											title="删除">
 											<i class="fa fa-trash-o"></i> 删除
 										</button>
 										<button type="button" class="btn btn-default" title="刷新"
-											onclick="location.href='../user/order?id=${param.id}&p=${param.p }'">
+											onclick="location.href='../user/search?msg=${param.msg }&p=${param.p }'">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 									</div>
@@ -110,7 +114,7 @@
 							<div class="box-tools pull-right">
 								<div class="has-feedback">
 									<input type="text" class="form-control input-sm"
-										placeholder="搜索" id="search1"> <span
+										placeholder="按回车搜索" id="search1"> <span
 										class="glyphicon glyphicon-search form-control-feedback"></span>
 								</div>
 							</div>
@@ -124,33 +128,35 @@
 										<th class="" style="padding-right: 0px;"><input
 											id="selall" type="checkbox" class="icheckbox_square-blue">
 										</th>
-										<th class="sorting_asc">房屋ID</th>
-										<th class="sorting_asc sorting_asc_disabled">房屋地址</th>
-										<th class="sorting_desc sorting_desc_disabled">房屋单价</th>
-										<th class="sorting_desc sorting_desc_disabled">房屋面积</th>
-										<th class="sorting_desc sorting_desc_disabled">房屋楼层</th>
-										<th class="sorting_desc sorting_desc_disabled">出售类型</th>
-										<th class="sorting_desc sorting_desc_disabled">订单状态</th>
-
+										<th class="sorting_asc">ID</th>
+										<th class="sorting_desc">用户姓名</th>
+										<th class="sorting_asc sorting_asc_disabled">性别</th>
+										<th class="sorting_desc sorting_desc_disabled">账户名称</th>
+										<th class="text-center sorting">用户电话</th>
+										<th class="sorting">用户邮箱</th>
+										<th class="sorting">用户创建时间</th>
+										<th class="sorting">最后修改时间</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${requestScope.pi.list }" var="house">
+									<c:forEach items="${requestScope.pi.list }" var="user">
 										<tr>
 											<td><input name="ids" type="checkbox" value="isCheck"></td>
-											<td>${house.houseId }</td>
-											<td>${house.address }</td>
-											<td>${house.unitPrice }</td>
-											<td>${house.area }</td>
-											<td>${house.floor }</td>
-											<td>${house.typeStr }</td>
-											<td>${house.statusStr }</td>
+											<td>${user.userId }</td>
+											<td>${user.userName }</td>
+											<td>${user.userSexStr }</td>
+											<td>${user.userAccount }</td>
+											<td>${user.userTelephone }</td>
+											<td>${user.userMail }</td>
+											<td>${user.userCreatetimeStr}</td>
+											<td>${user.userUpdatetimeStr }</td>
 											<td class="text-center">
-											<c:if test="${house.status == 1 }">
-											<button type="button" class="btn bg-olive btn-xs" disabled ="disabled">通过</button>
-											</c:if>
 												<button type="button" class="btn bg-olive btn-xs"
-													onclick="window.location.href='/house/delete?id=${house.houseId }'">删除</button>
+													onclick="window.location.href='/user/order?id=${user.userId }'">订单</button>
+												<button type="button" class="btn bg-olive btn-xs"
+													onclick="window.location.href='/user/update?id=${user.userId }'">编辑</button>
+												<button type="button" class="btn bg-olive btn-xs"
+													onclick="window.location.href='/user/delete?id=${user.userId }'">删除</button>
 											</td>
 										</tr>
 									</c:forEach>
@@ -161,16 +167,16 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									<div class="btn-group">
+										<button type="button" class="btn btn-default" title="新建"
+											onclick="location.href='../pages/user-add.jsp'">
+											<i class="fa fa-file-o"></i> 新建
+										</button>
 										<button type="button" class="btn btn-default" id="user_delete"
 											title="删除">
 											<i class="fa fa-trash-o"></i> 删除
 										</button>
 										<button type="button" class="btn btn-default" title="刷新"
-<<<<<<< HEAD
-											onclick="location.href='../user/order?id=${param.id}'">
-=======
-											onclick="location.href='../user/order?id=${param.id}&p=${param.p }'">
->>>>>>> modify
+											onclick="location.href='../user/search?msg=${param.msg }&p=${param.p }'">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 									</div>
@@ -179,12 +185,8 @@
 							<div class="box-tools pull-right">
 								<div class="has-feedback">
 									<input type="text" class="form-control input-sm"
-<<<<<<< HEAD
-										placeholder="搜索"> <span
-=======
-										placeholder="搜索" id="search2"> <span
->>>>>>> modify
-										class="glyphicon glyphicon-search form-control-feedback" id="search"></span>
+										placeholder="按回车搜索" id="search2"> <span
+										class="glyphicon glyphicon-search form-control-feedback"></span>
 								</div>
 							</div>
 							<!--工具栏/-->
@@ -192,6 +194,7 @@
 						<!-- 数据表格 /-->
 					</div>
 					<!-- /.box-body -->
+
 					<!-- .box-footer-->
 					<div class="box-footer">
 						<div class="pull-left">
@@ -200,9 +203,9 @@
 						</div>
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="${APP_PATH }?id=${param.id }&p=1">首页</a></li>
+								<li><a href="../user/search?msg=${param.msg }&p=1">首页</a></li>
 								<c:if test="${pi.hasPreviousPage }">
-									<li><a href="${APP_PATH }?id=${param.id }&p=${pi.pageNum-1}"
+									<li><a href="../user/search?msg=${param.msg }&p=${pi.pageNum-1}"
 										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 									</a></li>
 								</c:if>
@@ -211,21 +214,20 @@
 										<li class="active"><a href="#">${page_Num }</a></li>
 									</c:if>
 									<c:if test="${page_Num != pi.pageNum }">
-										<li><a href="${APP_PATH }?id=${param.id }&p=${page_Num }">${page_Num }</a></li>
+										<li><a href="../user/search?msg=${param.msg }&p=${page_Num }">${page_Num }</a></li>
 									</c:if>
 
 								</c:forEach>
 								<c:if test="${pi.hasNextPage }">
-									<li><a href="${APP_PATH }?id=${param.id }&p=${pi.pageNum+1 }"
+									<li><a href="../user/search?msg=${param.msg }&p=${pi.pageNum+1 }"
 										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 									</a></li>
 								</c:if>
-								<li><a href="${APP_PATH }?id=${param.id }&p=${pi.pages}">末页</a></li>
+								<li><a href="../user/search?msg=${param.msg }&p=${pi.pages}">末页</a></li>
 							</ul>
 						</div>
 					</div>
 					<!-- /.box-footer-->
-
 					<div class="box-tools text-center">
 						<button type="submit" class="btn bg-maroon">保存</button>
 						<button type="button" class="btn bg-default"
@@ -310,6 +312,7 @@
 		}
 
 		$(document).ready(function() {
+
 			// 激活导航位置
 			setSidebarActive("admin-datalist");
 
@@ -328,6 +331,7 @@
 				}
 				$(this).data("clicks", !clicks);
 			});
+
 			$("#search1").keypress(function(e) {
 				if(e.keyCode == 13){
 					var msg1 = $("#search1").val();
@@ -350,7 +354,7 @@
 				}
 			});
 		});
+
 	</script>
 </body>
-
 </html>
