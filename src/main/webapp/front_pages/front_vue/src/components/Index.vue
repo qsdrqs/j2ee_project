@@ -13,7 +13,7 @@
                     <div class="grid-content bg-purple-light post_details" style="margin-right: 0;">
                         <div class="post_details_title">
                             <span>新闻</span>
-                            <el-button type="text" class="fr" @click="viewMore">更多</el-button>
+                            <el-button type="text" class="fr" @click="viewMoreNews">更多</el-button>
                         </div>
                         <el-table :data="hotApartment" style="width: 100%" stripe @cell-click="openNews">
                             <el-table-column prop="time" label="日期" width="100"></el-table-column>
@@ -25,7 +25,7 @@
                 <div class="grid-content bg-purple post_details" style="margin-left: 0;">
                   <div class="post_details_title">
                     <span>最新房屋信息</span>
-                    <el-button type="text" class="fr" @click="viewMore">更多</el-button>
+                    <el-button type="text" class="fr" @click="viewMoreHouse">更多</el-button>
                   </div>
                   <el-table :data="newApartment" style="width: 100%" stripe @cell-click="openNewApartment">
                     <el-table-column prop="time" label="发布日期" width="100"></el-table-column>
@@ -74,8 +74,11 @@ export default {
     openNews(row, column, cell, event) {
         this.$router.push('/news_details/' + row.id);
     },
-    viewMore() {
+    viewMoreHouse() {
         this.$router.push('/house_list/1');
+    },
+    viewMoreNews(){
+      this.$router.push('/newslist')
     }
   },
   created() {

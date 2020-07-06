@@ -11,6 +11,7 @@ import SellerCenter from '@/components/seller_center'
 import AgentCenter from '@/components/agent_center'
 import AgentLogin from '@/components/agent_login'
 import BookHouse from '@/components/book_house'
+import NewsList from '@/components/newslist'
 
 Vue.use(Router)
 
@@ -40,17 +41,17 @@ export default new Router({
       path: '/register',
       name: '注册账号',
       component: Register
-    }, 
+    },
     {
       path: '/login',
       name: '登录',
       component: Login
-    }, 
+    },
     {
-      path: '/post_house/:ifs', 
+      path: '/post_house/:ifs',
       name: '发布房源',
       component: PostHouse
-    }, 
+    },
     {
       path: '/customer_center',
       name: '买家中心',
@@ -65,22 +66,21 @@ export default new Router({
       path: '/agent_login',
       name: '经纪人登录',
       component: AgentLogin
-    }, 
+    },
     {
       path: '/agent_center',
       name: '经纪人中心',
       component: AgentCenter
-    }, 
+    },
     {
       path: '/book_house/:id',
       name: '预定此房',
       component: BookHouse
     },
     {
-	  path:'/news/:id',
-      name:'新闻资讯',
-      component:News
-	
+      path:'/newslist',
+      name:'新闻列表',
+      component:NewsList
     }
   ]
 })
