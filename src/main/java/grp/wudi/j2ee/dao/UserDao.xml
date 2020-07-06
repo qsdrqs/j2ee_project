@@ -6,15 +6,15 @@
 	<select id="findById" parameterType="int"
 		resultType="grp.wudi.j2ee.entity.User">
 		SELECT
-		user_id,
-		user_name,
-		user_sex,
-		user_account,
-		user_passwordsha256,
-		user_mail,
-		user_telephone
+			user_id,
+			user_name,
+			user_sex,
+			user_account,
+			user_passwordsha256,
+			user_mail,
+			user_telephone
 		FROM
-		user
+			user
 		WHERE user_id = #{id}
 	</select>
 	<select id="findAll" resultType="grp.wudi.j2ee.entity.User">
@@ -23,22 +23,29 @@
 	
 	<select id="findByKeyword" resultType="grp.wudi.j2ee.entity.User">
 		SELECT
-		user_id,
-		user_name,
-		user_sex,
-		user_account
+			*
 		FROM
-		user
-		WHERE 
-		<if test="userId != 0">
-			user_id LIKE '%${userId}%'
-		</if>
-		<if test="userName != null">
-			AND user_name = '%${userName}%'
-		</if>
-		<if test="userAccount != null">
-			AND user_account = '%${userAccount}%'
-		</if>
+			user
+		<where>
+			<if test="userId != 0">
+				user_id LIKE CONCAT('%', #{userId} ,'%')
+			</if>
+			<if test="userName != null">
+				OR user_name LIKE CONCAT('%', #{userName} ,'%')
+			</if>
+			<if test="userSex != -1">
+				OR user_sex LIKE CONCAT('%', #{userSex} ,'%')
+			</if>
+			<if test="userAccount != null">
+				OR user_account LIKE CONCAT('%', #{userAccount} ,'%')
+			</if>
+			<if test="userMail != null">
+				OR user_mail LIKE CONCAT('%', #{userMail} ,'%')
+			</if>
+			<if test="userTelephone != null">
+				OR user_telephone LIKE CONCAT('%', #{userTelephone} ,'%')
+			</if>
+		</where>
 	</select>
 	
 	<insert id="addUser" keyProperty="userId" useGeneratedKeys="true"

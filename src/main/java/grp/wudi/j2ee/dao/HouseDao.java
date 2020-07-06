@@ -8,10 +8,10 @@ public interface HouseDao {
     public List<House> findAll();
 
     public House findById(int id);
+    
+    public List<House> findByUserId(int uid);
 
     public List<House> findByKeyword(House house);
-
-
 
     public int addHouse(House house);
 

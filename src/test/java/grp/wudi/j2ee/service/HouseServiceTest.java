@@ -33,6 +33,12 @@ public class HouseServiceTest {
 
         System.out.println(houseService.getHouseById(2));
     }
+    
+    @Test
+    public void findByUserIdTest(){
+
+        System.out.println(houseService.getHouseByUserId(1));
+    }
 
 
 
@@ -55,7 +61,7 @@ public class HouseServiceTest {
     @Test
     public void addHouseTest() {
         House house = new House();
-        house.setUserId(1);
+        house.setUserId(9);
         house.setHousePicture("hello");
         house.setAddress("Xian Jiaotong University");
         house.setUnitPrice(55000);
@@ -64,7 +70,7 @@ public class HouseServiceTest {
         house.setFloor(2);
         house.setDescription("University");
         house.setHasLift(true);
-        house.setType(1);
+        house.setType(0);
 
         houseService.add(house);
 
@@ -82,7 +88,7 @@ public class HouseServiceTest {
         house.setUnitPrice(50000);
         house.setArea(1000000);
         house.setStatus(1);
-        house.setFloor(2);
+        house.setFloor(3);
         house.setDescription("University");
         house.setHasLift(true);
         house.setType(1);

@@ -16,12 +16,17 @@ public class House {
     private String description;     //对房子的描述
     private boolean hasLift;        //房子是否有电梯
     private int type;               //房子种类:0表示卖，1表示租
+    private String typeStr;
+
+
+    private int agentId;           //与房源对应的经纪人ID
 
     /**
      * 设置价格区间
      */
     private int highestPrice;
     private int lowestPrice;
+
 
 
     /**
@@ -76,6 +81,16 @@ public class House {
         }
         return "错误";
     }
+    
+    public String getTypeStr() {
+        switch (type){
+            case 0:
+                return "卖房";
+            case 1:
+                return "出租";
+        }
+        return "错误";
+    }
 
     public void setStatusStr(String statusStr) {
         this.statusStr = statusStr;
@@ -107,10 +122,16 @@ public class House {
                 ", unitPrice=" + unitPrice +
                 ", area=" + area +
                 ", status=" + status +
+                ", statusStr='" + statusStr + '\'' +
                 ", floor=" + floor +
                 ", description='" + description + '\'' +
                 ", hasLift=" + hasLift +
                 ", type=" + type +
+                ", agentId=" + agentId +
+                ", highestPrice=" + highestPrice +
+                ", lowestPrice=" + lowestPrice +
+                ", maxArea=" + maxArea +
+                ", minArea=" + minArea +
                 '}';
     }
 
@@ -200,5 +221,13 @@ public class House {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getAgentId() {
+        return agentId;
+    }
+
+    public void setAgentId(int agentId) {
+        this.agentId = agentId;
     }
 }

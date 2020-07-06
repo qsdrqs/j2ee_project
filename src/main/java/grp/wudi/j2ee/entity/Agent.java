@@ -54,13 +54,10 @@ public class Agent implements Serializable {
 
     public String getAgentSexStr() {
         if(null != agentSex){
-            if(agentSex == 1){
-                return "男";
-            }if (agentSex == 2){
-                return "女";
-            }
+            return agentSex==1 ? "男":"女";}
+        else {
+            return "未知";
         }
-        return "未知";
     }
 
     public void setAgentSexStr(String agentSexStr) {

@@ -1,5 +1,7 @@
 package grp.wudi.j2ee.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import grp.wudi.j2ee.dao.AgentDao;
 import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.service.AgentService;
@@ -33,9 +35,33 @@ public class AgentServiceImpl implements AgentService {
     }
 
     @Override
-    public int dateleAgent(int id) {
+    public int deleteAgent(int id) {
         System.out.println("业务层执行了...");
-        return dao.dateleAgent(id);
+        return dao.deleteAgent(id);
 
+    }
+    @Override
+    public PageInfo<Agent> finAll(int p) {
+        PageHelper.startPage(p, 5);
+        List<Agent> agents = dao.findAll();
+        return new PageInfo<Agent>(agents,5);
+    }
+    @Override
+    public int updateAgent(Agent agent){
+        System.out.println("业务层正在执行更新经纪人信息...");
+        System.out.println("从表单获取的信息："+agent);
+        if(agent.getAgentSexStr()!=null){
+            if(agent.getAgentSexStr().equals("男")){
+                agent.setAgentSex(1);
+            }else{
+                agent.setAgentSex(0);
+            }
+        }
+        Agent agent1 = dao.findById(agent.getAgentId());
+        System.out.println("处理更新前："+agent);
+        if(!agent1.getAgentPassword().equals(agent.getAgentPassword())){
+            agent.setAgentPassword(SHA256Util.stringToSHA256(agent.getAgentPassword()));
+        }
+        return dao.updateAgent(agent);
     }
 }

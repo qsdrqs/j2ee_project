@@ -11,8 +11,8 @@ public interface UserService {
 	public User getUserById(int id);
 	public int add(User user);
 	public int update(User user);
-	public List<User> getUserByKeyword(User user);
+	public PageInfo<User> getUserByKeyword(String msg,int p);
 	public List<User> findAll();
-	PageInfo<User> finAll(int p);
+	public PageInfo<User> finAll(int p);
 	public int deleteUser(int id);
 }

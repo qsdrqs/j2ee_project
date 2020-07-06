@@ -29,7 +29,8 @@
 		destroy-method="close">
 		<property name="driverClassName" value="${driverClass}" />
 		<property name="url" value="${url}" />
-		<property name="username" value="${user}" />
+            <!-- 这里如果直接使用${user}在linux中会得到系统用户名，因此改为${username}-->
+        <property name="username" value="${name}" />
 		<property name="password" value="${password}" />
 	</bean>
 

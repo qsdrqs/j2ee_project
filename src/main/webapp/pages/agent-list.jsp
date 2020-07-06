@@ -136,7 +136,7 @@
 <%--											<i class="fa fa-ban"></i> 屏蔽--%>
 <%--										</button>--%>
 										<button type="button" class="btn btn-default" title="刷新"
-												onclick="location.href='../agent/findAll'">
+												onclick="location.href='../agent/findAll1'">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 									</div>
@@ -168,7 +168,6 @@
 									<th class="text-center sorting">注册时间</th>
 									<th class="sorting">离职时间</th>
 									<th class="sorting">账号</th>
-									<th class="sorting">密码</th>
 									<th class="sorting">个人简述</th>
 
 								</tr>
@@ -176,7 +175,7 @@
 								<tbody>
 
 
-								<c:forEach items="${agentList}" var="agent">
+								<c:forEach items="${requestScope.pi.list }" var="agent">
 
 									<tr>
 										<td><input name="ids" type="checkbox"></td>
@@ -188,12 +187,15 @@
 										<td>${agent.registerTimeStr }</td>
 										<td>${agent.leaveTimeStr }</td>
 										<td>${agent.agentAccount}</td>
-										<td>${agent.agentPassword }</td>
 										<td>${agent.agentProfile}</td>
 										<td class="text-center">
-												<%--												<button type="button" class="btn bg-olive btn-xs">订单</button>--%>
+											<button type="button" class="btn bg-olive btn-xs"
+											onclick="location.href='../agent/PreupdateAgent?id=${agent.agentId}'">编辑</button>
+
+
 											<button type="button" class="btn bg-olive btn-xs">详情</button>
-											<button type="button" class="btn bg-olive btn-xs">编辑</button>
+
+
 													<button type="button" class="btn bg-olive btn-xs"
 															onclick="location.href='../agent/deleteAgent?id=${agent.agentId}'">删除</button>
 										</td>
@@ -256,31 +258,36 @@
 					<!-- .box-footer-->
 					<div class="box-footer">
 						<div class="pull-left">
-							<div class="form-group form-inline">
-								总共2 页，共14 条数据。 每页 <select class="form-control">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-								</select> 条
-							</div>
+							<div class="form-group form-inline">当前 ${pi.pageNum }页,总${pi.pages }
+								页,总 ${pi.total } 条记录</div>
 						</div>
-
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="#" aria-label="Previous">首页</a></li>
-								<li><a href="#">上一页</a></li>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">下一页</a></li>
-								<li><a href="#" aria-label="Next">尾页</a></li>
+								<li><a href="../agent/findAll1?p=1">首页</a></li>
+								<c:if test="${pi.hasPreviousPage }">
+									<li><a href="../agent/findAll1?p=${pi.pageNum-1}"
+										   aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+									</a></li>
+								</c:if>
+
+
+								<c:forEach items="${pi.navigatepageNums }" var="page_Num">
+									<c:if test="${page_Num == pi.pageNum }">
+										<li class="active"><a href="#">${page_Num }</a></li>
+									</c:if>
+									<c:if test="${page_Num != pi.pageNum }">
+										<li><a href="../agent/findAll1?p=${page_Num }">${page_Num }</a></li>
+									</c:if>
+
+								</c:forEach>
+								<c:if test="${pi.hasNextPage }">
+									<li><a href="../agent/findAll1?p=${pi.pageNum+1 }"
+										   aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+									</a></li>
+								</c:if>
+								<li><a href="../agent/findAll1?p=${pi.pages}">末页</a></li>
 							</ul>
 						</div>
-
 					</div>
 					<!-- /.box-footer-->
 
