@@ -14,7 +14,8 @@ public class House {
 
     private int floor;              //房子的楼层
     private String description;     //对房子的描述
-    private boolean hasLift;        //房子是否有电梯
+    private int hasLift;        //房子是否有电梯
+    private String hasLiftStr;
     private int type;               //房子种类:0表示卖，1表示租
     private String typeStr;
 
@@ -96,19 +97,6 @@ public class House {
         this.statusStr = statusStr;
     }
 
-    public House(int houseId, int userId, String housePicture, String address, int unitPrice, int area, int status, int floor, String description, boolean hasLift, int type) {
-        this.houseId = houseId;
-        this.userId = userId;
-        this.housePicture = housePicture;
-        this.address = address;
-        this.unitPrice = unitPrice;
-        this.area = area;
-        this.status = status;
-        this.floor = floor;
-        this.description = description;
-        this.hasLift = hasLift;
-        this.type = type;
-    }
 
     public House() {}
 
@@ -207,12 +195,24 @@ public class House {
         this.description = description;
     }
 
-    public boolean isHasLift() {
+    public int getHasLift() {
         return hasLift;
     }
 
-    public void setHasLift(boolean hasLift) {
+    public void setHasLift(int hasLift) {
         this.hasLift = hasLift;
+    }
+
+    public String getHasLiftStr() {
+        if(this.getHasLift()==0){
+            return "无";
+        }else {
+            return "有";
+        }
+    }
+
+    public void setHasLiftStr(String hasLiftStr) {
+        this.hasLiftStr = hasLiftStr;
     }
 
     public int getType() {

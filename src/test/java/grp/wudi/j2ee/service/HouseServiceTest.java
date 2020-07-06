@@ -69,7 +69,7 @@ public class HouseServiceTest {
         house.setStatus(1);
         house.setFloor(2);
         house.setDescription("University");
-        house.setHasLift(true);
+        house.setHasLift(1);
         house.setType(0);
 
         houseService.add(house);
@@ -90,7 +90,7 @@ public class HouseServiceTest {
         house.setStatus(1);
         house.setFloor(3);
         house.setDescription("University");
-        house.setHasLift(true);
+        house.setHasLift(1);
         house.setType(1);
 
         houseService.update(house);

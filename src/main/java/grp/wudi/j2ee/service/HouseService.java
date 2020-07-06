@@ -1,5 +1,6 @@
 package grp.wudi.j2ee.service;
 
+import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.entity.House;
 import java.util.List;
 
@@ -20,5 +21,8 @@ public interface HouseService {
     public int delete(int id);
 
     public String getStatus(House house);
+    //分页
+
+    PageInfo<House> findAll(int p);
 
 }

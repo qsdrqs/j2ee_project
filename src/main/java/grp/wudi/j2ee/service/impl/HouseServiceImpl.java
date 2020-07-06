@@ -1,6 +1,7 @@
 package grp.wudi.j2ee.service.impl;
 
 import grp.wudi.j2ee.dao.HouseDao;
+import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.entity.House;
 import grp.wudi.j2ee.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,4 +70,12 @@ public class HouseServiceImpl implements HouseService {
 		return new PageInfo<House>(houses,5);
 	}
 
+    @Override
+    public PageInfo<House> findAll(int p) {
+        System.out.println("业务层正在执行分页查询所有房源信息...");
+        PageHelper.startPage(p, 2);
+        List<House> houses = houseDao.findAll();
+        return new PageInfo<House>(houses,5);
+
+    }
 }

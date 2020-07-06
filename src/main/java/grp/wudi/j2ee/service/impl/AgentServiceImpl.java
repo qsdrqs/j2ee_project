@@ -42,7 +42,7 @@ public class AgentServiceImpl implements AgentService {
     }
     @Override
     public PageInfo<Agent> finAll(int p) {
-        PageHelper.startPage(p, 5);
+        PageHelper.startPage(p, 10);
         List<Agent> agents = dao.findAll();
         return new PageInfo<Agent>(agents,5);
     }
