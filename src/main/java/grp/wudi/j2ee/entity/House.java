@@ -86,7 +86,7 @@ public class House {
     public String getTypeStr() {
         switch (type){
             case 0:
-                return "卖房";
+                return "出售";
             case 1:
                 return "出租";
         }

@@ -32,19 +32,19 @@
 			</a>
 				<ul class="treeview-menu">
 
-					<li id="system-setting"><a
+					<li class="system-setting"><a
 						href="${pageContext.request.contextPath}/user/add"> <i
 							class="fa fa-circle-o"></i> 用户管理
 					</a></li>
-					<li id="system-setting"><a
+					<li class="system-setting"><a
 						href="${pageContext.request.contextPath}/user/add"> <i
 							class="fa fa-circle-o"></i> 角色管理
 					</a></li>
-					<li id="system-setting"><a
+					<li class="system-setting"><a
 						href="${pageContext.request.contextPath}/user/add">
 							<i class="fa fa-circle-o"></i> 资源权限管理
 					</a></li>
-					<li id="system-setting"><a
+					<li class="system-setting"><a
 						href="${pageContext.request.contextPath}/user/add"> <i
 							class="fa fa-circle-o"></i> 访问日志
 					</a></li>
@@ -56,17 +56,17 @@
 			</a>
 				<ul class="treeview-menu">
 
-					<li id="system-setting"><a
+					<li class="system-setting"><a
 						href="../user/findAll">
 							<i class="fa fa-circle-o"></i> 用户管理
 					</a></li>
-					<li id="system-setting"><a
+					<li class="system-setting"><a
 <%--						href="${pageContext.request.contextPath}/user/findAll1?page=1&pageSize=3"> <i--%>
 							href="../agent/findAll1"> <i
 							class="fa fa-circle-o"></i> 经纪人管理
 					</a></li>
 
-					<li id="system-setting"><a
+					<li class="system-setting"><a
 							href="../house/findAllBypages"> <i
 							class="fa fa-circle-o"></i> 房源管理
 					</a></li>
