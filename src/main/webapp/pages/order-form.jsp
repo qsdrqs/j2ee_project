@@ -166,11 +166,7 @@
 											<i class="fa fa-trash-o"></i> 删除
 										</button>
 										<button type="button" class="btn btn-default" title="刷新"
-<<<<<<< HEAD
-											onclick="location.href='../user/order?id=${param.id}'">
-=======
 											onclick="location.href='../user/order?id=${param.id}&p=${param.p }'">
->>>>>>> modify
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 									</div>
@@ -179,11 +175,7 @@
 							<div class="box-tools pull-right">
 								<div class="has-feedback">
 									<input type="text" class="form-control input-sm"
-<<<<<<< HEAD
-										placeholder="搜索"> <span
-=======
 										placeholder="搜索" id="search2"> <span
->>>>>>> modify
 										class="glyphicon glyphicon-search form-control-feedback" id="search"></span>
 								</div>
 							</div>

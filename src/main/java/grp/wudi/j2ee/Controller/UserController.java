@@ -87,12 +87,5 @@ public class UserController {
 		model.addAttribute("pi", pi);
 		return "order-form";
 	}
-	
-//	@RequestMapping(path = "/order")
-//	public String trackOrder(@RequestParam(value = "id", required = true) int id, Model model) {
-//		List<House> houses = houseService.getHouseByUserId(id);
-//		System.out.println(houses);
-//		model.addAttribute("houses", houses);
-//		return "order-form";
-//	}
+
 }

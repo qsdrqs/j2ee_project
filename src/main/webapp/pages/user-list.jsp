@@ -327,13 +327,7 @@
 				$(this).data("clicks", !clicks);
 			});
 
-<<<<<<< HEAD
-			$("#search1").keypress(function() {
-				window.location.href = "/user/findAll"
-			});
-			$("#search2").keypress(function() {
-				window.alert("hello world!");
-=======
+
 			$("#search1").keypress(function(e) {
 				if(e.keyCode == 13){
 					var msg1 = $("#search1").val();
@@ -354,7 +348,6 @@
 						window.location.href = "/user/search?msg="+msg1
 					}
 				}
->>>>>>> modify
 			});
 		});
 
