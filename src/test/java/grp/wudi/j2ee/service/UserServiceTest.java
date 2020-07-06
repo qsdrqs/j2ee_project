@@ -50,7 +50,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void testGetUserByKeyword() {
-		System.out.println(userService.getUserByKeyword("蔡徐坤"));
+		System.out.println(userService.getUserByKeyword("蔡徐坤",1));
 	}
 	
 	@Test
