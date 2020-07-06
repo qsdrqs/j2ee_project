@@ -79,7 +79,7 @@
 			<!-- 内容头部 -->
 			<section class="content-header">
 			<h1>
-				房产经纪人 <small>信息录入</small>
+				房产经纪人 <small>信息修改</small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="../pages/main.jsp"><i
@@ -91,27 +91,26 @@
 			</section>
 			<!-- 内容头部 /-->
 			<!--FIXME!!! -->
-			<form action="../agent/addagent"
+			<!-- TODO：modify -->
+			<form action="../agent/updateAgent"
 				method="post">
+				<input type="hidden" name="agentId" value="${agent.agentId}">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
 
 				<div class="panel panel-default">
-					<div class="panel-heading">新增房产经纪人信息</div>
+					<div class="panel-heading">经纪人信息修改</div>
 					<div class="row data-type">
 
 						<div class="col-md-2 title">姓  名</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" name="agentName"
-								placeholder="姓名" value="">
+								placeholder="" value="${agent.agentName}" readonly="readonly">
 						</div>
 						<div class="col-md-2 title">性  别</div>
 						<div class="col-md-4 data">
-							<select class="form-control select2" style="width: 100%"
-									name="agentSex">
-								<option value="0" selected="selected">女</option>
-								<option value="1" >男</option>
-							</select>
+							<input type="text" class="form-control" name="agentSexStr"
+								   placeholder="" value="${agent.agentSexStr}" readonly="readonly">
 						</div>
 <%--						<div class="col-md-2 title">入职时间</div>--%>
 <%--						<div class="col-md-4 data">--%>
@@ -128,13 +127,13 @@
 						<div class="col-md-2 title">电话/手机号码</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" name="agentTel"
-								placeholder="电话/手机号码" value="">
+								placeholder="" value="${agent.agentTel}">
 						</div>
 
 						<div class="col-md-2 title">电子邮箱/Email</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" placeholder="电子邮箱/Email"
-								name="agentEmail" value="">
+							<input type="text" class="form-control" placeholder=""
+								name="agentEmail" value="${agent.agentEmail}">
 						</div>
 
 <%--						<div class="col-md-2 title">产品状态</div>--%>
@@ -147,20 +146,20 @@
 <%--						</div>--%>
 						<div class="col-md-2 title">账号名称</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" placeholder="账号名称"
-								   name="agentAccount" value="">
+							<input type="text" class="form-control" placeholder=""
+								   name="agentAccount" value="${agent.agentAccount}">
 						</div>
 
 						<div class="col-md-2 title">密  码</div>
 						<div class="col-md-4 data">
-							<input type="password" class="form-control" placeholder="密码小于16位"
-								   name="agentPassword" value="">
+							<input type="password" class="form-control" placeholder="请重新设置密码（默认不变）"
+								   name="agentPassword" value="${agent.agentPassword}">
 						</div>
 
 						<div class="col-md-2 title rowHeight2x">履历/个人说明</div>
 						<div class="col-md-10 data rowHeight2x">
 							<textarea class="form-control" rows="3" placeholder="描述"
-								name="agentProfile"></textarea>
+								name="agentProfile">${agent.agentProfile}</textarea>
 						</div>
 
 					</div>
