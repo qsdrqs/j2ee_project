@@ -190,14 +190,23 @@
 										<td>${house.statusStr}</td>
 										<td class="text-center">
 											<button type="button" class="btn bg-olive btn-xs"
-											onclick="location.href='../house/PreupdateAgent?id=${agent.agentId}'">编辑</button>
+											onclick="location.href='../house/PreupdateAgent?id=${house.houseId}'">编辑</button>
 
 
 											<button type="button" class="btn bg-olive btn-xs">详情</button>
 
 
+											<c:choose>
+												<c:when test="${house.agentId != 0}">
+													<button type="button" class="btn bg-olive btn-xs" disabled="disabled">删除</button>
+
+												</c:when>
+												<c:otherwise>
 													<button type="button" class="btn bg-olive btn-xs"
-															onclick="location.href='../agent/deleteAgent?id=${agent.agentId}'">删除</button>
+															onclick="location.href='../house/delete?id=${house.houseId}'">删除</button>
+												</c:otherwise>
+											</c:choose>
+
 										</td>
 									</tr>
 								</c:forEach>

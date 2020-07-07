@@ -61,7 +61,7 @@ public class HouseServiceTest {
     @Test
     public void addHouseTest() {
         House house = new House();
-        house.setUserId(9);
+        house.setUserId(2);
         house.setHousePicture("hello");
         house.setAddress("Xian Jiaotong University");
         house.setUnitPrice(55000);
@@ -102,7 +102,7 @@ public class HouseServiceTest {
 
     @Test
     public void deleteHouseTest(){
-        houseService.delete(1);
+        houseService.delete(2);
     }
 
 

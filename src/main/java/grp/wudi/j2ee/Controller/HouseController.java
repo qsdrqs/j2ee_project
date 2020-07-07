@@ -25,6 +25,15 @@ public class HouseController {
         mv.setViewName("house-list");
         return mv;
     }
+
+
+    /**
+     * 查找所有房源信息，并分页
+     * @param p
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(path="/findAllBypages")
     public String findAllBypages(@RequestParam(value = "p", defaultValue = "1") int p, Model model) throws Exception {
         System.out.println("表现层正在执行分页查询房源信息....");
@@ -40,7 +49,6 @@ public class HouseController {
 		House removeHouse = houseService.getHouseById(id);
 		houseService.delete(id);
 		id = removeHouse.getUserId();
-		String redirect = "redirect:/user/order?id="+id;
-		return redirect;
+        return "redirect:/house/findAllBypages";
 	}
 }
