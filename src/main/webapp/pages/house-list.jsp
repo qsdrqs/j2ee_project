@@ -129,12 +129,7 @@
 										<button type="button" class="btn btn-default" title="删除">
 											<i class="fa fa-trash-o"></i> 删除
 										</button>
-<%--										<button type="button" class="btn btn-default" title="开启">--%>
-<%--											<i class="fa fa-check"></i> 开启--%>
-<%--										</button>--%>
-<%--										<button type="button" class="btn btn-default" title="屏蔽">--%>
-<%--											<i class="fa fa-ban"></i> 屏蔽--%>
-<%--										</button>--%>
+
 										<button type="button" class="btn btn-default" title="刷新"
 												onclick="location.href='../house/findAllBypages'">
 											<i class="fa fa-refresh"></i> 刷新
@@ -190,7 +185,7 @@
 										<td>${house.statusStr}</td>
 										<td class="text-center">
 											<button type="button" class="btn bg-olive btn-xs"
-											onclick="location.href='../house/PreupdateAgent?id=${house.houseId}'">编辑</button>
+											onclick="location.href='../house/update?id=${house.houseId}'">编辑</button>
 
 
 											<button type="button" class="btn bg-olive btn-xs">详情</button>
@@ -211,16 +206,7 @@
 									</tr>
 								</c:forEach>
 								</tbody>
-								<!--
-                            <tfoot>
-                            <tr>
-                            <th>Rendering engine</th>
-                            <th>Browser</th>
-                            <th>Platform(s)</th>
-                            <th>Engine version</th>
-                            <th>CSS grade</th>
-                            </tr>
-                            </tfoot>-->
+
 							</table>
 							<!--数据列表/-->
 
@@ -235,12 +221,7 @@
 										<button type="button" class="btn btn-default" title="删除">
 											<i class="fa fa-trash-o"></i> 删除
 										</button>
-										<%--										<button type="button" class="btn btn-default" title="开启">--%>
-										<%--											<i class="fa fa-check"></i> 开启--%>
-										<%--										</button>--%>
-										<%--										<button type="button" class="btn btn-default" title="屏蔽">--%>
-										<%--											<i class="fa fa-ban"></i> 屏蔽--%>
-										<%--										</button>--%>
+
 										<button type="button" class="btn btn-default" title="刷新"
 												onclick="location.href='../agent/findAll'">
 											<i class="fa fa-refresh"></i> 刷新

@@ -3,10 +3,13 @@ package grp.wudi.j2ee.Controller;
 import com.github.pagehelper.PageInfo;
 import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.entity.House;
+import grp.wudi.j2ee.entity.User;
+import grp.wudi.j2ee.service.HouseService;
 import grp.wudi.j2ee.service.impl.HouseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,11 +47,29 @@ public class HouseController {
     /**
 	 * 删除房屋信息
 	 */
-	@RequestMapping(path = "/delete")
+	@RequestMapping(path = "/deleteHouse")
 	public String delete(@RequestParam(value = "id", required = true) int id) {
 		House removeHouse = houseService.getHouseById(id);
 		houseService.delete(id);
 		id = removeHouse.getUserId();
         return "redirect:/house/findAllBypages";
 	}
+
+    /**
+     * 审核房屋信息
+     * @param id
+     * @return
+     */
+    @RequestMapping(path = "/update")
+    public String update(@RequestParam(value = "id", required = true) int id, Model model) {
+        House house = houseService.getHouseById(id);
+        model.addAttribute("house", house);
+        return "house-update";
+    }
+
+    @PostMapping("/update")
+    public String update(House house) {
+        houseService.update(house);
+        return "redirect:/house/findAll";
+    }
 }
