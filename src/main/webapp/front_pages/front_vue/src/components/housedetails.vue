@@ -49,10 +49,6 @@
                 <td>{{ house.properties }}</td>
               </tr>
               <tr>
-                <th>所在区域</th>
-                <td>{{ house.district }}</td>
-              </tr>
-              <tr>
                 <th>看房时间</th>
                 <td>{{ house.view_time }}</td>
               </tr>
@@ -173,7 +169,7 @@
           周边地图
         </div>
         <div class="info_block" id="container">
-          <baidu-map class="map" :zoom="zoom" :center="house.district+house.properties">
+          <baidu-map class="map" :zoom="zoom" :center="house.properties">
           </baidu-map>
           <div class="map_button" style="bottom: 30px; right: 10px;" @click="addZoom">＋</div>
           <div class="map_button" style="bottom: 30px; right: 50px;" @click="minusZoom">－</div>

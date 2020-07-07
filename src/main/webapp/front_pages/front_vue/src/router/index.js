@@ -12,6 +12,7 @@ import AgentCenter from '@/components/agent_center'
 import AgentLogin from '@/components/agent_login'
 import BookHouse from '@/components/book_house'
 import NewsList from '@/components/newslist'
+import NewsDetails from '@/components/news_details'
 
 Vue.use(Router)
 
@@ -81,6 +82,11 @@ export default new Router({
       path:'/newslist',
       name:'新闻列表',
       component:NewsList
+    },
+    {
+      path:'/news_details/:id',
+      name:'新闻详情',
+      component:NewsDetails
     }
   ]
 })

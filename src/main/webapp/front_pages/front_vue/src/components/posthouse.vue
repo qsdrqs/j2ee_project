@@ -14,10 +14,16 @@
 			</el-form-item>
 			<el-form-item label="房屋描述" prop="description">
 				<el-input v-model="form.description"></el-input>
+
 			</el-form-item>
 			<el-form-item label="小区名称" prop="properties">
+			<baidu-map>
+    		<bm-auto-complete >
 				<el-input v-model="form.properties"></el-input>
+    		</bm-auto-complete>
+			</baidu-map>
 			</el-form-item>
+
 			<el-form-item label="总价格" prop="price">
 				<el-input v-model="form.price" @change="countUnitPrice"></el-input>
 			</el-form-item>
@@ -50,9 +56,6 @@
 			</el-form-item>
 			<el-form-item label="建筑年份" prop="description">
 				<el-input v-model="form.build_year"></el-input>
-			</el-form-item>
-			<el-form-item label="市、区(县)" prop="district">
-				<el-input v-model="form.district"></el-input>
 			</el-form-item>
 			<el-form-item label="可预约的看房时间" prop="view_time">
 				<el-input v-model="form.view_time"></el-input>
@@ -169,7 +172,6 @@ export default {
         floor: "",
         build_year: "",
         properties: "",
-        district: "",
         view_time: "",
         area: "",
         inside_area: "",

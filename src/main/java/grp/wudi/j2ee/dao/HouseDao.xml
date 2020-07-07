@@ -5,6 +5,8 @@
 <mapper namespace="grp.wudi.j2ee.dao.HouseDao">
     <select id="findAll" resultType="grp.wudi.j2ee.entity.House">
         SELECT * FROM house
+        LEFT JOIN house_agent
+        ON house.house_id = house_agent.house_id
     </select>
 
     <select id="findById" parameterType="int" resultType="grp.wudi.j2ee.entity.House">
@@ -62,15 +64,6 @@
 
 
         </where>
-
-
-
-
-
-
-
-
-
 
 
     </select>

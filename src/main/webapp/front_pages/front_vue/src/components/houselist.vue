@@ -71,7 +71,7 @@
         <div class="house_info fg">
           <div class="house_title">{{ item.title }}</div>
           <div class="house_spec">{{ item.properties }} | {{ item.room }}室{{ item.livingroom }}厅 | {{ item.area }}㎡ | {{ item.direction }} | {{ item.decoration }}</div>
-          <div class="house_spec">{{ item.floor/item.total_floor < 1/3 ? '低' : item.floor/item.total_floor < 2/3 ? '中' : '高' }}楼层(共{{ item.floor }}层){{ item.build_year }}年建塔楼 - {{ item.district }}</div>
+          <div class="house_spec">{{ item.floor/item.total_floor < 1/3 ? '低' : item.floor/item.total_floor < 2/3 ? '中' : '高' }}楼层(共{{ item.floor }}层){{ item.build_year }}年建塔楼 - </div>
           <div class="house_spec">{{ item.post_time }}发布</div>
           <div class="house_spec">
             <span class="house_advantage">{{ item.house_label }}</span>

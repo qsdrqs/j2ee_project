@@ -100,7 +100,7 @@
 											onclick="location.href='../pages/user-add.jsp'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
-										<button type="button" class="btn btn-default" id="user_delete"
+										<button type="button" class="btn btn-default" id="userDel1"
 											title="删除">
 											<i class="fa fa-trash-o"></i> 删除
 										</button>
@@ -155,7 +155,7 @@
 													onclick="window.location.href='/user/order?id=${user.userId }'">订单</button>
 												<button type="button" class="btn bg-olive btn-xs"
 													onclick="window.location.href='/user/update?id=${user.userId }'">编辑</button>
-												<button type="button" class="btn bg-olive btn-xs"
+												<button type="button" class="btn bg-olive btn-xs" 
 													onclick="window.location.href='/user/delete?id=${user.userId }'">删除</button>
 											</td>
 										</tr>
@@ -327,30 +327,58 @@
 				$(this).data("clicks", !clicks);
 			});
 
-
+			//搜索功能
 			$("#search1").keypress(function(e) {
-				if(e.keyCode == 13){
+				if (e.keyCode == 13) {
 					var msg1 = $("#search1").val();
-					if(msg1 == ""){
+					if (msg1 == "") {
 						window.location.href = "/user/findAll"
-					}else{
-						window.location.href = "/user/search?msg="+msg1
+					} else {
+						window.location.href = "/user/search?msg=" + msg1
+					}
+				}
+			});
+
+			$("#search2").keypress(function(e) {
+				if (e.keyCode == 13) {
+					var msg1 = $("#search2").val();
+					if (msg1 == "") {
+						window.location.href = "/user/findAll"
+					} else {
+						window.location.href = "/user/search?msg=" + msg1
 					}
 				}
 			});
 			
-			$("#search2").keypress(function(e) {
-				if(e.keyCode == 13){
-					var msg1 = $("#search2").val();
-					if(msg1 == ""){
-						window.location.href = "/user/findAll"
-					}else{
-						window.location.href = "/user/search?msg="+msg1
+// 			$("input[name='delConfirm']").click(function (e){
+// 				var r=confirm("你确定要删除吗");
+// 				if (r==true){
+// 					var delId = $("input[name='delConfirm']").parent().parentElement.parentElement.children[1].textContent;
+// 					window.location.href = "/user/search?msg=" + delId;
+// 					alert("删除成功");
+// 				}else{
+// 				  	alert("你取消了删除");
+// 				}
+// 			});
+
+			//批量删除
+			$("#userDel1").click(function() {
+				var r=confirm("你确定要删除吗");
+				if (r==true){
+					var box=$("input[name='ids']").parent();
+					var delId;
+					for(var i = 0; i < box.length; ++i){
+						if(box[i].attributes.getNamedItem("aria-checked").textContent == "true") {
+							//console.log(box[i].parentElement.parentElement.children[1].textContent);
+							delId = box[i].parentElement.parentElement.children[1].textContent;
+							window.location.href = "/user/search?msg=" + delId;
+						}
 					}
+				}else{
+					alert("你取消了删除");
 				}
 			});
 		});
-
 	</script>
 </body>
 </html>
