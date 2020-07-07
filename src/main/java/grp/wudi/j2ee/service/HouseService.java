@@ -1,10 +1,9 @@
 package grp.wudi.j2ee.service;
 
-import grp.wudi.j2ee.entity.Agent;
-import grp.wudi.j2ee.entity.House;
-import java.util.List;
-
 import com.github.pagehelper.PageInfo;
+import grp.wudi.j2ee.entity.House;
+
+import java.util.List;
 
 public interface HouseService {
     public List<House> findAll();
@@ -24,5 +23,7 @@ public interface HouseService {
     //分页
 
     PageInfo<House> findAll(int p);
+
+    PageInfo<House> findBykeywordsPages(int p, String address, int type, int minPrice, int maxPrice, int minArea, int maxArea, int hasLift);
 
 }

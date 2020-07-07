@@ -35,12 +35,12 @@ export default {
       this.$ajax.get(
         'http://localhost:8080/agent/Agentlogin?agentAccount=' + this.form.agentAccount + '&agentPassword=' + this.form.agentPassword).then((res) => {
         console.log(res);
-        if (res.status == 200) {
+        if (res.data != null && res.data != "") {
           sessionStorage.setItem('agentId', res.data.agentAccount);
           sessionStorage.setItem('agentName', res.data.agentName);
           window.location.href = '/#/agent_center';
         } else {
-          this.$alert(res.data.msg, '抱歉', {
+          this.$alert(res.data.msg, '账号或者密码错误', {
             confirmButtonText: '确定',
             callback: action => {
               if (action = 'confirm') {

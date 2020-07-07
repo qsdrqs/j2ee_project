@@ -1,18 +1,16 @@
 package grp.wudi.j2ee.service.impl;
 
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-
 import grp.wudi.j2ee.dao.UserDao;
 import grp.wudi.j2ee.entity.User;
 import grp.wudi.j2ee.service.UserService;
 import grp.wudi.j2ee.utils.SHA256Util;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -88,7 +86,6 @@ public class UserServiceImpl implements UserService {
 		user.setUserMail(msg);
 		user.setUserTelephone(msg);
 		PageHelper.startPage(p, 5);
-
 		List<User> users = userDao.findByKeyword(user);
 		return new PageInfo<User>(users, 5);
 	}

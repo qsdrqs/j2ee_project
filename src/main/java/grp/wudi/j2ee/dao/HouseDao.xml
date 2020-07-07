@@ -19,19 +19,7 @@
 
     <select id="findByKeyword" resultType="grp.wudi.j2ee.entity.House">
 
-        SELECT
-        house_id,
-        user_id,
-        house_picture,
-
-        <if test="lowestPrice > 0 or highestPrice > 0">
-            unit_price,
-        </if>
-        <if test="minArea > 0 or maxArea > 0">
-            area,
-        </if>
-
-        address
+        SELECT *
         FROM
         house
         <where>
@@ -43,8 +31,6 @@
                 AND address LIKE '%${address}%'
             </if>
 
-
-
             <if test="lowestPrice > 0">
                 AND unit_price > #{lowestPrice}
             </if>
@@ -54,12 +40,18 @@
             </if>
 
 
-
             <if test="minArea > 0">
                 AND area > #{minArea}
             </if>
             <if test="maxArea > 0">
                 AND #{maxArea} > area
+            </if>
+            <if test="hasLift ==0">
+                AND has_lift=0
+            </if>
+
+            <if test="hasLift ==1">
+                AND has_lift=1
             </if>
 
 

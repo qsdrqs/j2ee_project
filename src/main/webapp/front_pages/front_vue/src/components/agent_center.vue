@@ -1,17 +1,17 @@
 <template>
 	<div class="form">
 		<div class="seller_center">
-			<h2>您好，{{ agent_name }}。</h2>
-			<div class="function_tab">
-				<el-radio-group v-model="list_type" @change="getList">
-					<el-radio-button label="1">我的订单</el-radio-button>
-					<el-radio-button label="2">待带看</el-radio-button>
-					<el-radio-button label="3">待评价</el-radio-button>
-					<el-radio-button label="4">待协商交易</el-radio-button>
-					<el-radio-button label="5">已完成</el-radio-button>
-					<el-radio-button label="0">待接订单</el-radio-button>
-				</el-radio-group>
-			</div>
+      <h2>您好，{{ agentName }}!欢迎登入经纪人中心</h2>
+      <div class="function_tab">
+        <el-radio-group v-model="list_type" @change="getList">
+          <el-radio-button label="1">我的订单</el-radio-button>
+          <el-radio-button label="2">待带看</el-radio-button>
+          <el-radio-button label="3">待评价</el-radio-button>
+          <el-radio-button label="4">待协商交易</el-radio-button>
+          <el-radio-button label="5">已完成</el-radio-button>
+          <el-radio-button label="0">待接订单</el-radio-button>
+        </el-radio-group>
+      </div>
 
 			<!-- 我的订单 -->
 			<el-table v-loading="loading" :data="orderList" style="width: 100%; text-align: left;" stripe :hidden="list_type == 0" @cellclick="viewHouse">
@@ -63,7 +63,7 @@ export default {
   name: "AgentCenter",
   data() {
     return {
-      agent_name: sessionStorage.getItem("agent_name"),
+      agentName: sessionStorage.getItem("agentName"),
       list_type: 1,
       loading: false,
       orderList: []
@@ -72,7 +72,7 @@ export default {
   methods: {
     getList() {
       var that = this;
-      var id = sessionStorage.getItem("agent_id");
+      var id = sessionStorage.getItem("agentId");
       var url =
         "http://localhost:3333/house/agentGetOrderList?a_id=" +
         id +
@@ -173,8 +173,8 @@ export default {
       var that = this;
       var form = {
         house_id: object.house_id,
-        agent_id: sessionStorage.getItem("agent_id"),
-        agent_name: sessionStorage.getItem("agent_name"),
+        agent_id: sessionStorage.getItem("agentId"),
+        agent_name: sessionStorage.getItem("agentName"),
         content: ""
       };
       this.$prompt("请输入评价内容", "提示", {

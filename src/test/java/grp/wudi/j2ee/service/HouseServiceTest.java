@@ -1,5 +1,6 @@
 package grp.wudi.j2ee.service;
 
+import com.github.pagehelper.PageInfo;
 import grp.wudi.j2ee.entity.House;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -98,11 +99,19 @@ public class HouseServiceTest {
     }
 
 
-
+    @Test
+    public void deleteHouseTest() {
+        houseService.delete(2);
+    }
 
     @Test
-    public void deleteHouseTest(){
-        houseService.delete(2);
+    public void run1() {
+        PageInfo<House> list = houseService.findBykeywordsPages(1, "tong", 1, 1000, 10000, 50, 120, 1);
+        System.out.println(list);
+        for (House house : list.getList()) {
+            System.out.println(house);
+        }
+
     }
 
 

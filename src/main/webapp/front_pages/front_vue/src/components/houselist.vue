@@ -18,18 +18,17 @@
     <div class="filter_block">
       <div class="filter">
         <el-radio-group v-model="price" @change="getList">
-          <el-radio label="0">全部价格</el-radio>
-          <el-radio label="0-100">100万以下</el-radio>
-          <el-radio label="100-200">100-200万</el-radio>
-          <el-radio label="200-400">200-400万</el-radio>
-          <el-radio label="400-600">400-600万</el-radio>
-          <el-radio label="600-1000">600-1000万</el-radio>
-          <el-radio label="1000-∞">1000万以上</el-radio>
+          <el-radio label="0-0">全部单价</el-radio>
+          <el-radio label="0-3000">3000元以下</el-radio>
+          <el-radio label="3000-5000">3000-5000元</el-radio>
+          <el-radio label="5000-9000">5000-9000元</el-radio>
+          <el-radio label="9000-12000">9000-12000元</el-radio>
+          <el-radio label="12000-∞">12000元以上</el-radio>
         </el-radio-group>
       </div>
       <div class="filter">
         <el-radio-group v-model="area" @change="getList">
-          <el-radio label="0">全部面积</el-radio>
+          <el-radio label="0-0">全部面积</el-radio>
           <el-radio label="0-40">40平以下</el-radio>
           <el-radio label="40-60">40-60平</el-radio>
           <el-radio label="60-80">60-80平</el-radio>
@@ -42,24 +41,22 @@
       </div>
       <div class="filter">
         <el-radio-group v-model="houseType" @change="getList">
-          <el-radio label="0">全部房型</el-radio>
-          <el-radio label="1">一室</el-radio>
-          <el-radio label="2">二室</el-radio>
-          <el-radio label="3">三室</el-radio>
-          <el-radio label="4">四室</el-radio>
-          <el-radio label="5">五室或以上</el-radio>
+          <el-radio label="0">无电梯</el-radio>
+          <el-radio label="1">有电梯</el-radio>
+          <el-radio label="3">全部</el-radio>
+
         </el-radio-group>
       </div>
-      <div class="filter">
-        <el-radio-group v-model="usage" @change="getList">
-          <el-radio label="0">全部用途</el-radio>
-          <el-radio label="1">普通住宅</el-radio>
-          <el-radio label="2">别墅</el-radio>
-          <el-radio label="3">商用</el-radio>
-          <el-radio label="4">商住两用</el-radio>
-          <el-radio label="5">四合院</el-radio>
-        </el-radio-group>
-      </div>
+      <!--      <div class="filter">-->
+      <!--        <el-radio-group v-model="usage" @change="getList">-->
+      <!--          <el-radio label="0">全部用途</el-radio>-->
+      <!--          <el-radio label="1">普通住宅</el-radio>-->
+      <!--          <el-radio label="2">别墅</el-radio>-->
+      <!--          <el-radio label="3">商用</el-radio>-->
+      <!--          <el-radio label="4">商住两用</el-radio>-->
+      <!--          <el-radio label="5">四合院</el-radio>-->
+      <!--        </el-radio-group>-->
+      <!--      </div>-->
     </div>
     <h3 class="result_tips">共找到<span class="blue">{{ resultCount }}</span>套房子</h3>
     <div class="houselist_block" v-loading="loading">
@@ -98,7 +95,6 @@ export default {
     return {
       placeholder: "请输入您感兴趣的地区或者楼盘",
       isForSell: this.$route.params.type,
-      price: 0,
       keyword: '',
       price: '0',
       area: '0',
@@ -123,28 +119,27 @@ export default {
     getList: function () {
       var that = this;
       this.loading = true;
-      var queryString = 'http://localhost:8080/house/findAllBypages?p=' + this.currentPage + '&keyword=' + this.keyword + '&isForSell=' + this.isForSell;
+      var queryString = 'http://localhost:8080/house/findAllBypages?p=' + this.currentPage + '&address=' + this.keyword + '&type=' + this.isForSell;
       if ( this.price != 0 ) {
         var priceArray = this.price.split('-');
         var minPrice = priceArray[0];
         var maxPrice = priceArray[1];
-        queryString += '&minPrice=' + minPrice * 10000 + (maxPrice == '∞' ? '' : ('&maxPrice=' + maxPrice * 10000));
+        queryString += '&minPrice=' + minPrice + (maxPrice == '∞' ? 0 : ('&maxPrice=' + maxPrice));
       }
       if ( this.area != 0 ) {
         var areaArray = this.area.split('-');
         var minArea = areaArray[0];
         var maxArea = areaArray[1];
-        queryString += '&minArea=' + minArea + (maxArea == '∞' ? '' : ('&maxArea=' + maxArea));
+        queryString += '&minArea=' + minArea + (maxArea == '∞' ? 0 : ('&maxArea=' + maxArea));
       }
       if (this.houseType != 0) {
-        queryString += '&room=' + this.houseType;
+        queryString += '&hasLift=' + this.houseType;
       }
-      if (this.usage != 0) {
-        queryString += '&usage=' + this.usage;
-      }
+
       this.$ajax
         .get(queryString)
         .then(function (res) {
+          console.log(res)
           that.resultCount = res.data.count;
           that.houseList = res.data.list;
           that.total = res.data.count;
