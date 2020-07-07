@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -21,7 +23,7 @@ public class UserController {
 	private UserServiceImpl userService;
 	@Autowired
 	private HouseServiceImpl houseService;
-
+	
 	/**
 	 * 	查询所有用户信息
 	 */
@@ -71,6 +73,12 @@ public class UserController {
 	/*
 	 * 	增加用户信息
 	 */
+	@RequestMapping("/userAdd.do")
+	public ModelAndView goHome() {
+        ModelAndView mav =new ModelAndView("user-add");
+        return mav;
+    }
+	
 	@RequestMapping(path = "/add")
 	public String addAuser(User user) {
 		userService.add(user);

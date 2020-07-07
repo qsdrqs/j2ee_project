@@ -21,7 +21,7 @@
 	<!-- 配置视图解析器 -->
 	<bean id="internalResourceViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/pages/"></property>
+		<property name="prefix" value="/WEB-INF/pages/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 
@@ -30,6 +30,20 @@
 	<mvc:resources mapping="/img/**" location="/img/" />
 	<mvc:resources mapping="/plugins/**" location="/plugins/" />
 	<mvc:resources mapping="/js/**" location="/js/" />
+
+	<!-- 拦截器定义 -->
+	<mvc:interceptors>
+		<!-- 定义一个拦截器 -->
+		<mvc:interceptor>
+			<!-- 拦截所有资源 -->
+			<mvc:mapping path="/**/" />
+			
+			<!-- 设置放行资源 -->
+			<mvc:exclude-mapping path="/admin/login.do" />
+
+			<bean class="grp.wudi.j2ee.interceptor.LoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 
 	<!-- <mvc:resources mapping="" location="" -->

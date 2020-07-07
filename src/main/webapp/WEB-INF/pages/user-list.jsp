@@ -75,7 +75,7 @@
 					数据管理 <small>数据列表</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+					<li><a href="/main.do"><i class="fa fa-dashboard"></i> 首页</a></li>
 					<li><a href="#">数据管理</a></li>
 					<li class="active">数据列表</li>
 				</ol>
@@ -97,7 +97,7 @@
 								<div class="form-group form-inline">
 									<div class="btn-group">
 										<button type="button" class="btn btn-default" title="新建"
-											onclick="location.href='../pages/user-add.jsp'">
+											onclick="location.href='../user/userAdd.do'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										<button type="button" class="btn btn-default" id="userDel1"
@@ -168,7 +168,7 @@
 								<div class="form-group form-inline">
 									<div class="btn-group">
 										<button type="button" class="btn btn-default" title="新建"
-											onclick="location.href='../pages/user-add.jsp'">
+											onclick="location.href='../user/userAdd.do'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										<button type="button" class="btn btn-default" id="user_delete"
