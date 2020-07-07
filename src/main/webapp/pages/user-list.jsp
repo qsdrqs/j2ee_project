@@ -155,7 +155,7 @@
 													onclick="window.location.href='/user/order?id=${user.userId }'">订单</button>
 												<button type="button" class="btn bg-olive btn-xs"
 													onclick="window.location.href='/user/update?id=${user.userId }'">编辑</button>
-												<button type="button" class="btn bg-olive btn-xs"
+												<button type="button" class="btn bg-olive btn-xs" 
 													onclick="window.location.href='/user/delete?id=${user.userId }'">删除</button>
 											</td>
 										</tr>
@@ -349,19 +349,34 @@
 					}
 				}
 			});
+			
+// 			$("input[name='delConfirm']").click(function (e){
+// 				var r=confirm("你确定要删除吗");
+// 				if (r==true){
+// 					var delId = $("input[name='delConfirm']").parent().parentElement.parentElement.children[1].textContent;
+// 					window.location.href = "/user/search?msg=" + delId;
+// 					alert("删除成功");
+// 				}else{
+// 				  	alert("你取消了删除");
+// 				}
+// 			});
 
 			//批量删除
 			$("#userDel1").click(function() {
-				var box=$("input[name='ids']").parent();
-				var delId;
-				for(var i = 0; i < box.length; ++i){
-					if(box[i].attributes.getNamedItem("aria-checked").textContent == "true") {
-												//console.log(box[i].parentElement.parentElement.children[1].textContent);
-												delId = box[i].parentElement.parentElement.children[1].textContent;
-												window.location.href = "/user/search?msg=" + delId;
+				var r=confirm("你确定要删除吗");
+				if (r==true){
+					var box=$("input[name='ids']").parent();
+					var delId;
+					for(var i = 0; i < box.length; ++i){
+						if(box[i].attributes.getNamedItem("aria-checked").textContent == "true") {
+							//console.log(box[i].parentElement.parentElement.children[1].textContent);
+							delId = box[i].parentElement.parentElement.children[1].textContent;
+							window.location.href = "/user/search?msg=" + delId;
+						}
 					}
+				}else{
+					alert("你取消了删除");
 				}
-
 			});
 		});
 	</script>
