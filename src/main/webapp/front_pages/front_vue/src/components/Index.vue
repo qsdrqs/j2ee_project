@@ -12,24 +12,24 @@
                 <el-col :span="12">
                     <div class="grid-content bg-purple-light post_details" style="margin-right: 0;">
                         <div class="post_details_title">
-                            <span>新闻</span>
-                            <el-button type="text" class="fr" @click="viewMoreNews">更多</el-button>
+                            <span>鏂伴椈</span>
+                            <el-button type="text" class="fr" @click="viewMoreNews">鏇村</el-button>
                         </div>
                         <el-table :data="hotApartment" style="width: 100%" stripe @cell-click="openNews">
-                            <el-table-column prop="time" label="日期" width="100"></el-table-column>
-                            <el-table-column prop="title" label="新闻标题"></el-table-column>
+                            <el-table-column prop="time" label="鏃ユ湡" width="100"></el-table-column>
+                            <el-table-column prop="title" label="鏂伴椈鏍囬"></el-table-column>
                         </el-table>
                     </div>
                 </el-col>
               <el-col :span="12">
                 <div class="grid-content bg-purple post_details" style="margin-left: 0;">
                   <div class="post_details_title">
-                    <span>最新房屋信息</span>
-                    <el-button type="text" class="fr" @click="viewMoreHouse">更多</el-button>
+                    <span>鏈�鏂版埧灞嬩俊鎭�</span>
+                    <el-button type="text" class="fr" @click="viewMoreHouse">鏇村</el-button>
                   </div>
                   <el-table :data="newApartment" style="width: 100%" stripe @cell-click="openNewApartment">
-                    <el-table-column prop="time" label="发布日期" width="100"></el-table-column>
-                    <el-table-column prop="title" label="房屋信息"></el-table-column>
+                    <el-table-column prop="time" label="鍙戝竷鏃ユ湡" width="100"></el-table-column>
+                    <el-table-column prop="title" label="鎴垮眿淇℃伅"></el-table-column>
                   </el-table>
                 </div>
               </el-col>
@@ -54,18 +54,21 @@ export default {
   },
   methods: {
     getList() {
-      var that = this;//TODO:修改成新闻的客户端列表,增加新闻详情页面
+      var that = this;//TODO:淇敼鎴愭柊闂荤殑瀹㈡埛绔垪琛�,澧炲姞鏂伴椈璇︽儏椤甸潰
       this.$ajax.get("http://localhost:3333/house/index").then(res => {
         that.hotApartment = res.data[0];
         that.newApartment = res.data[1];
         for (var i = 0; i < that.hotApartment.length; i++) {
             that.hotApartment[i].time = that.hotApartment[i].post_time.slice(0, 10);
-            that.hotApartment[i].title = (that.hotApartment[i].is_for_sell ? '[出售]' : '[出租]') + that.hotApartment[i].title;
+            that.hotApartment[i].title = (that.hotApartment[i].is_for_sell ? '[鍑哄敭]' : '[鍑虹]') + that.hotApartment[i].title;
         }
         for (var i = 0; i < that.newApartment.length; i++) {
             that.newApartment[i].time = that.newApartment[i].post_time.slice(0, 10);
-            that.newApartment[i].title = (that.newApartment[i].is_for_sell ? '[出售]' : '[出租]') + that.newApartment[i].title;
+            that.newApartment[i].title = (that.newApartment[i].is_for_sell ? '[鍑哄敭]' : '[鍑虹]') + that.newApartment[i].title;
         }
+        for(var i=0;i < that.swiper.length;i++) {
+          var patt=/*.jpg/;
+          swiper[]=swiper.match(patt);
       });
     },
     openNewApartment(row, column, cell, event) {

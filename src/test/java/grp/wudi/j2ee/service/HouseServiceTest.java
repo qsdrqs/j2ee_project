@@ -46,8 +46,10 @@ public class HouseServiceTest {
     @Test
     public  void findByKeyword(){
         House house = new House();
-        house.setHighestPrice(60000);
-        house.setLowestPrice(20000);
+        house.setAddress("tong");
+
+        house.setHighestPrice(55000);
+        house.setLowestPrice(0);
         house.setMinArea(150000);
         house.setMaxArea(2000000);
         List<House> list = houseService.getHouseByKeyword(house);
