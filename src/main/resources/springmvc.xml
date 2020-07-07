@@ -33,6 +33,5 @@
 
 
 	<!-- <mvc:resources mapping="" location="" -->
-
 	<mvc:annotation-driven></mvc:annotation-driven>
 </beans>

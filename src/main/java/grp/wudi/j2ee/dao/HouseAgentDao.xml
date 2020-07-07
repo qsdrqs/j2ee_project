@@ -34,10 +34,4 @@
         DELETE FROM house_agent
         WHERE house_id = #{houseId}
     </delete>
-
-
-
-
-
-
 </mapper>

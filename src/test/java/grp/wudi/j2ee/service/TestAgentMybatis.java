@@ -71,14 +71,21 @@ public class TestAgentMybatis {
         agentService.updateAgent(agent);
 
     }
+
     @Test
-    public void run1(){
-        Agent agent = agentService.findById(70);
+    public void run1() {
+        Agent agent = agentService.findById(69);
         String str1 = agent.getAgentPassword();
         System.out.println(str1);
         System.out.println(SHA256Util.stringToSHA256("1234567"));
         System.out.println(str1.equals(SHA256Util.stringToSHA256("1234567")));
     }
 
+    @Test
+    public void run2() {
+        Agent agent = agentService.verifyAgent("test", "123456");
 
+        System.out.println(agent);
+
+    }
 }

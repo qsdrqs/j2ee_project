@@ -36,5 +36,8 @@ VALUES
 		agent_profile = #{agentProfile}
 		WHERE agent_id = #{agentId}
 	</update>
+	<select id="verifyAgent" resultType="grp.wudi.j2ee.entity.Agent">
+		select * from agent where agent_account=#{agentAccount} and agent_password=#{agentPassword}
+	</select>
 </mapper>
 

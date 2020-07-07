@@ -26,4 +26,7 @@ public interface AgentService {
     //分页
     PageInfo<Agent> finAll(int p);
 
+    //验证经纪人的账户和密码
+    public Agent verifyAgent(String agentAccount, String agentPassword);
+
 }

@@ -49,19 +49,25 @@ public class AgentServiceImpl implements AgentService {
     @Override
     public int updateAgent(Agent agent){
         System.out.println("业务层正在执行更新经纪人信息...");
-        System.out.println("从表单获取的信息："+agent);
-        if(agent.getAgentSexStr()!=null){
-            if(agent.getAgentSexStr().equals("男")){
+        System.out.println("从表单获取的信息：" + agent);
+        if (agent.getAgentSexStr() != null) {
+            if (agent.getAgentSexStr().equals("男")) {
                 agent.setAgentSex(1);
-            }else{
+            } else {
                 agent.setAgentSex(0);
             }
         }
         Agent agent1 = dao.findById(agent.getAgentId());
-        System.out.println("处理更新前："+agent);
-        if(!agent1.getAgentPassword().equals(agent.getAgentPassword())){
+        System.out.println("处理更新前：" + agent);
+        if (!agent1.getAgentPassword().equals(agent.getAgentPassword())) {
             agent.setAgentPassword(SHA256Util.stringToSHA256(agent.getAgentPassword()));
         }
         return dao.updateAgent(agent);
+    }
+
+    @Override
+    public Agent verifyAgent(String agentAccount, String agentPassword) {
+        agentPassword = SHA256Util.stringToSHA256(agentPassword);
+        return dao.verifyAgent(agentAccount, agentPassword);
     }
 }

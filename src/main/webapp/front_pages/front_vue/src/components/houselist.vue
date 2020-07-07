@@ -99,7 +99,7 @@ export default {
       placeholder: "请输入您感兴趣的地区或者楼盘",
       isForSell: this.$route.params.type,
       price: 0,
-      keyword: '', 
+      keyword: '',
       price: '0',
       area: '0',
       houseType: '0',
@@ -118,12 +118,12 @@ export default {
     },
     changePage: function (val) {
       this.currentPage = val;
-      this.getList(); 
+      this.getList();
     },
     getList: function () {
       var that = this;
       this.loading = true;
-      var queryString = 'http://localhost:3333/house/getHouseList?page=' + this.currentPage + '&keyword=' + this.keyword + '&isForSell=' + this.isForSell;
+      var queryString = 'http://localhost:8080/house/findAllBypages?p=' + this.currentPage + '&keyword=' + this.keyword + '&isForSell=' + this.isForSell;
       if ( this.price != 0 ) {
         var priceArray = this.price.split('-');
         var minPrice = priceArray[0];
@@ -136,32 +136,32 @@ export default {
         var maxArea = areaArray[1];
         queryString += '&minArea=' + minArea + (maxArea == '∞' ? '' : ('&maxArea=' + maxArea));
       }
-      if ( this.houseType != 0 ) {
+      if (this.houseType != 0) {
         queryString += '&room=' + this.houseType;
       }
-      if( this.usage != 0) {
+      if (this.usage != 0) {
         queryString += '&usage=' + this.usage;
       }
       this.$ajax
-      .get(queryString)
-      .then(function(res) {
-        that.resultCount = res.data.count;
-        that.houseList = res.data.list;
-        that.total = res.data.count;
-        that.loading = false;
-      });
-    }, 
-    changeType: function(num) {
+        .get(queryString)
+        .then(function (res) {
+          that.resultCount = res.data.count;
+          that.houseList = res.data.list;
+          that.total = res.data.count;
+          that.loading = false;
+        });
+    },
+    changeType: function (num) {
       this.isForSell = num;
-      this.getList(); 
+      this.getList();
       this.$router.push('/house_list/' + num);
     },
-    houseDetails: function() {
+    houseDetails: function () {
       this.$router.push(
         "/house_details/" + event.currentTarget.getAttribute("hid")
       );
     }
-  }, 
+  },
   created: function () {
     this.getList();
   }

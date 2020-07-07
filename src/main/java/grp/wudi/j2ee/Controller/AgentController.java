@@ -1,5 +1,6 @@
 package grp.wudi.j2ee.Controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.service.impl.AgentServiceImpl;
@@ -7,8 +8,7 @@ import grp.wudi.j2ee.service.impl.AgentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
@@ -73,14 +73,31 @@ public class AgentController {
         mv.setViewName("agent-modify");
         return mv;
     }
+
     @RequestMapping(path = "/updateAgent")
-     public String update(Agent agent) {
-        System.out.println("表现层从表单接受到的信息："+agent);
+    public String update(Agent agent) {
+        System.out.println("表现层从表单接受到的信息：" + agent);
         System.out.println("/update agent");
         System.out.println(agent);
         agentService.updateAgent(agent);
         return "redirect:/agent/findAll1";
     }
 
+    @RequestMapping(path = "/Agentlogin")
+    @CrossOrigin(origins = "*")
+    public @ResponseBody
+    String verifyAgent(String agentAccount, String agentPassword) {
+        System.out.println("表现层正在执行经纪人经纪人验证登入...");
+        System.out.println(agentAccount);
+        System.out.println(agentPassword);
+        Agent agent = agentService.verifyAgent(agentAccount, agentPassword);
+        if (null != agent) {
+            String result = JSON.toJSONString(agent);
+            System.out.println(result);
+            return result;
+        } else {
+            System.out.println("验证失败!!!");
+            return null;
+        }
+    }
 }
-

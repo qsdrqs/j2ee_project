@@ -73,6 +73,12 @@
 			<version>${spring.version}</version>
 		</dependency>
 
+		<!--阿里巴巴json套件-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.72</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
