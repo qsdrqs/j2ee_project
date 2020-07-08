@@ -86,9 +86,10 @@
 
     </div>
     <div class="page_block">
-      <el-pagination layout="prev, pager, next" :total="total" @current-change="changePage">
+      <el-pagination layout="prev, pager, next" :total="total"  :page-size="pageSize" @current-change="changePage" >
       </el-pagination>
     </div>
+
   </div>
 </template>
 
@@ -106,12 +107,16 @@ export default {
       usage: '0',
       currentPage: 1,
       houseList: [],
-      total: 0,
+      total: 10,
+      pageSize:10,
       resultCount: 0,
       loading: false
     };
   },
   methods: {
+    changeCurrentPage:function(){
+      this.currentPage++;
+    },
     search: function () {
       this.currentPage = 1;
       this.getList();
@@ -147,7 +152,7 @@ export default {
           console.log(res)
           console.log("===============================")
           console.log("获取的满足条件房源总数")
-
+          that.pageSize = res.data.pageSize;
           that.resultCount = res.data.total;
           console.log(that.resultCount);
           console.log("===============================")
@@ -156,7 +161,7 @@ export default {
           console.log(that.houseList)
           console.log("===============================")
           console.log("获取的总页数")
-          that.total = res.data.pages;
+           that.total = res.data.total;
           console.log(that.total);
           that.loading = false;
         });

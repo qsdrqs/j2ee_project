@@ -40,12 +40,12 @@
 			
 			<!-- 设置放行资源 -->
 			<mvc:exclude-mapping path="/admin/login.do" />
+			<mvc:exclude-mapping path="/agent/Agentlogin"/>
+			<mvc:exclude-mapping path="/house/findAllBypages"/>
 
 			<bean class="grp.wudi.j2ee.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-
-
 	<!-- <mvc:resources mapping="" location="" -->
 	<mvc:annotation-driven></mvc:annotation-driven>
 </beans>
