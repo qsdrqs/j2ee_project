@@ -11,7 +11,7 @@
 					alt="User Image">
 			</div>
 			<div class="pull-left info">
-				<p>xxx</p>
+				<p>${pageContext.getSession().getAttribute("adminInfo").getAdminAccount()}</p>
 				<a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
 			</div>
 		</div>
@@ -31,12 +31,12 @@
 				<ul class="treeview-menu">
 
 					<li class="system-setting"><a
-						href="${pageContext.request.contextPath}/user/add"> <i
-							class="fa fa-circle-o"></i> 用户管理
+						href="${pageContext.request.contextPath}/admin/update?id=${pageContext.getSession().getAttribute("adminInfo").getAdminId()}"> <i
+							class="fa fa-circle-o"></i> 我的信息
 					</a></li>
 					<li class="system-setting"><a
-						href="${pageContext.request.contextPath}/user/add"> <i
-							class="fa fa-circle-o"></i> 角色管理
+						href="${pageContext.request.contextPath}/admin/manage?type=${pageContext.getSession().getAttribute("adminInfo").getType()}"> <i
+							class="fa fa-circle-o"></i> 管理员管理
 					</a></li>
 					<li class="system-setting"><a
 						href="${pageContext.request.contextPath}/user/add"> <i

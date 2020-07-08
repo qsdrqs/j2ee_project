@@ -4,11 +4,17 @@
 <html>
 <head>
 <!-- 页面meta -->
-<title>Ihouse后台管理系统</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>添加管理员</title>
+<meta name="description" content="AdminLTE2定制版">
+<meta name="keywords" content="AdminLTE2定制版">
+
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
 	name="viewport">
+
 
 <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -41,16 +47,17 @@
 <link rel="stylesheet"
 	href="../plugins/ionslider/ion.rangeSlider.skinNice.css">
 <link rel="stylesheet" href="../plugins/bootstrap-slider/slider.css">
+<link rel="stylesheet"
+	href="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-purple sidebar-mini">
 
 	<div class="wrapper">
 
 		<!-- 页面头部 -->
 		<jsp:include page="header.jsp"></jsp:include>
 		<!-- 页面头部 /-->
-
 		<!-- 导航侧栏 -->
 		<jsp:include page="aside.jsp"></jsp:include>
 		<!-- 导航侧栏 /-->
@@ -58,11 +65,58 @@
 		<!-- 内容区域 -->
 		<div class="content-wrapper">
 
-			<img src="../img/center.jpg" width="100%" height="100%" />
+			<!-- 内容头部 -->
+			<section class="content-header">
+			<h1>
+				管理员 <small>信息录入</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="../main.do"><i class="fa fa-dashboard"></i>首页</a></li>
+				<li><a href="../admin/findAll">用户信息管理</a></li>
+				<li class="active">用户信息表单</li>
+			</ol>
+			</section>
+			<!-- 内容头部 /-->
+			<!--FIXME!!! -->
+			<form action="../admin/add" method="post">
+				<!-- 正文区域 -->
+				<section class="content"> <!--产品信息-->
+				<div class="panel panel-default">
+					<div class="panel-heading">新增管理员信息</div>
+					<div class="col-md-2 title">账号名称</div>
+					<div class="col-md-4 data">
+						<input type="text" class="form-control" placeholder="账号名称"
+							name="adminAccount" value="">
+					</div>
 
+					<div class="col-md-2 title">密 码</div>
+					<div class="col-md-4 data">
+						<input type="password" class="form-control" placeholder="密码"
+							name="adminPassword" value="">
+					</div>
+					<div class="col-md-2 title">管理员类型</div>
+					<div class="col-md-4 data">
+						<select class="form-control select2" style="width: 100%"
+							name="type">
+							<option value="0" selected="selected">普通管理员</option>
+							<option value="1">超级管理员</option>
+						</select>
+					</div>
+				</div>
+				<div class="box-tools text-center">
+					<button type="submit" class="btn bg-maroon">保存</button>
+					<button type="button" class="btn bg-default"
+						onclick="window.location.href='/admin/findAll'">返回</button>
+				</div>
 		</div>
-		<!-- 内容区域 /-->
+		<!--工具栏/-->
+		</section>
+		<!-- 正文区域 /-->
+		</form>
 	</div>
+	<!-- 内容区域 /-->
+	</div>
+
 
 	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<script src="../plugins/jQueryUI/jquery-ui.min.js"></script>
@@ -111,6 +165,9 @@
 	<script src="../plugins/flot/jquery.flot.categories.min.js"></script>
 	<script src="../plugins/ionslider/ion.rangeSlider.min.js"></script>
 	<script src="../plugins/bootstrap-slider/bootstrap-slider.js"></script>
+	<script
+		src="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+
 	<script>
 		$(document).ready(function() {
 			// 选择框
@@ -132,10 +189,26 @@
 		}
 
 		$(document).ready(function() {
+			$('#datepicker-a3').datetimepicker({
+				format : "yyyy-mm-dd hh:ii",
+				autoclose : true,
+				todayBtn : true,
+				language : "zh-CN"
+			});
+		});
+
+		$(document).ready(function() {
 			// 激活导航位置
-			setSidebarActive("admin-index");
+			setSidebarActive("order-manage");
+			$("#datepicker-a3").datetimepicker({
+				format : "yyyy-mm-dd hh:ii",
+
+			});
+
 		});
 	</script>
+
+
 </body>
 
 </html>

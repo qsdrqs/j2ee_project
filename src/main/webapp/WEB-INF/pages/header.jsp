@@ -4,7 +4,7 @@
 <!-- 页面头部 -->
 <header class="main-header">
 	<!-- Logo -->
-	<a href="all-admin-index.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+	<a href="/main.do" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 		<span class="logo-mini"><b>数据</b></span> <!-- logo for regular state and mobile devices -->
 		<span class="logo-lg"><b>数据</b>后台管理</span>
 	</a>
@@ -22,7 +22,7 @@
 					class="dropdown-toggle" data-toggle="dropdown"> <img
 						src="${pageContext.request.contextPath}/img/user2-160x160.jpg"
 						class="user-image" alt="User Image"> <span class="hidden-xs">
-							xxx
+							${pageContext.getSession().getAttribute("adminInfo").getAdminAccount()}
 					</span>
 
 				</a>
@@ -35,10 +35,10 @@
 						<!-- Menu Footer-->
 						<li class="user-footer">
 							<div class="pull-left">
-								<a href="#" class="btn btn-default btn-flat">修改密码</a>
+								<a href="${pageContext.request.contextPath}/admin/update?id=${pageContext.getSession().getAttribute("adminInfo").getAdminId()}" class="btn btn-default btn-flat">修改信息</a>
 							</div>
 							<div class="pull-right">
-								<a href="${pageContext.request.contextPath}/logout.do"
+								<a href="../admin/logout.do"
 									class="btn btn-default btn-flat">注销</a>
 							</div>
 						</li>

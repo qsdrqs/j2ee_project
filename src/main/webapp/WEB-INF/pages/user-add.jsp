@@ -82,7 +82,7 @@
 				用户 <small>信息录入</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="../pages/main.jsp"><i
+				<li><a href="../main.do"><i
 						class="fa fa-dashboard"></i>首页</a></li>
 				<li><a
 					href="../pages/user-list.jsp">用户信息管理</a></li>

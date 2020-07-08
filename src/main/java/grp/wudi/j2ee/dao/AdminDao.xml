@@ -3,11 +3,81 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="grp.wudi.j2ee.dao.AdminDao">
-	<select id="checkPassword" resultType="grp.wudi.j2ee.entity.Admin">
+	<select id="checkPassword"
+		resultType="grp.wudi.j2ee.entity.Admin">
 		SELECT
 			admin_password
 		FROM
 			admin
-		WHERE admin_account = #{adminAccount}
+		WHERE 
+			admin_account =#{adminAccount}
+	</select>
+
+	<insert id="addAdmin" keyProperty="AdminId" useGeneratedKeys="true" parameterType="grp.wudi.j2ee.entity.Admin">
+		INSERT INTO
+			admin(admin_account,admin_password,type)
+		VALUES
+			(#{adminAccount},#{adminPassword},#{type})
+	</insert>
+
+	<delete id="removeAdmin" parameterType="int">
+		DELETE FROM 
+			admin
+		WHERE
+			admin_id =#{id}
+	</delete>
+
+	<select id="findById" parameterType="int" resultType="grp.wudi.j2ee.entity.Admin">
+		SELECT
+			*
+		FROM
+			admin
+		WHERE 
+			admin_id = #{id}
+	</select>
+	
+	<select id="findByAccount" resultType="grp.wudi.j2ee.entity.Admin">
+		SELECT
+			*
+		FROM
+			admin
+		WHERE 
+			admin_account = #{account}
+	</select>
+	
+	<update id="update"
+		parameterType="grp.wudi.j2ee.entity.Admin">
+		UPDATE 
+			admin
+		SET 
+			admin_account=#{adminAccount}, 
+			admin_password=#{adminPassword}
+		WHERE 
+			admin_id = #{adminId}
+	</update>
+	
+	<select id="findAll" resultType="grp.wudi.j2ee.entity.Admin">
+		SELECT 
+			* 
+		FROM 
+			admin
+	</select>
+	
+	<select id="findAdminId" resultType="int">
+		SELECT 
+			admin_id 
+		FROM 
+			admin
+		WHERE
+			admin_account = #{account}
+	</select>
+	
+	<select id="findAdminType" resultType="int">
+		SELECT 
+			type
+		FROM 
+			admin
+		WHERE
+			admin_account = #{account}
 	</select>
 </mapper>
