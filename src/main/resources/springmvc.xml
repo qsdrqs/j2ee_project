@@ -40,6 +40,11 @@
 			
 			<!-- 设置放行资源 -->
 			<mvc:exclude-mapping path="/admin/login.do" />
+			
+			
+			
+			
+			<mvc:exclude-mapping path="/picture/upload"/>
 
 			<bean class="grp.wudi.j2ee.interceptor.LoginInterceptor" />
 		</mvc:interceptor>

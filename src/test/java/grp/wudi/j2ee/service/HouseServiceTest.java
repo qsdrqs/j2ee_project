@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -114,6 +119,21 @@ public class HouseServiceTest {
             System.out.println(house);
         }
 
+    }
+
+    @Test
+    public void downloadImgTest() throws IOException {
+
+
+        String path = "../src/main/webapp/img/avatar.png";
+//        Image[] array = new Image[10];
+//        Image image = ImageIO.read(new File(path));
+//        array[0] = image;
+
+        ImageIcon imglogo = new ImageIcon(ClassLoader.getSystemResource(path));
+
+
+        System.out.println(imglogo);
     }
 
 

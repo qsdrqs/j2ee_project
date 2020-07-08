@@ -134,11 +134,41 @@
 				<el-input v-model="form.traffic"></el-input>
 			</el-form-item>
 			<el-form-item label="图片上传">
-				<el-upload class="upload-demo" action="http://localhost:3333/upload/uploadHouseImage" :on-preview="handlePreview" :on-remove="handleRemove" :file-list="form.fileList" :on-success="uploadSuccess" list-type="picture">
+				<el-upload
+          class="upload-demo"
+          action="http://localhost:8080/picture/upload"
+
+          ref="/upload"
+          name="picture"
+          :limit="2"
+          :on-exceed="onExceed"
+          :before-upload="beforeUpload"
+
+
+          :on-preview="handlePreview"
+          :on-remove="handleRemove"
+          :file-list="form.fileList"
+          :on-success="uploadSuccess"
+          list-type="picture-card">
 					<el-button size="small" type="primary">点击上传</el-button>
 					<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 				</el-upload>
 			</el-form-item>
+
+<!--      <el-table :data="picture">-->
+<!--        <el-table-column label="图片" width="130">-->
+<!--          <template scope="scope">-->
+<!--            <img :src="scope.row.picture" class="picture"/>-->
+<!--          </template>-->
+<!--        </el-table-column>-->
+        <el-table-column
+          label="运行状态"
+          width="80"
+          prop="operatingStatus">
+        </el-table-column>
+      </el-table>
+
+
 			<h2>请填写您的联系方式</h2>
 			<el-form-item label="真实姓名" prop="user_name">
 				<el-input v-model="form.user_name"></el-input>
@@ -204,7 +234,7 @@ export default {
       var that = this;
       this.isLoading = true;
       this.$ajax
-        .post("http://localhost:3333/house/postHouse", this.form)
+        .post("http://localhost:8080/house/postHouse", this.form)
         .then(function(res) {
           if (res.data.code == 200) {
             that.$message("发布成功");
@@ -220,12 +250,12 @@ export default {
     back() {
       this.$router.push("/");
     },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePreview(file) {
-      console.log(file);
-    },
+    // handleRemove(file, fileList) {
+    //   console.log(file, fileList);
+    // },
+    // handlePreview(file) {
+    //   console.log(file);
+    // },
     uploadSuccess(res, file, fileList) {
       this.form.fileList.push(res.url);
     },
@@ -234,9 +264,60 @@ export default {
         this.form.unit_price =
           parseInt(this.form.price) / parseInt(this.form.area);
       }
+    },
+
+
+    //文件上传成功的钩子函数
+    handleSuccess(res, file) {
+      this.$message({
+        type: 'info',
+        message: '图片上传成功',
+        duration: 6000
+      });
+      if (file.response.success) {
+        this.editor.picture = file.response.message; //将返回的文件储存路径赋值picture字段
+      }
+    },
+    //删除文件之前的钩子函数
+    handleRemove(file, fileList) {
+      this.$message({
+        type: 'info',
+        message: '已删除原有图片',
+        duration: 6000
+      });
+    },
+    //点击列表中已上传的文件事的钩子函数
+    handlePreview(file) {
+    },
+    //上传的文件个数超出设定时触发的函数
+    onExceed(files, fileList) {
+      this.$message({
+        type: 'info',
+        message: '最多只能上传一个图片',
+        duration: 6000
+      });
+    },
+    //文件上传前的前的钩子函数
+    //参数是上传的文件，若返回false，或返回Primary且被reject，则停止上传
+    beforeUpload(file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isGIF = file.type === 'image/gif';
+      const isPNG = file.type === 'image/png';
+      const isBMP = file.type === 'image/bmp';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG && !isGIF && !isPNG && !isBMP) {
+        this.$message.error('上传图片必须是JPG/GIF/PNG/BMP 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传图片大小不能超过 2MB!');
+      }
+      return (isJPG || isBMP || isGIF || isPNG) && isLt2M;
     }
   }
 };
+
+
 </script>
 <style scoped>
 h2 {
