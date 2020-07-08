@@ -26,4 +26,11 @@ public interface HouseService {
 
     PageInfo<House> findBykeywordsPages(int p, String address, int type, int minPrice, int maxPrice, int minArea, int maxArea, int hasLift);
 
+    //获取图片路径
+    public String downloadImg(int houseId);
+
+
+    //上传图片路径
+    public void uploadImg(String ImgName);
+
 }

@@ -97,5 +97,9 @@
         WHERE house_id = #{houseId}
     </delete>
 
+    <select id="getImgName" parameterType="int" resultType="String">
+        SELECT house_picture FROM house
+        WHERE house_id = #{house_id}
+    </select>
 
 </mapper>

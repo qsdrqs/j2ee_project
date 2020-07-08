@@ -47,6 +47,12 @@
 			<mvc:exclude-mapping path="/plugins/**" />
 			<mvc:exclude-mapping path="/js/**" />
 			<mvc:exclude-mapping path="/houseAgent/findHouseByAgent"/>
+			<mvc:exclude-mapping path="/admin/login.do" />
+			
+			
+			
+			
+			<mvc:exclude-mapping path="/picture/upload"/>
 
 			<bean class="grp.wudi.j2ee.interceptor.LoginInterceptor"/>
 		</mvc:interceptor>

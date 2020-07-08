@@ -8,6 +8,7 @@ import grp.wudi.j2ee.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.URL;
 import java.util.List;
 
 @Service
@@ -93,5 +94,26 @@ public class HouseServiceImpl implements HouseService {
         PageHelper.startPage(p, 2);
         List<House> houses = houseDao.findByKeyword(house);
         return new PageInfo<House>(houses, 3);
+    }
+
+
+    @Override
+    public String downloadImg(int houseId) {
+//        String name = houseDao.getImgName(houseId);
+//        String path = HouseService.class.getResource("/").getPath();
+        String name = "avatar.png";
+        String path = "/src/main/webapp/img/";
+        return path+name;
+
+    }
+
+
+
+
+
+
+    @Override
+    public void uploadImg(String ImgName) {
+
     }
 }
