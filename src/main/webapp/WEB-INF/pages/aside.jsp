@@ -63,7 +63,7 @@
 							<i class="fa fa-circle-o"></i> 经纪人管理
 					</a></li>
 
-					<li class="system-setting"><a href="../house/findAllBypages">
+					<li class="system-setting"><a href="../house/findAllBypagesBack">
 							<i class="fa fa-circle-o"></i> 房源管理
 					</a></li>
 

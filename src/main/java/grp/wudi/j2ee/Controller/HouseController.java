@@ -42,7 +42,7 @@ public class HouseController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(path = "/findAllBypages1111")
+    @RequestMapping(path = "/findAllBypagesBack")
     public String findAllBypages(@RequestParam(value = "p", defaultValue = "1") int p, Model model) throws Exception {
         System.out.println("表现层正在执行分页查询房源信息....");
         PageInfo<House> pi = houseService.findAll(p);

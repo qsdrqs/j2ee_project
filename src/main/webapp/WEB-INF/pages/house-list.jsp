@@ -253,9 +253,9 @@
 						</div>
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="../house/findAllBypages?p=1">首页</a></li>
+								<li><a href="../house/findAllBypagesBack?p=1">首页</a></li>
 								<c:if test="${pi.hasPreviousPage }">
-									<li><a href="../house/findAllBypages?p=${pi.pageNum-1}"
+									<li><a href="../house/findAllBypagesBack?p=${pi.pageNum-1}"
 										   aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 									</a></li>
 								</c:if>
@@ -266,16 +266,16 @@
 										<li class="active"><a href="#">${page_Num }</a></li>
 									</c:if>
 									<c:if test="${page_Num != pi.pageNum }">
-										<li><a href="../house/findAllBypages?p=${page_Num }">${page_Num }</a></li>
+										<li><a href="../house/findAllBypagesBack?p=${page_Num }">${page_Num }</a></li>
 									</c:if>
 
 								</c:forEach>
 								<c:if test="${pi.hasNextPage }">
-									<li><a href="../house/findAllBypages?p=${pi.pageNum+1 }"
+									<li><a href="../house/findAllBypagesBack?p=${pi.pageNum+1 }"
 										   aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 									</a></li>
 								</c:if>
-								<li><a href="../house/findAllBypages?p=${pi.pages}">末页</a></li>
+								<li><a href="../house/findAllBypagesBack?p=${pi.pages}">末页</a></li>
 							</ul>
 						</div>
 					</div>
