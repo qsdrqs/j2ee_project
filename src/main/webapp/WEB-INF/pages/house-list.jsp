@@ -185,10 +185,7 @@
 										<td>${house.statusStr}</td>
 										<td class="text-center">
 											<button type="button" class="btn bg-olive btn-xs"
-											onclick="location.href='../house/update?id=${house.houseId}'">编辑</button>
-
-
-											<button type="button" class="btn bg-olive btn-xs">详情</button>
+											onclick="location.href='../house/Preupdate?id=${house.houseId}'">审核</button>
 
 
 											<c:choose>
@@ -211,24 +208,6 @@
 							<!--数据列表/-->
 
 							<!--工具栏-->
-							<div class="pull-left">
-								<div class="form-group form-inline">
-									<div class="btn-group">
-										<button type="button" class="btn btn-default" title="新建"
-												onclick="location.href='../pages/agent-add.jsp'">
-											<i class="fa fa-file-o"></i> 新建
-										</button>
-										<button type="button" class="btn btn-default" title="删除">
-											<i class="fa fa-trash-o"></i> 删除
-										</button>
-
-										<button type="button" class="btn btn-default" title="刷新"
-												onclick="location.href='../agent/findAll'">
-											<i class="fa fa-refresh"></i> 刷新
-										</button>
-									</div>
-								</div>
-							</div>
 							<div class="box-tools pull-right">
 								<div class="has-feedback">
 									<input type="text" class="form-control input-sm"

@@ -71,7 +71,7 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public PageInfo<House> findAll(int p) {
         System.out.println("业务层正在执行分页查询所有房源信息...");
-        PageHelper.startPage(p, 2);
+        PageHelper.startPage(p, 5);
         List<House> houses = houseDao.findAll();
         return new PageInfo<House>(houses, 5);
 

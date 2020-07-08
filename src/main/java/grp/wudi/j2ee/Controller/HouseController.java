@@ -2,6 +2,7 @@ package grp.wudi.j2ee.Controller;
 
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
+import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.entity.House;
 import grp.wudi.j2ee.entity.User;
 import grp.wudi.j2ee.service.HouseService;
@@ -88,17 +89,38 @@ public class HouseController {
      * @param id
      * @return
      */
-    @RequestMapping(path = "/update")
-    public String update(@RequestParam(value = "id", required = true) int id, Model model) {
+//    @RequestMapping(path = "/update")
+//    public String update(@RequestParam(value = "id", required = true) int id, Model model) {
+//        House house = houseService.getHouseById(id);
+//        model.addAttribute("house", house);
+//        return "house-update";
+//    }
+//
+//    @PostMapping("/update")
+//    public String update(House house) {
+//        houseService.update(house);
+//        return "redirect:/house/findAllBypagesBack";
+//
+//    }
+
+
+    @RequestMapping(path = "/Preupdate")
+    public ModelAndView PreupdateAgent(int id) {
+        System.out.println("业务层正在执行修改...");
+        ModelAndView mv = new ModelAndView();
         House house = houseService.getHouseById(id);
-        model.addAttribute("house", house);
-        return "house-update";
+        System.out.println("从数据库得到的agent信息"+house);
+        mv.addObject("house", house);
+        mv.setViewName("house-update");
+        return mv;
     }
 
-    @PostMapping("/update")
+    @RequestMapping(path = "/update")
     public String update(House house) {
+        System.out.println("表现层从表单接受到的信息：" + house);
+        System.out.println("/update agent");
+        System.out.println(house);
         houseService.update(house);
-        return "redirect:/house/findAll";
-
+        return "redirect:/house/findAllBypagesBack";
     }
 }

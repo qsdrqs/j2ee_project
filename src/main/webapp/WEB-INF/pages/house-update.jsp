@@ -92,9 +92,9 @@
 			<!-- 内容头部 /-->
 			<!--FIXME!!! -->
 			<!-- TODO：modify -->
-			<form action="../house/updateHouse"
+			<form action="../house/update"
 				method="post">
-				<input type="hidden" name="agentId" value="${house.houseId}">
+				<input type="hidden" name="houseId" value="${house.houseId}">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
 
@@ -102,10 +102,20 @@
 					<div class="panel-heading">房源信息审核</div>
 					<div class="row data-type">
 
+						<div class="col-md-2 title">房屋ID</div>
+						<div class="col-md-4 data">
+							<input type="text" class="form-control" name="houseId"
+								   placeholder="" value="${house.houseId}" readonly="readonly">
+						</div>
 						<div class="col-md-2 title">业  主</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" name="userId"
 								placeholder="" value="${house.userId}" readonly="readonly">
+						</div>
+						<div class="col-md-2 title">地址</div>
+						<div class="col-md-4 data">
+							<input type="text" class="form-control" name="address"
+								   placeholder="" value="${house.address}" readonly="readonly">
 						</div>
 						<div class="col-md-2 title">图片</div>
 						<div class="col-md-4 data">
@@ -126,18 +136,12 @@
 								   placeholder=""value="${house.area}" readonly="readonly">
 						</div>
 
-<%--						<div class="col-md-2 title">产品状态</div>--%>
-<%--						<div class="col-md-4 data">--%>
-<%--							<select class="form-control select2" style="width: 100%"--%>
-<%--								name="productStatus">--%>
-<%--								<option value="0" selected="selected">关闭</option>--%>
-<%--								<option value="1">开启</option>--%>
-<%--							</select>--%>
-<%--						</div>--%>
 						<div class="col-md-2 title">审核状态</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" placeholder=""
-								   name="statusStr" value="${house.statusStr}" readonly="readonly">
+							<input type ="radio" ${(house.status eq 0) ? ' checked=checked ' :'' } name="status" value="0" />审核中
+							<input type ="radio" ${(house.status eq 1) ? ' checked=checked ' :'' } name="status" value="1" />审核通过
+							<input type ="radio" ${(house.status eq 2) ? ' checked=checked ' :'' } name="status" value="2" />审核不通过
+							<input type ="radio" ${(house.status eq 3) ? ' checked=checked ' :'' } name="status" value="3" />已出售
 						</div>
 
 						<div class="col-md-2 title">楼  层</div>
@@ -146,11 +150,19 @@
 								   name="agentPassword" value="${house.floor}" readonly="readonly">
 						</div>
 
+
 						<div class="col-md-2 title rowHeight2x">描述</div>
 						<div class="col-md-10 data rowHeight2x">
 							<textarea class="form-control" rows="3" placeholder="描述"
 								name="agentProfile" readonly="readonly">${house.description}</textarea>
 						</div>
+
+
+<%--						<div class="col-md-2 title">状  态</div>--%>
+<%--						<div class="col-md-4 data">--%>
+<%--							<input type ="radio" ${(house.status eq 0) ? ' checked=checked ' :'' } name="status" value="0" />审核中--%>
+<%--							<input type ="radio" ${(house.status eq 1) ? ' checked=checked ' :'' } name="status" value="1" />审核通过--%>
+<%--						</div>--%>
 
 					</div>
 				</div>
