@@ -146,9 +146,16 @@
 											<td>${house.typeStr }</td>
 											<td>${house.statusStr }</td>
 											<td class="text-center">
-											<c:if test="${house.status == 1 }">
-											<button type="button" class="btn bg-olive btn-xs" disabled ="disabled">通过</button>
-											</c:if>
+											<c:choose>
+													<c:when test="${house.status == 3}">
+														<button type="button" class="btn bg-olive btn-xs"
+															disabled="disabled">审核</button>
+													</c:when>
+													<c:otherwise>
+														<button type="button" class="btn bg-olive btn-xs"
+															onclick="location.href='../house/Preupdate?id=${house.houseId}'">审核</button>
+													</c:otherwise>
+												</c:choose> 
 												<button type="button" class="btn bg-olive btn-xs"
 													onclick="window.location.href='/house/delete?id=${house.houseId }'">删除</button>
 											</td>

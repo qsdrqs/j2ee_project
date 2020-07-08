@@ -68,33 +68,35 @@
 			</section>
 			<!-- 内容头部 /-->
 			<!--FIXME!!! -->
-			<form action="/admin/update" method="post">
+			<form action="/admin/edit" method="post">
 				<!-- 正文区域 -->
 				<section class="content"> <!--用户信息-->
+				<input type="hidden" name="adminId" value="${admin.adminId}" /> 
 				<div class="panel panel-default">
-					<input type="hidden" name="adminId" value="${admin.adminId}" />
-					<div class="panel panel-default">
-						<div class="panel-heading">管理员信息</div>
-						<div class="row data-type">
-							<div class="col-md-2 title">账号</div>
-							<div class="col-md-4 data">
-								<input type="text" class="form-control" name="adminAccount"
-									value="${admin.adminAccount }">
-							</div>
-							<div class="col-md-2 title">密 码</div>
-							<div class="col-md-4 data">
-								<input type="password" class="form-control" placeholder="密码"
-									name="adminPassword" value="${admin.adminPassword}">
-							</div>
+					<div class="panel-heading">管理员信息</div>
+					<div class="row data-type">
+						<div class="col-md-2 title">账号</div>
+						<div class="col-md-4 data">
+							<input type="text" class="form-control" name="adminAccount"
+								value="${admin.adminAccount }">
+						</div>
+						<div class="col-md-2 title">密 码</div>
+						<div class="col-md-4 data">
+							<input type="password" class="form-control" placeholder="密码"
+								name="adminPassword" value="${admin.adminPassword}">
+						</div>
+						<div class="col-md-2 title">管理员类型</div>
+					<div class="col-md-4 data">
+							<input type ="radio" ${(admin.type eq 1) ? ' checked=checked ' :'' } name="type" value="1" />超级管理员 
+							<input type ="radio" ${(admin.type eq 0) ? ' checked=checked ' :'' } name="type" value="0" />普通管理员
 						</div>
 					</div>
-					<!--订单信息/-->
-					<!--工具栏-->
 				</div>
+				<!--订单信息/--> <!--工具栏-->
 				<div class="box-tools text-center">
 					<button type="submit" class="btn bg-maroon">保存</button>
 					<button type="button" class="btn bg-default"
-						onclick="window.location.href='/main.do'">返回</button>
+						onclick="window.location.href='/admin/findAll'">返回</button>
 				</div>
 				<!--工具栏/--> </section>
 				<!-- 正文区域 /-->

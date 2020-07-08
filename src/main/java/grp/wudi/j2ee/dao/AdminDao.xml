@@ -51,7 +51,8 @@
 			admin
 		SET 
 			admin_account=#{adminAccount}, 
-			admin_password=#{adminPassword}
+			admin_password=#{adminPassword},
+			type=#{type}
 		WHERE 
 			admin_id = #{adminId}
 	</update>

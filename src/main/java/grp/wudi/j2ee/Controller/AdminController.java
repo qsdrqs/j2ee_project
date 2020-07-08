@@ -53,7 +53,7 @@ public class AdminController {
 	}
 	
 	/**
-	 * 	修改管理员信息
+	 * 	管理员自己修改信息
 	 */
 	@RequestMapping(path = "/update")
 	public String update(@RequestParam(value = "id", required = true) int id, Model model) {
@@ -99,8 +99,8 @@ public class AdminController {
 		return "redirect:/admin/findAll";
 	}
 	
-	/*
-	 * 	增加用户信息
+	/**
+	 * 	增加管理员信息
 	 */
 	@RequestMapping("/adminAdd.do")
 	public ModelAndView goHome() {
@@ -108,9 +108,25 @@ public class AdminController {
         return mav;
     }
 	
-	@RequestMapping(path = "/add")
+	@RequestMapping(path = "/add" ,method = RequestMethod.POST)
 	public String addAuser(Admin admin) {
 		adminService.addAdmin(admin);
+		return "redirect:/admin/findAll";
+	}
+	
+	/**
+	 * 	超级管理员修改管理员信息
+	 */
+	@RequestMapping(path = "/edit")
+	public String edit(@RequestParam(value = "id", required = true) int id, Model model) {
+		Admin admin = adminService.getAdminById(id);
+		model.addAttribute("admin", admin);
+		return "adminInfoEdit";
+	}
+
+	@PostMapping("/edit")
+	public String edit(Admin admin) {
+		adminService.update(admin);
 		return "redirect:/admin/findAll";
 	}
 }

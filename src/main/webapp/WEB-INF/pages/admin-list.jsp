@@ -136,7 +136,7 @@
 											<td>${admin.typeStr }</td>
 											<td class="text-center">
 												<button type="button" class="btn bg-olive btn-xs"
-													onclick="window.location.href='/admin/update?id=${admin.adminId }'">编辑</button>
+													onclick="window.location.href='/admin/edit?id=${admin.adminId }'">编辑</button>
 												<button type="button" class="btn bg-olive btn-xs"
 													onclick="window.location.href='/admin/delete?id=${admin.adminId }'">删除</button>
 											</td>
