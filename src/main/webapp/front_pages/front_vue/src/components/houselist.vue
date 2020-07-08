@@ -58,25 +58,29 @@
       <!--        </el-radio-group>-->
       <!--      </div>-->
     </div>
-    <h3 class="result_tips">共找到<span class="blue">{{ resultCount }}</span>套房子</h3>
+
+    <h3 class="result_tips">共找到<span class="blue">{{resultCount}}</span>套房子</h3>
     <div class="houselist_block" v-loading="loading">
 
       <div class="house flex" v-for="item in houseList" :key="item.id" :hid="item.id" @click="houseDetails">
-        <div class="house_img">
-          <img :src="JSON.parse(item.image)[0]">
-        </div>
+<!--        <div class="house_img">-->
+<!--          <img :src="JSON.parse(item.image)[0]">-->
+<!--        </div>-->
         <div class="house_info fg">
-          <div class="house_title">{{ item.title }}</div>
-          <div class="house_spec">{{ item.properties }} | {{ item.room }}室{{ item.livingroom }}厅 | {{ item.area }}㎡ | {{ item.direction }} | {{ item.decoration }}</div>
-          <div class="house_spec">{{ item.floor/item.total_floor < 1/3 ? '低' : item.floor/item.total_floor < 2/3 ? '中' : '高' }}楼层(共{{ item.floor }}层){{ item.build_year }}年建塔楼 - </div>
-          <div class="house_spec">{{ item.post_time }}发布</div>
+          <div class="house_title">房子编号{{ item.address }}</div>
+<!--          <div class="house_spec">{{ item.properties }} | {{ item.room }}室{{ item.livingroom }}厅 | {{ item.area }}㎡ | {{ item.direction }} | {{ item.decoration }}</div>-->
+
+          <div class="house_spec">{{ item.area }}㎡ | {{ item.description }}</div>
+<!--          <div class="house_spec">{{ item.floor/item.total_floor < 1/3 ? '低' : item.floor/item.total_floor < 2/3 ? '中' : '高' }}楼层(共{{ item.floor }}层){{ item.build_year }}年建塔楼 - </div>-->
+          <div class="house_spec">{{item.floor层}}</div>
+<!--          <div class="house_spec">{{ item.post_time }}发布</div>-->
           <div class="house_spec">
-            <span class="house_advantage">{{ item.house_label }}</span>
+            <span class="house_advantage">描述:{{ item.description }}</span>
           </div>
         </div>
         <div class="house_price">
-          <div class="price">¥ <span class="rmb">{{ item.price/10000 }}</span> 万</div>
-          <div class="unitprice">单价 <span style="font-weight: bold;">{{ parseInt(item.unit_price) }}</span> 元/平米</div>
+          <div class="price">¥ <span class="rmb">{{ item.unitPrice*item.area/10000 }}</span> 万</div>
+          <div class="unitprice">单价 <span style="font-weight: bold;">{{ parseInt(item.unitPrice) }}</span> 元/平米</div>
         </div>
       </div>
 
@@ -119,7 +123,7 @@ export default {
     getList: function () {
       var that = this;
       this.loading = true;
-      var queryString = 'http://localhost:8080/house/findAllBypages?p=' + this.currentPage + '&address=' + this.keyword + '&type=' + this.isForSell;
+      var queryString = 'http://localhost:8081/house/findAllBypages?p=' + this.currentPage + '&address=' + this.keyword + '&type=' + this.isForSell;
       if ( this.price != 0 ) {
         var priceArray = this.price.split('-');
         var minPrice = priceArray[0];
@@ -132,17 +136,28 @@ export default {
         var maxArea = areaArray[1];
         queryString += '&minArea=' + minArea + (maxArea == '∞' ? 0 : ('&maxArea=' + maxArea));
       }
-      if (this.houseType != 0) {
+
         queryString += '&hasLift=' + this.houseType;
-      }
+
 
       this.$ajax
         .get(queryString)
         .then(function (res) {
+          console.log("获取的数据主体")
           console.log(res)
-          that.resultCount = res.data.count;
+          console.log("===============================")
+          console.log("获取的满足条件房源总数")
+
+          that.resultCount = res.data.total;
+          console.log(that.resultCount);
+          console.log("===============================")
+          console.log("获取的房源列表")
           that.houseList = res.data.list;
-          that.total = res.data.count;
+          console.log(that.houseList)
+          console.log("===============================")
+          console.log("获取的总页数")
+          that.total = res.data.pages;
+          console.log(that.total);
           that.loading = false;
         });
     },
@@ -356,7 +371,6 @@ h3 {
 .el-radio__label {
   padding-left: 5px;
 }
-
 </style>
 
 

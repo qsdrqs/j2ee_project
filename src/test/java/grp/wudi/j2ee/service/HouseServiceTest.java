@@ -1,6 +1,7 @@
 package grp.wudi.j2ee.service;
 
 import com.github.pagehelper.PageInfo;
+import grp.wudi.j2ee.Controller.HouseController;
 import grp.wudi.j2ee.entity.House;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -113,6 +114,13 @@ public class HouseServiceTest {
         for (House house : list.getList()) {
             System.out.println(house);
         }
+
+    }
+    @Test
+    public void run3(){
+        HouseController houseController = new HouseController();
+        String result = houseController.findAllBypagess(1,"tong",1,0,0,0,0,0);
+        System.out.println(result);
 
     }
 
