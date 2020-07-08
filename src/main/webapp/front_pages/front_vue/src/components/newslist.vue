@@ -6,6 +6,10 @@
                     <el-table-column prop="title" label="新闻标题"></el-table-column>
                 </el-table>
         </div>
+      <div class="page_block">
+      <el-pagination layout="prev, pager, next" :total="total" @current-change="changePage">
+      </el-pagination>
+    </div>
 </div>
 
 </template>
@@ -15,7 +19,8 @@ export default {
     name:"newslist",
     data(){
         return{
-            newsInfo:[]
+            newsInfo:[],
+            currentPage:0
         };
     },
     methods:{
@@ -28,6 +33,10 @@ export default {
                     that.newsInfo[i].title=that.newsInfo[i].title;
                 }
             })
+        },
+        changePage: function (val) {
+        this.currentPage = val;
+        this.getNewsList();
         },
         openNews(row,column,cell,evebt){
             this.$router.push('/news_details/'+row.id)

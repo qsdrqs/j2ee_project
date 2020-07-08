@@ -41,9 +41,9 @@
       </div>
       <div class="filter">
         <el-radio-group v-model="houseType" @change="getList">
+          <el-radio label="3">全部</el-radio>
           <el-radio label="0">无电梯</el-radio>
           <el-radio label="1">有电梯</el-radio>
-          <el-radio label="3">全部</el-radio>
 
         </el-radio-group>
       </div>
@@ -101,9 +101,9 @@ export default {
       placeholder: "请输入您感兴趣的地区或者楼盘",
       isForSell: this.$route.params.type,
       keyword: '',
-      price: '0',
-      area: '0',
-      houseType: '0',
+      price: '0-0',
+      area: '0-0',
+      houseType: '3',
       usage: '0',
       currentPage: 1,
       houseList: [],

@@ -2,8 +2,13 @@
   
     <div class="news_details" >
         <el-container>
-            <el-header>{{newinfo.title}}</el-header>
-            <el-main v-html="newsinfo.content"></el-main>
+            <el-header>
+                <h2>biaotii
+                </h2>
+            </el-header>
+            <el-main>neirong
+                <el-button :plain="true" @click="openHtml">shiyong</el-button>
+            </el-main>
         </el-container>
     </div>
 </template>
@@ -12,13 +17,11 @@
 export default {
     name:"news_details",
     data(){
+        
         return{
             id:this.$route.params.id,
             newinfo:{}
         };
-    },
-    created(){
-        this.getNewsDetails();
     },
     methods:{
         getNewsDetails(){
@@ -30,8 +33,7 @@ export default {
                 }
             })
             
-        }
-    }
+        }}
 
 }
 </script>
