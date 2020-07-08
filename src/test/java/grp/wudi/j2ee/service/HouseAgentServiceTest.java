@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,8 +31,14 @@ public class HouseAgentServiceTest {
 
         List<House> list = houseAgentService.getHouseByAgentId(43);
         for (House houseAgent:list) {
+            if (null != houseAgent.getCreateTime()) {
+                SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+                String createTimeStr = date.format(houseAgent.getCreateTime());
+                houseAgent.setCreateTimeStr(createTimeStr);
 
-            System.out.println(houseAgent.getHouseId());
+            }
+
+            System.out.println(houseAgent);
         }
     }
 

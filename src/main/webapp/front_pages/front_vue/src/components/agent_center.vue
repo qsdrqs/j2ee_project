@@ -4,7 +4,7 @@
       <h2>您好，{{ agentName }}!欢迎登入经纪人中心</h2>
       <div class="function_tab">
         <el-radio-group v-model="list_type" @change="getList">
-          <el-radio-button label="1">我的订单</el-radio-button>
+          <el-radio-button label="1">我的房源</el-radio-button>
           <el-radio-button label="2">待带看</el-radio-button>
           <el-radio-button label="3">待评价</el-radio-button>
           <el-radio-button label="4">待协商交易</el-radio-button>
@@ -14,31 +14,37 @@
       </div>
 
 			<!-- 我的订单 -->
-			<el-table v-loading="loading" :data="orderList" style="width: 100%; text-align: left;" stripe :hidden="list_type == 0" @cellclick="viewHouse">
-				<el-table-column prop="post_time" label="发布日期">
-				</el-table-column>
-				<el-table-column prop="title" label="房源标题">
-				</el-table-column>
-				<el-table-column prop="price" label="售价">
-				</el-table-column>
-				<el-table-column prop="buyer_name" label="买家">
-				</el-table-column>
-				<el-table-column prop="buyer_phone" label="买家联系电话">
-				</el-table-column>
-				<el-table-column prop="user_name" label="卖家">
-				</el-table-column>
-				<el-table-column prop="user_phone" label="卖家联系电话">
-				</el-table-column>
-				<el-table-column prop="status_text" label="订单状态">
-				</el-table-column>
-				<el-table-column prop="operate" label="操作">
-					<template slot-scope="scope">
-						<el-button @click="viewHouse(scope.row)" type="text" size="small">查看</el-button>
-						<el-button @click="alreadyView(scope.row)" type="text" size="small" :class="{ hidden: scope.row.status != 2 }">已带看</el-button>
-						<el-button @click="feedbackHouse(scope.row)" type="text" size="small" :class="{ hidden: scope.row.status != 3 }">评价</el-button>
-					</template>
-				</el-table-column>
-			</el-table>
+      <el-table v-loading="loading" :data="orderList" style="width: 100%; text-align: left;" stripe
+                :hidden="list_type == 0" @cellclick="viewHouse">
+        <el-table-column prop="createTimeStr" label="发布日期">
+        </el-table-column>
+        <el-table-column prop="houseHead" label="房源标题">
+        </el-table-column>
+        <el-table-column prop="unitPrice" label="价格">
+        </el-table-column>
+        <!--				<el-table-column prop="buyer_name" label="买家姓名">-->
+        <!--				</el-table-column>-->
+        <!--				<el-table-column prop="buyer_phone" label="买家联系电话">-->
+        <!--				</el-table-column>-->
+        <el-table-column prop="userId" label="卖家姓名">
+        </el-table-column>
+        <el-table-column prop="user_phone" label="卖家联系电话">
+        </el-table-column>
+        <el-table-column prop="status_text" label="房源类型">
+        </el-table-column>
+        <el-table-column prop="operate" label="操作">
+          <template slot-scope="scope">
+            <el-button @click="viewHouse(scope.row)" type="text" size="small">查看</el-button>
+            <el-button @click="alreadyView(scope.row)" type="text" size="small"
+                       :class="{ hidden: scope.row.status != 2 }">已带看
+            </el-button>
+            <el-button @click="feedbackHouse(scope.row)" type="text" size="small"
+                       :class="{ hidden: scope.row.status != 3 }">评价
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      {{housePrice}}
 
 			<!-- 待接订单表格 -->
 			<el-table v-loading="loading" :data="orderList" style="width: 100%; text-align: left;" stripe :hidden="list_type != 0" @cellclick="viewHouse">
@@ -66,21 +72,41 @@ export default {
       agentName: sessionStorage.getItem("agentName"),
       list_type: 1,
       loading: false,
-      orderList: []
+      orderList: [],
+      housePrice: "￥0"
     };
   },
   methods: {
     getList() {
       var that = this;
       var id = sessionStorage.getItem("agentId");
+      console.log(id);
+      console.log(this.list_type);
       var url =
-        "http://localhost:3333/house/agentGetOrderList?a_id=" +
+        "http://localhost:8080/houseAgent/findHouseByAgent?agentId=" +
         id +
         "&type=" +
         this.list_type;
       this.$ajax.get(url).then(res => {
+        console.log(res);
         that.orderList = res.data;
         for (var i = 0; i < res.data.length; i++) {
+          // if(res.data[i].type=0){
+          //   that.housePrice = "￥"+(res.data[i].unitPrice)*(res.data[i].area)+"万";
+          //
+          // }else{
+          //   that.housePrice = "￥"+(res.data[i].unitPrice)+"/月";
+          // }
+          console.log("type=" + res.data[i].type);
+          if (res.data[i].type == 0) {
+
+            res.data[i].unitPrice = "￥" + ((res.data[i].unitPrice) * (res.data[i].area)) / 10000 + "万";
+
+          } else {
+            res.data[i].unitPrice = "￥" + (res.data[i].unitPrice) + "/月";
+          }
+          console.log("价格=" + res.data[i].unitPrice);
+
           switch (res.data[i].status) {
             case 0:
               that.orderList[i].status_text = "订单已关闭";

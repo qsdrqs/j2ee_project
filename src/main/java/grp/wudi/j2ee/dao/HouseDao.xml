@@ -3,16 +3,21 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="grp.wudi.j2ee.dao.HouseDao">
-    <select id="findAll" resultType="grp.wudi.j2ee.entity.House">
+    <select id="findAllWithAgent" resultType="grp.wudi.j2ee.entity.House">
         SELECT * FROM house
         LEFT JOIN house_agent
         ON house.house_id = house_agent.house_id
     </select>
 
+    <select id="findAll" resultType="grp.wudi.j2ee.entity.House">
+        select  * from house
+    </select>
+
+
     <select id="findById" parameterType="int" resultType="grp.wudi.j2ee.entity.House">
         SELECT * FROM house WHERE house_id = #{id}
     </select>
-    
+
     <select id="findByUserId" parameterType="int" resultType="grp.wudi.j2ee.entity.House">
         SELECT * FROM house WHERE user_id = #{uid}
     </select>
@@ -53,8 +58,12 @@
             <if test="hasLift ==1">
                 AND has_lift=1
             </if>
-
-
+            <if test="type==1">
+                AND type=1
+            </if>
+            <if test="type==0">
+                and type=0
+            </if>
         </where>
 
 

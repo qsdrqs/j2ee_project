@@ -128,7 +128,7 @@ export default {
     getList: function () {
       var that = this;
       this.loading = true;
-      var queryString = 'http://localhost:8081/house/findAllBypages?p=' + this.currentPage + '&address=' + this.keyword + '&type=' + this.isForSell;
+      var queryString = 'http://localhost:8080/house/findAllBypages?p=' + this.currentPage + '&address=' + this.keyword + '&type=' + this.isForSell;
       if ( this.price != 0 ) {
         var priceArray = this.price.split('-');
         var minPrice = priceArray[0];

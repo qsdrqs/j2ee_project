@@ -19,6 +19,7 @@ public interface HouseDao {
 
     public int deleteHouse(int id);
 
+    public List<House> findAllWithAgent();
 
 
 

@@ -36,18 +36,19 @@
 		<!-- 定义一个拦截器 -->
 		<mvc:interceptor>
 			<!-- 拦截所有资源 -->
-			<mvc:mapping path="/**/" />
+			<mvc:mapping path="/**/"/>
 
 			<!-- 设置放行资源 -->
-			<mvc:exclude-mapping path="/admin/login.do" />
+			<mvc:exclude-mapping path="/admin/login.do"/>
 			<mvc:exclude-mapping path="/agent/Agentlogin"/>
 			<mvc:exclude-mapping path="/house/findAllBypages"/>
 			<mvc:exclude-mapping path="/css/**" />
 			<mvc:exclude-mapping path="/img/**" />
 			<mvc:exclude-mapping path="/plugins/**" />
 			<mvc:exclude-mapping path="/js/**" />
+			<mvc:exclude-mapping path="/houseAgent/findHouseByAgent"/>
 
-			<bean class="grp.wudi.j2ee.interceptor.LoginInterceptor" />
+			<bean class="grp.wudi.j2ee.interceptor.LoginInterceptor"/>
 		</mvc:interceptor>
 		
 		<!-- 定义一个拦截器 -->

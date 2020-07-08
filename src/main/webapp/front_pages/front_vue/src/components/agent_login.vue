@@ -33,10 +33,10 @@ export default {
       this.isLoading = true;
       var formData=eval("("+JSON.stringify(this.form)+")");
       this.$ajax.post(
-        'http://localhost:8081/agent/Agentlogin',formData).then((res) => {
+        'http://localhost:8080/agent/Agentlogin', formData).then((res) => {
         console.log(res);
         if (res.data != null && res.data != "") {
-          sessionStorage.setItem('agentId', res.data.agentAccount);
+          sessionStorage.setItem('agentId', res.data.agentId);
           sessionStorage.setItem('agentName', res.data.agentName);
           window.location.href = '/#/agent_center';
         } else {

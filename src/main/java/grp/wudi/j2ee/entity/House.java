@@ -1,5 +1,8 @@
 package grp.wudi.j2ee.entity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class House {
 
     private int houseId;            //房子编号
@@ -29,12 +32,44 @@ public class House {
     private int lowestPrice;
 
 
-
     /**
      * 设置面积区间
      */
     private int maxArea;
     private int minArea;
+    private Date createTime;
+    private String createTimeStr;
+    private String houseHead;
+
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getCreateTimeStr() {
+        if (createTime != null) {
+            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+            createTimeStr = date.format(this.createTime);
+            return createTimeStr;
+        }
+        return null;
+    }
+
+    public void setCreateTimeStr(String createTimeStr) {
+        this.createTimeStr = createTimeStr;
+    }
+
+    public String getHouseHead() {
+        return houseHead;
+    }
+
+    public void setHouseHead(String houseHead) {
+        this.houseHead = houseHead;
+    }
 
     public int getMaxArea() {
         return maxArea;
@@ -98,7 +133,9 @@ public class House {
     }
 
 
-    public House() {}
+    public House() {
+        this.createTime = new Date();
+    }
 
     @Override
     public String toString() {
@@ -114,12 +151,17 @@ public class House {
                 ", floor=" + floor +
                 ", description='" + description + '\'' +
                 ", hasLift=" + hasLift +
+                ", hasLiftStr='" + hasLiftStr + '\'' +
                 ", type=" + type +
+                ", typeStr='" + typeStr + '\'' +
                 ", agentId=" + agentId +
                 ", highestPrice=" + highestPrice +
                 ", lowestPrice=" + lowestPrice +
                 ", maxArea=" + maxArea +
                 ", minArea=" + minArea +
+                ", createTime=" + createTime +
+                ", createTimeStr='" + createTimeStr + '\'' +
+                ", houseHead='" + houseHead + '\'' +
                 '}';
     }
 
