@@ -26,9 +26,9 @@
         <!--				</el-table-column>-->
         <!--				<el-table-column prop="buyer_phone" label="买家联系电话">-->
         <!--				</el-table-column>-->
-        <el-table-column prop="userId" label="卖家姓名">
+        <el-table-column prop="userName" label="卖家姓名">
         </el-table-column>
-        <el-table-column prop="user_phone" label="卖家联系电话">
+        <el-table-column prop="userTelephone" label="卖家联系电话">
         </el-table-column>
         <el-table-column prop="status_text" label="房源类型">
         </el-table-column>
@@ -44,7 +44,6 @@
           </template>
         </el-table-column>
       </el-table>
-      {{housePrice}}
 
 			<!-- 待接订单表格 -->
 			<el-table v-loading="loading" :data="orderList" style="width: 100%; text-align: left;" stripe :hidden="list_type != 0" @cellclick="viewHouse">
