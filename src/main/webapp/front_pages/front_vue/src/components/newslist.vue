@@ -1,8 +1,8 @@
 <template>
 <div class="newlist">
       <div class="grid-content bg-purple-light post_details" style="margin-right: 15%; margin-left: 15%;">
-                <el-table :data="newsInfo" style="width: 100%" stripe @cell-click="openNews">
-                    <el-table-column prop="time" label="日期" width="100"></el-table-column>
+                <el-table :data="newsInfo" style="width: 100%" @cell-click="openNews">
+                    <el-table-column prop="newsinfo" label="日期" width="100"></el-table-column>
                     <el-table-column prop="title" label="新闻标题"></el-table-column>
                 </el-table>
         </div>
@@ -19,29 +19,33 @@ export default {
     name:"newslist",
     data(){
         return{
-            newsInfo:[],
-            currentPage:0
+            newsInfo:"",
+            title:"",
+            currentPage: 1,
+            total: 0,
+            pageSize:10,
         };
     },
     methods:{
-        getNewsList(){
-            var that = this;
-            this.$ajax.get("url").then(res =>{
-                that.newsInfo=res.data[0];
-                for(var i=0;i<that.newsInfo[i].length;i++){
-                    that.newsInfo[i].time=that.newsInfo[i].post_time;
-                    that.newsInfo[i].title=that.newsInfo[i].title;
-                }
-            })
+        getNewsList: function(){
+          var that = this;
+          
+          this.$axios
+        .get('https://rsshub.app/bilibili/ranking/0/3?limit=10.atom')
+        .then(function (res) {
+          console.log(res);
+          that.newsInfo = res.data.channel.title;
+        });
         },
-        changePage: function (val) {
-        this.currentPage = val;
-        this.getNewsList();
-        },
-        openNews(row,column,cell,evebt){
-            this.$router.push('/news_details/'+row.id)
-        },
-        created(){
+        // changePage: function (val) {
+        // this.currentPage = val;
+        // this.getNewsList();
+        // },
+        // openNews(row,column,cell,evebt){
+        //     this.$router.push('/news_details/'+row.id)
+        // },
+        created: function(){
+          console.log("Hello World!");
             this.getNewsList();
         }
     }
