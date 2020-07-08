@@ -31,9 +31,9 @@ export default {
 		onSubmit() {
       var that = this;
       this.isLoading = true;
-      console.log(this.form)
-      this.$ajax.get(
-        'http://localhost:8080/agent/Agentlogin?agentAccount=' + this.form.agentAccount + '&agentPassword=' + this.form.agentPassword).then((res) => {
+      var formData=eval("("+JSON.stringify(this.form)+")");
+      this.$ajax.post(
+        'http://localhost:8080/agent/Agentlogin',formData).then((res) => {
         console.log(res);
         if (res.data != null && res.data != "") {
           sessionStorage.setItem('agentId', res.data.agentAccount);

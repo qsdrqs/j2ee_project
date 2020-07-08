@@ -1,6 +1,7 @@
 package grp.wudi.j2ee.Controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.service.impl.AgentServiceImpl;
@@ -86,10 +87,14 @@ public class AgentController {
     @RequestMapping(path = "/Agentlogin")
     @CrossOrigin(origins = "*")
     public @ResponseBody
-    String verifyAgent(String agentAccount, String agentPassword) {
+    String verifyAgent(@RequestBody String data) {
         System.out.println("表现层正在执行经纪人经纪人验证登入...");
-        System.out.println(agentAccount);
-        System.out.println(agentPassword);
+        System.out.println(data);
+        JSONObject jsonData = JSONObject.parseObject(data);
+
+        String agentAccount = (String)jsonData.get("agentAccount");
+        String agentPassword = (String)jsonData.get("agentPassword");
+
         Agent agent = agentService.verifyAgent(agentAccount, agentPassword);
         if (null != agent) {
             String result = JSON.toJSONString(agent);
