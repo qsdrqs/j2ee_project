@@ -5,17 +5,14 @@
       <div class="function_tab">
         <el-radio-group v-model="list_type" @change="getList">
           <el-radio-button label="1">我的房源</el-radio-button>
-          <el-radio-button label="2">待带看</el-radio-button>
-          <el-radio-button label="3">待评价</el-radio-button>
-          <el-radio-button label="4">待协商交易</el-radio-button>
-          <el-radio-button label="5">已完成</el-radio-button>
-          <el-radio-button label="0">待接订单</el-radio-button>
+          <el-radio-button label="2">已完成</el-radio-button>
+          <!--<el-radio-button label="0">待接订单</el-radio-button>-->
         </el-radio-group>
       </div>
 
 			<!-- 我的订单 -->
       <el-table v-loading="loading" :data="orderList" style="width: 100%; text-align: left;" stripe
-                :hidden="list_type == 0" @cellclick="viewHouse">
+                :hidden="list_type == 0" @cellclick="viewHouse" :cell-style="red_cell">
         <el-table-column prop="createTimeStr" label="发布日期">
         </el-table-column>
         <el-table-column prop="houseHead" label="房源标题">
@@ -30,7 +27,7 @@
         </el-table-column>
         <el-table-column prop="userTelephone" label="卖家联系电话">
         </el-table-column>
-        <el-table-column prop="status_text" label="房源类型">
+        <el-table-column prop="status_text" label="房源类型" >
         </el-table-column>
         <el-table-column prop="operate" label="操作">
           <template slot-scope="scope">
@@ -72,10 +69,15 @@ export default {
       list_type: 1,
       loading: false,
       orderList: [],
-      housePrice: "￥0"
+      housePrice: "￥0",
     };
   },
   methods: {
+  red_cell({row,column,rowIndex,columnIndex}){
+    if (column.label == "房源类型"){
+      return "color:red";
+    }
+  },
     getList() {
       var that = this;
       var id = sessionStorage.getItem("agentId");
@@ -106,33 +108,13 @@ export default {
           }
           console.log("价格=" + res.data[i].unitPrice);
 
-          switch (res.data[i].status) {
+          switch (res.data[i].type) {
             case 0:
-              that.orderList[i].status_text = "订单已关闭";
+              that.orderList[i].status_text = "售卖房源";
+              console.log()
               break;
             case 1:
-              that.orderList[i].status_text = "等待经纪人接单";
-              break;
-            case 2:
-              that.orderList[i].status_text = "您已接单";
-              break;
-            case 3:
-              that.orderList[i].status_text = "已带看房源";
-              break;
-            case 4:
-              that.orderList[i].status_text = "请协商交易";
-              break;
-            case 5:
-              that.orderList[i].status_text = "卖家已收款";
-              break;
-            case 6:
-              that.orderList[i].status_text = "买家已收楼";
-              break;
-            case 7:
-              that.orderList[i].status_text = "交易已完成";
-              break;
-            default:
-              that.orderList[i].status_text = "订单状态未知";
+              that.orderList[i].status_text = "出租房源";
               break;
           }
         }
@@ -231,7 +213,7 @@ export default {
   },
   created() {
     this.getList();
-  }
+  },
 };
 </script>
 <style scoped>
