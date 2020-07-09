@@ -55,14 +55,14 @@ public class AdminController {
 	/**
 	 * 	管理员自己修改信息
 	 */
-	@RequestMapping(path = "/update")
+	@RequestMapping(path = "/update.do")
 	public String update(@RequestParam(value = "id", required = true) int id, Model model) {
 		Admin admin = adminService.getAdminById(id);
 		model.addAttribute("admin", admin);
 		return "adminInfo";
 	}
 
-	@PostMapping("/update")
+	@PostMapping("/update.do")
 	public String update(Admin admin) {
 		adminService.update(admin);
 		return "adminInfo";
@@ -72,10 +72,10 @@ public class AdminController {
 	 * 	访问角色管理
 	 * 	只有超级管理员可以访问
 	 */
-	@RequestMapping(path = "/manage")
+	@RequestMapping(path = "/manage.do")
 	public String manage(@RequestParam(value = "type", required = true) int type, Model model) {
 		if(1 == type) {
-			return "redirect:/admin/findAll";
+			return "redirect:/admin/findAll.do";
 		}
 		return "redirect:/main.do";
 	}
@@ -83,7 +83,7 @@ public class AdminController {
 	/**
 	 * 	查询所有管理员信息
 	 */
-	@RequestMapping(path = "/findAll")
+	@RequestMapping(path = "/findAll.do")
 	public String findAll(@RequestParam(value = "p", defaultValue = "1") int p, Model model) throws Exception {
 		PageInfo<Admin> pi = adminService.finAll(p);
 		model.addAttribute("pi", pi);
@@ -93,10 +93,10 @@ public class AdminController {
 	/**
 	 * 	删除用户信息
 	 */
-	@RequestMapping(path = "/delete")
+	@RequestMapping(path = "/delete.do")
 	public String delete(@RequestParam(value = "id", required = true) int id) {
 		adminService.deleteAdmin(id);
-		return "redirect:/admin/findAll";
+		return "redirect:/admin/findAll.do";
 	}
 	
 	/**
@@ -111,22 +111,22 @@ public class AdminController {
 	@RequestMapping(path = "/add" ,method = RequestMethod.POST)
 	public String addAuser(Admin admin) {
 		adminService.addAdmin(admin);
-		return "redirect:/admin/findAll";
+		return "redirect:/admin/findAll.do";
 	}
 	
 	/**
 	 * 	超级管理员修改管理员信息
 	 */
-	@RequestMapping(path = "/edit")
+	@RequestMapping(path = "/edit.do")
 	public String edit(@RequestParam(value = "id", required = true) int id, Model model) {
 		Admin admin = adminService.getAdminById(id);
 		model.addAttribute("admin", admin);
 		return "adminInfoEdit";
 	}
 
-	@PostMapping("/edit")
+	@PostMapping("/edit.do")
 	public String edit(Admin admin) {
 		adminService.update(admin);
-		return "redirect:/admin/findAll";
+		return "redirect:/admin/findAll.do";
 	}
 }

@@ -85,13 +85,13 @@
 				<li><a href="../main.do"><i
 						class="fa fa-dashboard"></i>首页</a></li>
 				<li><a
-					href="../user/findAll">用户信息管理</a></li>
+					href="../user/findAll.do">用户信息管理</a></li>
 				<li class="active">用户信息表单</li>
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
 			<!--FIXME!!! -->
-			<form action="../user/add"
+			<form action="../user/add.do"
 				method="post" onsubmit="return checkFormart()">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
@@ -140,7 +140,7 @@
 				<div class="box-tools text-center">
 					<button type="submit" class="btn bg-maroon" >保存</button>
 					<button type="button" class="btn bg-default"
-						onclick="window.location.href='/user/findAll'">返回</button>
+						onclick="window.location.href='/user/findAll.do'">返回</button>
 				</div>
 				<!--工具栏/--> </section>
 				<!-- 正文区域 /-->

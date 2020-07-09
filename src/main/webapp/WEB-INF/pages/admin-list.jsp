@@ -105,7 +105,7 @@
 											<i class="fa fa-trash-o"></i> 删除
 										</button>
 										<button type="button" class="btn btn-default" title="刷新"
-											onclick="location.href='../admin/findAll'">
+											onclick="location.href='../admin/findAll.do'">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 									</div>
@@ -136,9 +136,9 @@
 											<td>${admin.typeStr }</td>
 											<td class="text-center">
 												<button type="button" class="btn bg-olive btn-xs"
-													onclick="window.location.href='/admin/edit?id=${admin.adminId }'">编辑</button>
+													onclick="window.location.href='/admin/edit.do?id=${admin.adminId }'">编辑</button>
 												<button type="button" class="btn bg-olive btn-xs"
-													onclick="window.location.href='/admin/delete?id=${admin.adminId }'">删除</button>
+													onclick="window.location.href='/admin/delete.do?id=${admin.adminId }'">删除</button>
 											</td>
 										</tr>
 									</c:forEach>
@@ -157,9 +157,9 @@
 						</div>
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="../admin/findAll?p=1">首页</a></li>
+								<li><a href="../admin/findAll.do?p=1">首页</a></li>
 								<c:if test="${pi.hasPreviousPage }">
-									<li><a href="../admin/findAll?p=${pi.pageNum-1}"
+									<li><a href="../admin/findAll.do?p=${pi.pageNum-1}"
 										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 									</a></li>
 								</c:if>
@@ -168,16 +168,16 @@
 										<li class="active"><a href="#">${page_Num }</a></li>
 									</c:if>
 									<c:if test="${page_Num != pi.pageNum }">
-										<li><a href="../admin/findAll?p=${page_Num }">${page_Num }</a></li>
+										<li><a href="../admin/findAll.do?p=${page_Num }">${page_Num }</a></li>
 									</c:if>
 
 								</c:forEach>
 								<c:if test="${pi.hasNextPage }">
-									<li><a href="../admin/findAll?p=${pi.pageNum+1 }"
+									<li><a href="../admin/findAll.do?p=${pi.pageNum+1 }"
 										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 									</a></li>
 								</c:if>
-								<li><a href="../admin/findAll?p=${pi.pages}">末页</a></li>
+								<li><a href="../admin/findAll.do?p=${pi.pages}">末页</a></li>
 							</ul>
 						</div>
 					</div>
@@ -298,9 +298,9 @@
 													var msg1 = $("#search1")
 															.val();
 													if (msg1 == "") {
-														window.location.href = "/user/findAll"
+														window.location.href = "/user/findAll.do"
 													} else {
-														window.location.href = "/user/search?msg="
+														window.location.href = "/user/search.do?msg="
 																+ msg1
 													}
 												}
@@ -313,9 +313,9 @@
 													var msg1 = $("#search2")
 															.val();
 													if (msg1 == "") {
-														window.location.href = "/user/findAll"
+														window.location.href = "/user/findAll.do"
 													} else {
-														window.location.href = "/user/search?msg="
+														window.location.href = "/user/search.do?msg="
 																+ msg1
 													}
 												}
@@ -347,7 +347,7 @@
 																.getNamedItem("aria-checked").textContent == "true") {
 															//console.log(box[i].parentElement.parentElement.children[1].textContent);
 															delId = box[i].parentElement.parentElement.children[1].textContent;
-															window.location.href = "/user/search?msg="
+															window.location.href = "/user/delete.do?id="
 																	+ delId;
 														}
 													}

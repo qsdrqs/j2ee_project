@@ -35,7 +35,7 @@
 						<!-- Menu Footer-->
 						<li class="user-footer">
 							<div class="pull-left">
-								<a href="${pageContext.request.contextPath}/admin/update?id=${pageContext.getSession().getAttribute("adminInfo").getAdminId()}" class="btn btn-default btn-flat">修改信息</a>
+								<a href="${pageContext.request.contextPath}/admin/update.do?id=${pageContext.getSession().getAttribute("adminInfo").getAdminId()}" class="btn btn-default btn-flat">修改信息</a>
 							</div>
 							<div class="pull-right">
 								<a href="../admin/logout.do"

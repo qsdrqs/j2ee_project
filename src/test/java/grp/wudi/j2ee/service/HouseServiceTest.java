@@ -124,7 +124,7 @@ public class HouseServiceTest {
     @Test
     public void run3(){
         HouseController houseController = new HouseController();
-        String result = houseController.findAllBypagess(1,"tong",1,0,0,0,0,0);
+        String result = "";
         System.out.println(result);
 
     }

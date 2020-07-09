@@ -31,20 +31,12 @@
 				<ul class="treeview-menu">
 
 					<li class="system-setting"><a
-						href="${pageContext.request.contextPath}/admin/update?id=${pageContext.getSession().getAttribute("adminInfo").getAdminId()}"> <i
+						href="${pageContext.request.contextPath}/admin/update.do?id=${pageContext.getSession().getAttribute("adminInfo").getAdminId()}"> <i
 							class="fa fa-circle-o"></i> 我的信息
 					</a></li>
 					<li class="system-setting"><a
-						href="${pageContext.request.contextPath}/admin/manage?type=${pageContext.getSession().getAttribute("adminInfo").getType()}"> <i
+						href="${pageContext.request.contextPath}/admin/manage.do?type=${pageContext.getSession().getAttribute("adminInfo").getType()}"> <i
 							class="fa fa-circle-o"></i> 管理员管理
-					</a></li>
-					<li class="system-setting"><a
-						href="${pageContext.request.contextPath}/user/add"> <i
-							class="fa fa-circle-o"></i> 资源权限管理
-					</a></li>
-					<li class="system-setting"><a
-						href="${pageContext.request.contextPath}/user/add"> <i
-							class="fa fa-circle-o"></i> 访问日志
 					</a></li>
 				</ul></li>
 			<li class="treeview"><a href="#"> <i class="fa fa-cube"></i>
@@ -53,17 +45,16 @@
 				</span>
 			</a>
 				<ul class="treeview-menu">
-
-					<li class="system-setting"><a href="../user/findAll"> <i
+					<li class="system-setting"><a href="../user/findAll.do"> <i
 							class="fa fa-circle-o"></i> 用户管理
 					</a></li>
 					<li class="system-setting"><a
-						<%--						href="${pageContext.request.contextPath}/user/findAll1?page=1&pageSize=3"> <i--%>
-							href="../agent/findAll1">
+						<%--						href="${pageContext.request.contextPath}/user/findAll1.do?page=1&pageSize=3"> <i--%>
+							href="../agent/findAll1.do">
 							<i class="fa fa-circle-o"></i> 经纪人管理
 					</a></li>
 
-					<li class="system-setting"><a href="../house/findAllBypagesBack">
+					<li class="system-setting"><a href="../house/findAllBypagesBack.do">
 							<i class="fa fa-circle-o"></i> 房源管理
 					</a></li>
 
