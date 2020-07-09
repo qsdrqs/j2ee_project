@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import sun.nio.cs.GBK;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 @Controller
 @RequestMapping(path="/house")
@@ -61,8 +63,10 @@ public class HouseController {
     public @ResponseBody
     String findAllBypagess(int p, String address, int type,
                            int minPrice, int maxPrice,
-                           int minArea, int maxArea, int hasLift) {
+                           int minArea, int maxArea, int hasLift) throws UnsupportedEncodingException {
         System.out.println("表现层正在执行分页查找房源信息...");
+        System.out.println(address);
+        address = new String(address.getBytes("ISO8859_1"),"UTF-8");
         System.out.println(address);
         System.out.println(type);
         PageInfo<House> list = houseService.findBykeywordsPages(p, address, type
