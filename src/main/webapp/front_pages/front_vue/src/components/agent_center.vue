@@ -29,15 +29,16 @@
         </el-table-column>
         <el-table-column prop="status_text" label="房源类型" >
         </el-table-column>
-        <el-table-column prop="operate" label="操作">
+        <el-table-column prop="operate" label="状态">
           <template slot-scope="scope">
             <el-button @click="viewHouse(scope.row)" type="text" size="small">查看</el-button>
-            <el-button @click="alreadyView(scope.row)" type="text" size="small"
-                       :class="{ hidden: scope.row.status != 2 }">已带看
+            <el-button @click="alreadyView(scope.row)" type="text" size="small" 
+                       :class="{ hidden: scope.row.status == 3 }">完成
             </el-button>
-            <el-button @click="feedbackHouse(scope.row)" type="text" size="small"
-                       :class="{ hidden: scope.row.status != 3 }">评价
-            </el-button>
+            <!--<el-button @click="feedbackHouse(scope.row)" type="text" size="small"-->
+                       <!--:class="{ hidden: scope.row.status != 3 }">已完成-->
+            <!--</el-button>-->
+            <el-tag type="success" size="small" :class="{ hidden: scope.row.status != 3 }">已完成</el-tag>
           </template>
         </el-table-column>
       </el-table>
@@ -69,15 +70,15 @@ export default {
       list_type: 1,
       loading: false,
       orderList: [],
-      housePrice: "￥0",
+      housePrice: "￥0"
     };
   },
   methods: {
-  red_cell({row,column,rowIndex,columnIndex}){
-    if (column.label == "房源类型"){
-      return "color:red";
-    }
-  },
+    red_cell({ row, column, rowIndex, columnIndex }) {
+      if (column.label == "房源类型") {
+        return "color:red";
+      }
+    },
     getList() {
       var that = this;
       var id = sessionStorage.getItem("agentId");
@@ -100,18 +101,17 @@ export default {
           // }
           console.log("type=" + res.data[i].type);
           if (res.data[i].type == 0) {
-
-            res.data[i].unitPrice = "￥" + ((res.data[i].unitPrice) * (res.data[i].area)) / 10000 + "万";
-
+            res.data[i].unitPrice =
+              "￥" + res.data[i].unitPrice * res.data[i].area / 10000 + "万";
           } else {
-            res.data[i].unitPrice = "￥" + (res.data[i].unitPrice) + "/月";
+            res.data[i].unitPrice = "￥" + res.data[i].unitPrice + "/月";
           }
           console.log("价格=" + res.data[i].unitPrice);
 
           switch (res.data[i].type) {
             case 0:
               that.orderList[i].status_text = "售卖房源";
-              console.log()
+              console.log();
               break;
             case 1:
               that.orderList[i].status_text = "出租房源";
@@ -119,9 +119,9 @@ export default {
           }
         }
       });
-		},
-		//查看房子详情
-		viewHouse(object) {
+    },
+    //查看房子详情
+    viewHouse(object) {
       this.$router.push("/house_details/" + object.house_id);
     },
     //接单
@@ -152,20 +152,23 @@ export default {
         }
       });
     },
-    //将订单状态改为已经带看房源
+    //将订单状态改为已经售出房源
     alreadyView(object) {
       var that = this;
-      this.$confirm("已经带看了此买家（" + object.buyer_name + "）？", "确认", {
-        confirmButtonText: "我已带看",
-        cancelButtonText: "还没带看"
-      }).then(action => {
+      this.$confirm(
+        "已经完成了此卖家（" + object.userName + "）的订单？",
+        "确认",
+        {
+          confirmButtonText: "我已完成",
+          cancelButtonText: "还没完成"
+        }
+      ).then(action => {
         if (action == "confirm") {
           that.$ajax
-            .get(
-              "http://localhost:3333/house/viewHouse?o_id=" + object.order_id
-            )
+            .get("http://localhost:8080/house/soldout?houseId=" + object.houseId)
             .then(res => {
-              if (res.data.code == 200) {
+              console.log(res);
+              if (res.data == "OK!") {
                 this.$message("操作成功！");
                 that.getList();
               } else {
@@ -213,7 +216,7 @@ export default {
   },
   created() {
     this.getList();
-  },
+  }
 };
 </script>
 <style scoped>

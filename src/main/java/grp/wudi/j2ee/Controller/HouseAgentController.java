@@ -46,7 +46,27 @@ public class HouseAgentController {
                     jsonList.add(tmp);
                 }
 
-                System.out.println(jsonList);
+                String result = JSON.toJSONString(jsonList);
+                return result;
+            }
+        }
+        if (type == 2) {
+            List<House> list = houseAgentService.getHouseByAgentId(agentId);
+            if (null != list) {
+                List<JSONObject> jsonList = new ArrayList<JSONObject>();
+                //把list中的House转为JSONObject
+                for (House house : list) {
+                    if (house.getStatus() != 3) {
+                        continue;
+                    }
+                    JSONObject tmp = (JSONObject)JSONObject.toJSON(house);
+                    int uId = house.getUserId();
+                    User user = userService.getUserById(uId);
+                    tmp.put("userName",user.getUserName());
+                    tmp.put("userTelephone",user.getUserTelephone());
+                    jsonList.add(tmp);
+                }
+
                 String result = JSON.toJSONString(jsonList);
                 return result;
             }
