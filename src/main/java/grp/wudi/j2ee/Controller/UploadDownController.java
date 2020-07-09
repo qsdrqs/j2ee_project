@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/picture")
@@ -38,7 +39,10 @@ public class UploadDownController {
     public String upload(@RequestParam("picture") MultipartFile picture, HttpServletRequest request) {
         System.out.println("表现层在执行上传图片");
         //获取文件在服务器的储存位置
-        String path = request.getSession().getServletContext().getRealPath("/picture");
+        UUID uuid = UUID.randomUUID();
+        String dir = uuid.toString();
+
+        String path = request.getSession().getServletContext().getRealPath("/picture/" + dir);
         File filePath = new File(path);
         System.out.println("文件的保存路径：" + path);
         if (!filePath.exists() && !filePath.isDirectory()) {
@@ -77,7 +81,7 @@ public class UploadDownController {
             house.setHousePicture(path+fileName);
 
             //将文件在服务器的存储路径返回
-            Result result = new Result(true,"/upload/" + fileName);
+            Result result = new Result(true,path + fileName);
             String json=JSON.toJSONString(result);
             return json;
         } catch (IOException e) {

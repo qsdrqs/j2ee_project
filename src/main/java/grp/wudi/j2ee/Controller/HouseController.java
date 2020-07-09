@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import grp.wudi.j2ee.entity.House;
+import grp.wudi.j2ee.entity.Result;
 import grp.wudi.j2ee.service.impl.HouseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -154,9 +155,21 @@ public class HouseController {
 
         JSONObject jsonData = JSONObject.parseObject(data);
 
+        //还未更新登录拦截器，用户id手动设置
+//        int userId = Integer.parseInt((String)jsonData.get("user"));
+        int userId = 44;
 
-        int userId = Integer.parseInt((String)jsonData.get("user"));
-        String housePicture = (String)jsonData.get("picture");
+
+
+
+        //此处有问题，多个图片的路径还无法读取
+//        String housePicture = (String)jsonData.get("picture");
+        String housePicture = (String)jsonData.get("fileList");
+        System.out.println(housePicture);
+
+
+
+
         String address = (String)jsonData.get("properties");
         int unitPrice = Integer.parseInt((String)jsonData.get("unit_price"));
         int area = Integer.parseInt((String) jsonData.get("area"));
@@ -168,7 +181,7 @@ public class HouseController {
 
         String houseHead = (String)jsonData.get("title");
 
-        int houseRoomnun = Integer.parseInt((String)jsonData.get("room_num"));
+        int houseRoomnum = Integer.parseInt((String)jsonData.get("room_num"));
         int houseLivingroomnum = Integer.parseInt((String) jsonData.get("livingroom_num"));
 
         String houseDecoration = (String) jsonData.get("decoration");
@@ -187,12 +200,18 @@ public class HouseController {
         house.setDescription(description);
         house.setHasLift(hasLift);
         house.setType(type);
+        house.setHouseHead(houseHead);
+        house.setHouseRoomnum(houseRoomnum);
+        house.setHouseLivingroomnum(houseLivingroomnum);
+        house.setHouseDecoration(houseDecoration);
+        house.setDecorationdesc(decorationdesc);
+        house.setSellingPoint(sellingPoint);
+        house.setSurroundings(surroundings);
+        house.setTraffic(traffic);
 
+        System.out.println("yes");
 
-
-
-
-
+        houseService.addHouseFront(house);
 
 
 //        System.out.println("type:"+type.toString());
@@ -201,7 +220,8 @@ public class HouseController {
 //        System.out.println("address:"+address);
 
 
-        return "success";
+        String json=JSON.toJSONString(new Result(true,"添加成功"));
+        return json;
 
     }
 

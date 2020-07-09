@@ -137,11 +137,11 @@
 			<el-form-item label="图片上传">
 				<el-upload
           class="upload-demo"
-          action="/api/picture/upload"
+          action="/ap/picture/upload"
 
           ref="/upload"
           name="picture"
-          :limit="1"
+          :limit="3"
           :on-exceed="onExceed"
           :before-upload="beforeUpload"
 
@@ -224,7 +224,7 @@ export default {
         traffic: "",
         picture:"",
         // house_usage: "",
-        // fileList: [],
+        fileList: [],
         // user_name: "",
         // user_phone: ""
       },
@@ -239,7 +239,7 @@ export default {
       this.isLoading = true;
       var formData=eval("("+JSON.stringify(this.form)+")");
       this.$ajax
-        .post("/api/house/newHouse", formData)
+        .post("/ap/house/newHouse", formData)
         .then(function(res) {
           if (res.data.code == 200) {
             that.$message("发布成功");
@@ -261,10 +261,10 @@ export default {
     handlePreview(file) {
       console.log(file);
     },
-    uploadSuccess(res, file, fileList) {
-      console.log("Sucess!");
-      this.form.fileList.push(res.url);
-    },
+    // uploadSuccess(res, file, fileList) {
+    //   console.log("Sucess!");
+    //   this.form.fileList.push(res.url);
+    // },
     countUnitPrice() {
       if (this.form.price && this.form.area) {
         this.form.unit_price =
@@ -281,9 +281,17 @@ export default {
         duration: 6000
       });
       if (file.response.success) {
-        this.form.picture = file.response.message; //将返回的文件储存路径赋值picture字段
+        //将返回的文件储存路径赋值picture字段
+        //this.form.picture = file.response.message;
+
+        //存储多个picture路径
+        this.form.fileList.push(file.response.message);
       }
     },
+
+
+
+
     //删除文件之前的钩子函数
     handleRemove(file, fileList) {
       this.$message({
