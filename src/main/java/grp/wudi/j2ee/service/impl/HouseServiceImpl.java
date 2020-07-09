@@ -99,21 +99,14 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public String downloadImg(int houseId) {
-//        String name = houseDao.getImgName(houseId);
-//        String path = HouseService.class.getResource("/").getPath();
-        String name = "avatar.png";
-        String path = "/src/main/webapp/img/";
-        return path+name;
-
+        House house = houseDao.findById(houseId);
+        String path = house.getHousePicture();
+        return path;
     }
 
 
-
-
-
-
     @Override
-    public void uploadImg(String ImgName) {
-
+    public int addHouseFront(House house) {
+        return houseDao.updateHouse(house);
     }
 }

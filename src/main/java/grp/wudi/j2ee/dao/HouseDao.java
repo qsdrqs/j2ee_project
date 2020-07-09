@@ -30,6 +30,8 @@ public interface HouseDao {
     //获取图片名字
     public String getImgName(int id);
 
+    public int addHouseFront(House house);
+
 
 
 }

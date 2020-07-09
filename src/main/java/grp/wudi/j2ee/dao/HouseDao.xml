@@ -102,4 +102,45 @@
         WHERE house_id = #{house_id}
     </select>
 
+
+    <insert id="addHouseFront" keyProperty="houseId" useGeneratedKeys="true" parameterType="grp.wudi.j2ee.entity.House" >
+        INSERT INTO
+        house(
+        user_id,
+        house_picture,
+        address,
+        unit_price,
+        area,
+        floor,
+        description,
+        has_lift,
+        type,
+        house_head,
+        house_roomnun,
+        house_livingroomnum,
+        house_decoration,
+        decorationdesc,
+        selling_point
+        surroundings,
+        teaffic)
+        VALUE (
+        #{userId},
+        #{housePicture},
+        #{address},
+        #{unitPrice},
+        #{area},
+        #{floor},
+        #{description},
+        #{hasLift},
+        #{type},
+        #{houseHead},
+        #{houseRoomnun},
+        #{houseLivingroomnum},
+        #{houseDecoration},
+        #{decorationdesc},
+        #{sellingPoint}
+        #{surroundings},
+        #{teaffic})
+    </insert>
+
 </mapper>

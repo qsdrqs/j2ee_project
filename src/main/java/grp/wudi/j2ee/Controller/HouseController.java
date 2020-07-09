@@ -1,16 +1,14 @@
 package grp.wudi.j2ee.Controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import grp.wudi.j2ee.entity.House;
 import grp.wudi.j2ee.service.impl.HouseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -130,4 +128,70 @@ public class HouseController {
         }
         return null;
     }
+
+
+    @RequestMapping(path = "/newHouse")
+    @CrossOrigin(origins = "*")
+    public @ResponseBody
+    String newhouse(@RequestBody String data) {
+
+        House house = new House();
+
+        System.out.println(data);
+
+        JSONObject jsonData = JSONObject.parseObject(data);
+
+
+        int userId = Integer.parseInt((String)jsonData.get("user"));
+        String housePicture = (String)jsonData.get("picture");
+        String address = (String)jsonData.get("properties");
+        int unitPrice = Integer.parseInt((String)jsonData.get("unit_price"));
+        int area = Integer.parseInt((String) jsonData.get("area"));
+
+        int floor = Integer.parseInt((String)jsonData.get("floor"));
+        String description =(String)jsonData.get("description");
+        int hasLift = Integer.parseInt((String) jsonData.get("lift"));
+        int type = Integer.parseInt((String) jsonData.get("is_for_sell"));
+
+        String houseHead = (String)jsonData.get("title");
+
+        int houseRoomnun = Integer.parseInt((String)jsonData.get("room_num"));
+        int houseLivingroomnum = Integer.parseInt((String) jsonData.get("livingroom_num"));
+
+        String houseDecoration = (String) jsonData.get("decoration");
+        String decorationdesc = (String) jsonData.get("decoration_desc");
+        String sellingPoint = (String)jsonData.get("main_sellpoint");
+        String surroundings = (String)jsonData.get("facility");
+        String traffic = (String)jsonData.get("traffic");
+
+
+        house.setUserId(userId);
+        house.setHousePicture(housePicture);
+        house.setAddress(address);
+        house.setUnitPrice(unitPrice);
+        house.setArea(area);
+        house.setFloor(floor);
+        house.setDescription(description);
+        house.setHasLift(hasLift);
+        house.setType(type);
+
+
+
+
+
+
+
+
+//        System.out.println("type:"+type.toString());
+//        System.out.println("houseHead:"+houseHead);
+//        System.out.println("description:"+description);
+//        System.out.println("address:"+address);
+
+
+        return "success";
+
+    }
+
+
+
 }
