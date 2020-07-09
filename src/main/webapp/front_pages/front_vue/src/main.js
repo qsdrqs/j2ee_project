@@ -21,7 +21,6 @@ Vue.config.productionTip = false
 
 Vue.use(ElementUI)
 
-Vue.use(VueResource)
 
 Vue.use(BaiduMap, {
   /* Visit http://lbsyun.baidu.com/apiconsole/key for details about app key. */
