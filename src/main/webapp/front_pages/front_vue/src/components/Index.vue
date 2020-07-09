@@ -15,8 +15,8 @@
                             <span>新闻</span>
                             <el-button type="text" class="fr" @click="viewMoreNews">更多</el-button>
                         </div>
-                        <el-table :data="hotApartment" style="width: 100%" stripe @cell-click="openNews">
-                            <el-table-column prop="time" label="日期" width="100"></el-table-column>
+                        <el-table :data="newsList.slice(0,4)" style="width: 100%" stripe @row-click="newsDetails" max-height="250px" >
+                            <el-table-column prop="pubDate" label="日期" width="100"></el-table-column>
                             <el-table-column prop="title" label="新闻标题"></el-table-column>
                         </el-table>
                     </div>
@@ -28,8 +28,8 @@
                     <el-button type="text" class="fr" @click="viewMoreHouse">更多</el-button>
                   </div>
                   <el-table :data="newApartment" style="width: 100%" stripe @cell-click="openNewApartment">
-                    <el-table-column prop="time" label="发布日期" width="100"></el-table-column>
-                    <el-table-column prop="title" label="房屋信息"></el-table-column>
+                    <el-table-column prop="housetime" label="发布日期" width="100"></el-table-column>
+                    <el-table-column prop="housetitle" label="房屋信息"></el-table-column>
                   </el-table>
                 </div>
               </el-col>
@@ -58,25 +58,38 @@ export default {
 
       ],
       newApartment: [],
-      hotApartment: []
+      newsList: [5],
+      title:"",
+      pubDate:"",
+      currentPaage:1,
+      pageSize:5
     };
   },
   methods: {
-    getList() {
-      var that = this;
-      this.$ajax.get("http://localhost:3333/house/index").then(res => {
-        that.hotApartment = res.data[0];
-        that.newApartment = res.data[1];
-        for (var i = 0; i < that.hotApartment.length; i++) {
-            that.hotApartment[i].time = that.hotApartment[i].post_time.slice(0, 10);
-            that.hotApartment[i].title = (that.hotApartment[i].is_for_sell ? '[出售]' : '[出租]') + that.hotApartment[i].title;
-        }
-        for (var i = 0; i < that.newApartment.length; i++) {
-            that.newApartment[i].time = that.newApartment[i].post_time.slice(0, 10);
-            that.newApartment[i].title = (that.newApartment[i].is_for_sell ? '[出售]' : '[出租]') + that.newApartment[i].title;
-        }
-         });
-      },
+    getNewsList: function(){
+          var that = this;
+          
+        this.$ajax.get('/api/politics.xml').then((res) => {
+          var jsonObj = this.$x2js.xml2js(res.data);
+          console.log(jsonObj.rss.channel.item);
+          that.newsList= jsonObj.rss.channel.item;
+          })
+          },
+    // getList() {
+    //   var that = this;
+    //   this.$ajax.get("http://localhost:3333/house/index").then(res => {
+    //     that.hotApartment = res.data[0];
+    //     that.newApartment = res.data[1];
+    //     for (var i = 0; i < that.hotApartment.length; i++) {
+    //         that.hotApartment[i].time = that.hotApartment[i].post_time.slice(0, 10);
+    //         that.hotApartment[i].title = (that.hotApartment[i].is_for_sell ? '[出售]' : '[出租]') + that.hotApartment[i].title;
+    //     }
+    //     for (var i = 0; i < that.newApartment.length; i++) {
+    //         that.newApartment[i].time = that.newApartment[i].post_time.slice(0, 10);
+    //         that.newApartment[i].title = (that.newApartment[i].is_for_sell ? '[出售]' : '[出租]') + that.newApartment[i].title;
+    //     }
+    //      });
+    //   },
   getImage() { 
     
 for (var i = 0; i < 3; i++) {
@@ -87,19 +100,27 @@ for (var i = 0; i < 3; i++) {
     openNewApartment(row, column, cell, event) {
         this.$router.push('/house_details/' + row.id);
     },
-    openNews(row, column, cell, event) {
-        this.$router.push('/news_details/' + row.id);
-    },
     viewMoreHouse() {
         this.$router.push('/house_list/1');
     },
     viewMoreNews(){
       this.$router.push('/newslist')
-    }
+    },
+    newsDetails(row,event,column) {
+        console.log("row:" );
+        console.log(row);
+        console.log(row.description)
+        console.log("event: ");
+        console.log(event);
+        console.log("column: ");
+        console.log(column);
+        window.location.href=row.link;
+      }
   },
   created() {
-    this.getList();
-    this.getImage()
+    // this.getList();
+    this.getImage();
+    this.getNewsList();
   },
   mounted(){
     //this.getImage()
