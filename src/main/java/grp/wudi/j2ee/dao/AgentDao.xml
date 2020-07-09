@@ -24,17 +24,22 @@ VALUES
     <update id="updateAgent"
             parameterType="grp.wudi.j2ee.entity.Agent">
 		UPDATE agent
-		SET
+    <set>
+        <if test="agentAccount != null">
+		    agent_account = #{agentAccount},
+        </if>
+        <if test="agentAccount != null">
+		    agent_password = #{agentPassword},
+        </if>
 		agent_name=#{agentName},
 		agent_sex=#{agentSex},
 		agent_registertime=#{agentRegistertime},
 		agent_leavetime=#{agentLeavetime},
 		agent_tel = #{agentTel},
 		agent_email = #{agentEmail},
-		agent_account = #{agentAccount},
-		agent_password = #{agentPassword},
 		agent_profile = #{agentProfile}
 		WHERE agent_id = #{agentId}
+    </set>
 	</update>
 	<select id="verifyAgent" resultType="grp.wudi.j2ee.entity.Agent">
 		select * from agent where agent_account=#{agentAccount} and agent_password=#{agentPassword}

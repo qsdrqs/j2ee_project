@@ -45,12 +45,12 @@
       </el-table>
 
 			<!-- 个人信息修改 -->
-    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" :hidden="list_type != 0" style="text-align: left">
       <el-form-item label="姓名" prop="name">
         <el-input v-model="ruleForm.name"></el-input>
       </el-form-item>
       <el-form-item label="性别" prop="sex">
-        <el-select v-model="ruleForm.sex">
+        <el-select v-model="ruleForm.sex" type="flex" >
           <el-option label="女" value="female"></el-option>
           <el-option label="男" value="male"></el-option>
         </el-select>
@@ -58,7 +58,7 @@
       <el-form-item label="电话" prop="telephone">
         <el-input v-model="ruleForm.telephone"></el-input>
       </el-form-item>
-      <el-form-item label="邮箱" prop="">
+      <el-form-item label="邮箱" prop="email">
         <el-input v-model="ruleForm.email"></el-input>
       </el-form-item>
        <el-form-item label="个人简介" prop="desc">
@@ -66,12 +66,13 @@
        </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">确定</el-button>
-        <el-button @click="resetForm('ruleForm')">重置</el-button>
+        <el-button type="primary" @click="submitForm(ruleForm)">确定</el-button>
+        <el-button @click="getAgentInfo()">重置</el-button>
       </el-form-item>
     </el-form>
 
 	</div>
+</div>
 </template>
 <script>
 export default {
@@ -79,7 +80,7 @@ export default {
   data() {
     return {
       ruleForm:{
-        name: 'name',
+        name: '',
         sex: '男',
         telephone: '1235',
         email: '123@123.com',
@@ -94,8 +95,11 @@ export default {
           { required: true, message: '电话不能为空', trigger: 'blur' },
           { min: 5,max: 13, message: '电话号码不正确', trigger: 'blur' }
         ],
+        email: [
+          { required: true, message: '邮箱不能为空', trigger: 'blur' },
+        ]
 
-      }
+      },
       agentName: sessionStorage.getItem("agentName"),
       list_type: 1,
       loading: false,
@@ -104,6 +108,18 @@ export default {
     };
   },
   methods: {
+    submitForm(form){
+      var url = "http://localhost:8080/agent/updateAgent";
+      form.id=sessionStorage.getItem("agentId");
+      this.$ajax.post(url, form).then(res => {
+        if (res.data == "OK!") {
+          that.$message({
+            message: '更新成功',
+            type: 'success'
+          })
+        }
+      });
+    },
     red_cell({ row, column, rowIndex, columnIndex }) {
       if (column.label == "房源类型") {
         return "color:red";
@@ -111,6 +127,7 @@ export default {
     },
     getList() {
       var that = this;
+      this.getAgentInfo();
       var id = sessionStorage.getItem("agentId");
       console.log(id);
       console.log(this.list_type);
@@ -240,6 +257,26 @@ export default {
             });
         }
       });
+    },
+    getAgentInfo(){
+      var that = this;
+      that.ruleForm.name = sessionStorage.getItem("agentName");
+      var id = sessionStorage.getItem("agentId");
+      var url =
+        "http://localhost:8080/agent/AgentInfo?id=" + id;
+      this.$ajax.get(url).then(res => {
+        console.log(res);
+        if (res.data.agentSex == 0) {
+          that.ruleForm.sex = "女";
+        }
+        else{
+          that.ruleForm.sex = "男";
+        }
+        that.ruleForm.telephone = res.data.agentTel;
+        that.ruleForm.email = res.data.agentEmail;
+        that.ruleForm.desc = res.data.agentProfile;
+      })
+
     },
     //评论房子
     feedbackHouse(object) {

@@ -1,6 +1,7 @@
 package grp.wudi.j2ee.Controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import grp.wudi.j2ee.entity.Agent;
@@ -112,6 +113,37 @@ public class AgentController {
             System.out.println("验证失败!!!");
             return null;
         }
+    }
+
+    @RequestMapping(path = "/AgentInfo")
+    @CrossOrigin(origins = "*")
+    public @ResponseBody String getAgentById(int id){
+        System.out.println("表现层正在查询经纪人信息");
+        Agent agent = agentService.findById(id);
+        String result = JSON.toJSONString(agent);
+        return result;
+    }
+
+    @RequestMapping(path = "/updateAgent")
+    @CrossOrigin(origins = "*")
+    public @ResponseBody String updateAgent(@RequestBody String data){
+        JSONObject jsonData = JSONObject.parseObject(data);
+
+        Agent agent = new Agent();
+        agent.setAgentId(Integer.parseInt((String)jsonData.get("id")) );
+        agent.setAgentName((String)jsonData.get("name"));
+        if((String)jsonData.get("sex") == "男"){
+            agent.setAgentSex(1);
+        }
+        else{
+            agent.setAgentSex(0);
+        }
+        agent.setAgentTel((String)jsonData.get("telephone"));
+        agent.setAgentEmail((String)jsonData.get("email"));
+        agent.setAgentProfile((String)jsonData.get("desc"));
+
+        agentService.updateAgent(agent);
+        return "OK!";
     }
 
 }

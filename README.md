@@ -6,3 +6,4 @@ Second-hand housing trading platform
 - [] 用户登录界面
 - [] 前端拦截器
 - [] 后端完善
+- [] 房子图片显示
