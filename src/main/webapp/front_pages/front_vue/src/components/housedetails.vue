@@ -9,8 +9,8 @@
     </div>
     <div class="flex">
       <div class="swiper">
-        <el-carousel :interval="5000" arrow="always">
-          <el-carousel-item v-for="item in swiperPic" :key="item">
+        <el-carousel :interval="5000" arrow="always" type="card">
+          <el-carousel-item v-for="item in swiperPic" :key="item" >
             <img :src="item">
           </el-carousel-item>
         </el-carousel>
@@ -170,6 +170,7 @@
           </table>
         </div>
         <div class="info_title">
+          <a name="agent"/>
           经纪人详情
         </div>
         <div class="info_block">
@@ -230,7 +231,7 @@ export default {
   name: "HouseDetails",
   data() {
     return {
-      swiperPic: [],
+      swiperPic: ["/static/img/a1.jpg","/static/img/a2.jpg","/static/img/a3.jpg","/static/img/a4.jpg"],
       house: {},
       // feedback: [],
       feedback:{},
@@ -252,13 +253,19 @@ export default {
   methods: {
     initInfo() {
       var that = this;
-      console.log("房源ID是:" + this.$route.params.id)
+      console.log("房源ID是:" + this.$route.params.id);
       var houseId = this.$route.params.id;
+      that.swiperPic.length=0;
+      for(var i=1;i<=4;i++){
+        that.swiperPic.push("/static/img/"+houseId+"/"+"a"+i+".jpg");
+        console.log(that.swiperPic[i]);
+      }
       this.$ajax
         .get(
           "http://localhost:8080/house/getHouseById?hid=" + this.$route.params.id
         )
         .then(function (res) {
+
           console.log("收到的信息：" + res.data);
           console.log("房源信息的创建时间：" + res.data.createTimeStr);
           var unitprice = res.data.unitPrice;
@@ -296,7 +303,7 @@ export default {
         });
     },
     bookThisHouse() {
-      this.$router.push("/book_house/" + this.$route.params.id);
+      window.location.href="#agent"
     },
     viewHouse(id) {
       this.$router.push("/house_details/" + id);
