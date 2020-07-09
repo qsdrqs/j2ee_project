@@ -85,14 +85,14 @@
 				<li><a href="../main.do"><i
 						class="fa fa-dashboard"></i>首页</a></li>
 				<li><a
-					href="../pages/user-list.jsp">用户信息管理</a></li>
+					href="../user/findAll">用户信息管理</a></li>
 				<li class="active">用户信息表单</li>
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
 			<!--FIXME!!! -->
 			<form action="../user/add"
-				method="post">
+				method="post" onsubmit="return checkFormart()">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
 				<div class="panel panel-default">
@@ -114,13 +114,13 @@
 						<div class="col-md-2 title">电话/手机号码</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" name="userTelephone"
-								placeholder="电话/手机号码" value="">
+							id = "telphone"	placeholder="电话/手机号码" value="">
 						</div>
 
 						<div class="col-md-2 title">电子邮箱/Email</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" placeholder="电子邮箱/Email"
-								name="userMail" value="">
+						id = "mail"		name="userMail" value="">
 						</div>
 
 						<div class="col-md-2 title">账号名称</div>
@@ -138,7 +138,7 @@
 				</div>
 				<!--订单信息/--> <!--工具栏-->
 				<div class="box-tools text-center">
-					<button type="submit" class="btn bg-maroon">保存</button>
+					<button type="submit" class="btn bg-maroon" >保存</button>
 					<button type="button" class="btn bg-default"
 						onclick="window.location.href='/user/findAll'">返回</button>
 				</div>
@@ -253,6 +253,24 @@
 			if (liObj.length > 0) {
 				liObj.parent().parent().addClass("active");
 				liObj.addClass("active");
+			}
+		}
+		//检查格式
+		function checkFormart(){
+			var email = document.getElementById("mail").value;
+			var phone = document.getElementById("telphone").value;
+			var mailregex = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g;
+			var phoneRegex = /^1[34578]\d{9}$/;
+			if(mailregex.test(email)){
+				if(phoneRegex.test(phone)){
+					return true;
+				}else{
+					alert("手机号码格式不正确");
+					return false;
+				}
+			}else{
+				alert("电子邮件格式不正确");
+				return false;
 			}
 		}
 

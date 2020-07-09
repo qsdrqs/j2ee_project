@@ -82,17 +82,17 @@
 				房产经纪人 <small>信息录入</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="../pages/main.jsp"><i
+				<li><a href="../main.do"><i
 						class="fa fa-dashboard"></i>首页</a></li>
 				<li><a
-					href="../pages/agent-list.jsp">房产经纪人管理</a></li>
+					href="../agent/findAll1">房产经纪人管理</a></li>
 				<li class="active">房产经纪人表单</li>
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
 			<!--FIXME!!! -->
 			<form action="../agent/addagent"
-				method="post">
+				method="post" onsubmit="return checkFormart()">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
 
@@ -128,13 +128,13 @@
 						<div class="col-md-2 title">电话/手机号码</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" name="agentTel"
-								placeholder="电话/手机号码" value="">
+							id="telphone"	placeholder="电话/手机号码" value="">
 						</div>
 
 						<div class="col-md-2 title">电子邮箱/Email</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" placeholder="电子邮箱/Email"
-								name="agentEmail" value="">
+							id="mail"	name="agentEmail" value="">
 						</div>
 
 <%--						<div class="col-md-2 title">产品状态</div>--%>
@@ -293,6 +293,25 @@
 			if (liObj.length > 0) {
 				liObj.parent().parent().addClass("active");
 				liObj.addClass("active");
+			}
+		}
+		
+		//检查邮件格式
+		function checkFormart(){
+			var email = document.getElementById("mail").value;
+			var phone = document.getElementById("telphone").value;
+			var mailregex = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g;
+			var phoneRegex = /^1[34578]\d{9}$/;
+			if(mailregex.test(email)){
+				if(phoneRegex.test(phone)){
+					return true;
+				}else{
+					alert("手机号码格式不正确");
+					return false;
+				}
+			}else{
+				alert("电子邮件格式不正确");
+				return false;
 			}
 		}
 

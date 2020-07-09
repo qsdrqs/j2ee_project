@@ -48,6 +48,15 @@ public class AgentController {
         mv.setViewName("success");
         return mv;
     }
+    
+    /*
+	 * 	增加用户信息
+	 */
+	@RequestMapping("/agentAdd.do")
+	public ModelAndView goHome() {
+        ModelAndView mav =new ModelAndView("agent-add");
+        return mav;
+    }
 
     @RequestMapping(path = "/addagent")
     public void addAgent(Agent agent, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

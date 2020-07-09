@@ -82,10 +82,10 @@
 				房产经纪人 <small>信息修改</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="../pages/main.jsp"><i
+				<li><a href="../main.do"><i
 						class="fa fa-dashboard"></i>首页</a></li>
 				<li><a
-					href="../pages/agent-list.jsp">房产经纪人管理</a></li>
+					href="../agent/findAll1">房产经纪人管理</a></li>
 				<li class="active">房产经纪人表单</li>
 			</ol>
 			</section>
@@ -93,7 +93,7 @@
 			<!--FIXME!!! -->
 			<!-- TODO：modify -->
 			<form action="../agent/updateAgent"
-				method="post">
+				method="post" onsubmit="return checkFormart()">
 				<input type="hidden" name="agentId" value="${agent.agentId}">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
@@ -127,13 +127,13 @@
 						<div class="col-md-2 title">电话/手机号码</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" name="agentTel"
-								placeholder="" value="${agent.agentTel}">
+							id="telphone"	placeholder="" value="${agent.agentTel}">
 						</div>
 
 						<div class="col-md-2 title">电子邮箱/Email</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" placeholder=""
-								name="agentEmail" value="${agent.agentEmail}">
+							id="mail"	name="agentEmail" value="${agent.agentEmail}">
 						</div>
 
 <%--						<div class="col-md-2 title">产品状态</div>--%>
@@ -295,6 +295,25 @@
 			}
 		}
 
+		//检查格式
+		function checkFormart(){
+			var email = document.getElementById("mail").value;
+			var phone = document.getElementById("telphone").value;
+			var mailregex = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g;
+			var phoneRegex = /^1[34578]\d{9}$/;
+			if(mailregex.test(email)){
+				if(phoneRegex.test(phone)){
+					return true;
+				}else{
+					alert("手机号码格式不正确");
+					return false;
+				}
+			}else{
+				alert("电子邮件格式不正确");
+				return false;
+			}
+		}
+		
 		$(document).ready(function() {
 			$('#datepicker-a3').datetimepicker({
 				format : "yyyy-mm-dd hh:ii",

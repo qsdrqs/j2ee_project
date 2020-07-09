@@ -82,7 +82,7 @@
 			<!-- 内容头部 /-->
 			<!--FIXME!!! -->
 			<form action="/user/update"
-				method="post">
+				method="post" onsubmit="return checkFormart()">
 				<!-- 正文区域 -->
 				<section class="content"> <!--用户信息-->
 				<input type="hidden" name="userId" value="${user.userId}" /> 
@@ -102,13 +102,13 @@
 						<div class="col-md-2 title">电话/手机号码</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" name="userTelephone"
-								value="${user.userTelephone }">
+							id="telphone"	value="${user.userTelephone }">
 						</div>
 
 						<div class="col-md-2 title">电子邮箱/Email</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" 
-								name="userMail" value="${user.userMail}">
+							id="mail"	name="userMail" value="${user.userMail}">
 						</div>
 
 						<div class="col-md-2 title">账号名称</div>
@@ -239,6 +239,25 @@
 			if (liObj.length > 0) {
 				liObj.parent().parent().addClass("active");
 				liObj.addClass("active");
+			}
+		}
+		
+		//检查格式
+		function checkFormart(){
+			var email = document.getElementById("mail").value;
+			var phone = document.getElementById("telphone").value;
+			var mailregex = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g;
+			var phoneRegex = /^1[34578]\d{9}$/;
+			if(mailregex.test(email)){
+				if(phoneRegex.test(phone)){
+					return true;
+				}else{
+					alert("手机号码格式不正确");
+					return false;
+				}
+			}else{
+				alert("电子邮件格式不正确");
+				return false;
 			}
 		}
 
