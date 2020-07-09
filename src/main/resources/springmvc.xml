@@ -39,6 +39,7 @@
 <!--            <mvc:mapping path="/**/"/>-->
 
 
+
 <!--			&lt;!&ndash; 设置放行资源 &ndash;&gt;-->
 <!--			<mvc:exclude-mapping path="/house/getHouseById"/>-->
 <!--			<mvc:exclude-mapping path="/admin/login.do"/>-->
@@ -51,6 +52,33 @@
 <!--			<mvc:exclude-mapping path="/houseAgent/findHouseByAgent"/>-->
 <!--			<mvc:exclude-mapping path="/admin/login.do" />-->
 <!--			<mvc:exclude-mapping path="/picture/upload"/>-->
+
+			<!-- 设置放行资源 -->
+
+
+
+<!--			<mvc:exclude-mapping path="/house/getHouseById"/>-->
+<!--			<mvc:exclude-mapping path="/admin/login.do"/>-->
+<!--			<mvc:exclude-mapping path="/agent/Agentlogin"/>-->
+<!--			<mvc:exclude-mapping path="/house/findAllBypages"/>-->
+<!--			<mvc:exclude-mapping path="/css/**" />-->
+<!--			<mvc:exclude-mapping path="/img/**" />-->
+<!--			<mvc:exclude-mapping path="/plugins/**" />-->
+<!--			<mvc:exclude-mapping path="/js/**" />-->
+<!--			<mvc:exclude-mapping path="/houseAgent/findHouseByAgent"/>-->
+
+<!--			<mvc:exclude-mapping path="/admin/login.do" />-->
+<!--            <mvc:exclude-mapping path="/house/soldout" />-->
+<!--			-->
+
+<!--			<mvc:exclude-mapping path="/picture/upload"/>-->
+
+
+<!--			<mvc:exclude-mapping path="/**/houseAgent/findAgentByHouseId"/>-->
+
+<!--			<mvc:exclude-mapping path="/user/userLogin"/>-->
+<!--			<mvc:exclude-mapping path="/house/getHouseById"/>-->
+
 
 
 <!--            <bean class="grp.wudi.j2ee.interceptor.LoginInterceptor"/>-->

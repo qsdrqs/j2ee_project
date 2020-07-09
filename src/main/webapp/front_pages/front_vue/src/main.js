@@ -10,11 +10,17 @@ import Footer from './components/_footer'
 import axios from 'axios'
 import BaiduMap from 'vue-baidu-map'
 
+import x2js from 'x2js'
+
+//import VueRssFeed from "VueRssFeed.vue";
+
+Vue.prototype.$x2js = new x2js()
 Vue.prototype.$ajax = axios
 
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
+
 
 Vue.use(BaiduMap, {
   /* Visit http://lbsyun.baidu.com/apiconsole/key for details about app key. */

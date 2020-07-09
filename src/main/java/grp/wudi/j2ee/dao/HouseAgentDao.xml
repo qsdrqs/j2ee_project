@@ -34,4 +34,11 @@
         DELETE FROM house_agent
         WHERE house_id = #{houseId}
     </delete>
+    <select id="findAgentByHouseId" parameterType="int" resultType="grp.wudi.j2ee.entity.Agent">
+         SELECT * FROM agent
+        WHERE agent_id IN
+            (SELECT agent_id
+            FROM house_agent
+            WHERE house_id = #{houseId})
+    </select>
 </mapper>

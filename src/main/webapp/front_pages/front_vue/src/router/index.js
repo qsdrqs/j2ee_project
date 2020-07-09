@@ -14,6 +14,7 @@ import BookHouse from '@/components/book_house'
 import NewsList from '@/components/newslist'
 import NewsDetails from '@/components/news_details'
 
+
 Vue.use(Router)
 
 export default new Router({

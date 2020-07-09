@@ -2,6 +2,7 @@ package grp.wudi.j2ee.service.impl;
 
 import grp.wudi.j2ee.dao.HouseAgentDao;
 import grp.wudi.j2ee.dao.HouseDao;
+import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.entity.House;
 import grp.wudi.j2ee.service.HouseAgentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,11 @@ public class HouseAgentServiceImpl implements HouseAgentService {
     public void deleteRelation(int houseId) {
         houseAgentDao.deleteRelation(houseId);
 
+    }
+    @Override
+    public Agent findAgentByHouseId(int houseId){
+        Agent agent = houseAgentDao.findAgentByHouseId(houseId);
+        agent.setAgentPassword(null);
+        return agent;
     }
 }
