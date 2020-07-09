@@ -24,6 +24,7 @@ export default {
     data(){
         return{
             newsList:[],
+            index:0,
             title:"",
             pubDate:"",
             author:"",
@@ -37,6 +38,7 @@ export default {
           var jsonObj = this.$x2js.xml2js(res.data);
           console.log(jsonObj.rss.channel.item);
           that.newsList= jsonObj.rss.channel.item;
+
         });
         },
         changePage: function (val) {
@@ -44,14 +46,18 @@ export default {
         this.getNewsList();
         },
         newsDetails(row,event,column) {
-        console.log("row:" );
-        console.log(row);
-        console.log(row.description)
-        console.log("event: ");
-        console.log(event);
-        console.log("column: ");
-        console.log(column);
-        window.location.href=row.link;
+        // console.log("row:" );
+        // console.log(row);
+        // console.log(row.description)
+        // console.log("event: ");
+        // console.log(event);
+        // console.log("column: ");
+        // console.log(column);
+      console.log(this.newsList.indexOf(row));
+        //window.location.href=row.link;
+        this.$router.push(
+        "/news_details/" + this.newsList.indexOf(row)
+      );
       }
     } ,
     created: function(){

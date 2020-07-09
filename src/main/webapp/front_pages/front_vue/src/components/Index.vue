@@ -114,7 +114,9 @@ for (var i = 0; i < 3; i++) {
         console.log(event);
         console.log("column: ");
         console.log(column);
-        window.location.href=row.link;
+        this.$router.push(
+        "/news_details/" + this.newsList.indexOf(row)
+      );
       }
   },
   created() {

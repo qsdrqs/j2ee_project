@@ -13,7 +13,7 @@ import AgentLogin from '@/components/agent_login'
 import BookHouse from '@/components/book_house'
 import NewsList from '@/components/newslist'
 import NewsDetails from '@/components/news_details'
-
+import JobOffer from '@/components/jobOffer'
 
 Vue.use(Router)
 
@@ -88,6 +88,11 @@ export default new Router({
       path:'/news_details/:id',
       name:'新闻详情',
       component:NewsDetails
+    },
+    {
+      path:'/jobOffer',
+      name:'招聘信息',
+      component:JobOffer
     }
   ]
 })
