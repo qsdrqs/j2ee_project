@@ -6,7 +6,7 @@
 <!-- 页面meta -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>经纪人添加</title>
+<title>房源信息修改</title>
 <meta name="description" content="AdminLTE2定制版">
 <meta name="keywords" content="AdminLTE2定制版">
 
@@ -82,17 +82,17 @@
 				房源 <small>信息审核</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="../pages/main.jsp"><i
+				<li><a href="../main.do"><i
 						class="fa fa-dashboard"></i>首页</a></li>
 				<li><a
-					href="../pages/house-list.jsp">房源管理</a></li>
+					href="../house/findAllBypagesBack.do">房源管理</a></li>
 				<li class="active">房源表单</li>
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
 			<!--FIXME!!! -->
 			<!-- TODO：modify -->
-			<form action="../house/update"
+			<form action="../house/update.do"
 				method="post">
 				<input type="hidden" name="houseId" value="${house.houseId}">
 				<!-- 正文区域 -->
@@ -170,7 +170,7 @@
 				<div class="box-tools text-center">
 					<button type="submit" class="btn bg-maroon">保存</button>
 					<button type="button" class="btn bg-default"
-						onclick="history.back(-1);">返回</button>
+						onclick="window.location.href='../house/findAllBypagesBack.do'">返回</button>
 				</div>
 				<!--工具栏/--> </section>
 				<!-- 正文区域 /-->
@@ -178,15 +178,7 @@
 		</div>
 		<!-- 内容区域 /-->
 
-		<!-- 底部导航 -->
-		<footer class="main-footer">
-		<div class="pull-right hidden-xs">
-			<b>Version</b> 1.0.8
-		</div>
-		<strong>Copyright &copy; 2014-2017 <a
-			href="http://www.itcast.cn">研究院研发部</a>.
-		</strong> All rights reserved. </footer>
-		<!-- 底部导航 /-->
+		
 
 	</div>
 

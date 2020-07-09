@@ -10,16 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import sun.nio.cs.GBK;
-
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+
 @Controller
 @RequestMapping(path="/house")
 public class HouseController {
     @Autowired
     private HouseServiceImpl houseService;
-    @RequestMapping(path = "/findAllHouse")
+    @RequestMapping(path = "/findAllHouse.do")
     public ModelAndView findAll(){
         ModelAndView mv = new ModelAndView();
         List<House> list = houseService.findAll();
@@ -36,7 +35,7 @@ public class HouseController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(path = "/findAllBypagesBack")
+    @RequestMapping(path = "/findAllBypagesBack.do")
     public String findAllBypages(@RequestParam(value = "p", defaultValue = "1") int p, Model model) throws Exception {
         System.out.println("表现层正在执行分页查询房源信息....");
         PageInfo<House> pi = houseService.findAll(p);
@@ -48,12 +47,12 @@ public class HouseController {
 
      * 删除房屋信息
      */
-    @RequestMapping(path = "/delete")
+    @RequestMapping(path = "/delete.do")
     public String delete(@RequestParam(value = "id", required = true) int id) {
         House removeHouse = houseService.getHouseById(id);
         houseService.delete(id);
         id = removeHouse.getUserId();
-        return "redirect:/house/findAllBypages";
+        return "redirect:/house/findAllBypages.do";
     }
 
     @RequestMapping(path = "/findAllBypages")
@@ -99,7 +98,7 @@ public class HouseController {
 //    }
 
 
-    @RequestMapping(path = "/Preupdate")
+    @RequestMapping(path = "/Preupdate.do")
     public ModelAndView PreupdateAgent(int id) {
         System.out.println("业务层正在执行修改...");
         ModelAndView mv = new ModelAndView();
@@ -110,12 +109,11 @@ public class HouseController {
         return mv;
     }
 
-    @RequestMapping(path = "/update")
+    @RequestMapping(path = "/update.do")
     public String update(House house) {
         System.out.println("表现层从表单接受到的信息：" + house);
-        System.out.println("/update agent");
         houseService.update(house);
-        return "redirect:/house/findAllBypagesBack";
+        return "redirect:/house/findAllBypagesBack.do";
     }
 
     @RequestMapping(path = "/soldout")

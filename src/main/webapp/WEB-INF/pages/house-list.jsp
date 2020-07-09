@@ -87,7 +87,7 @@
 					数据管理 <small>数据列表</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+					<li><a href="../main.do"><i class="fa fa-dashboard"></i> 首页</a></li>
 					<li><a href="#">数据管理</a></li>
 					<li class="active">数据列表</li>
 				</ol>
@@ -114,7 +114,7 @@
 								<div class="form-group form-inline">
 									<div class="btn-group">
 										<button type="button" class="btn btn-default" title="新建"
-											onclick="location.href='../pages/agent-add.jsp'">
+											onclick="location.href='#'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										<button type="button" class="btn btn-default" title="删除">
@@ -122,7 +122,7 @@
 										</button>
 
 										<button type="button" class="btn btn-default" title="刷新"
-											onclick="location.href='../house/findAllBypages'">
+											onclick="location.href='../house/findAllBypages.do'">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 									</div>
@@ -182,7 +182,7 @@
 													</c:when>
 													<c:otherwise>
 														<button type="button" class="btn bg-olive btn-xs"
-															onclick="location.href='../house/Preupdate?id=${house.houseId}'">审核</button>
+															onclick="location.href='../house/Preupdate.do?id=${house.houseId}'">审核</button>
 													</c:otherwise>
 												</c:choose> <c:choose>
 													<c:when test="${house.agentId != 0}">
@@ -191,7 +191,7 @@
 													</c:when>
 													<c:otherwise>
 														<button type="button" class="btn bg-olive btn-xs"
-															onclick="location.href='../house/delete?id=${house.houseId}'">删除</button>
+															onclick="location.href='../house/delete.do?id=${house.houseId}'">删除</button>
 													</c:otherwise>
 												</c:choose>
 
@@ -228,10 +228,10 @@
 						</div>
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="../house/findAllBypagesBack?p=1">首页</a></li>
+								<li><a href="../house/findAllBypagesBack.do?p=1">首页</a></li>
 								<c:if test="${pi.hasPreviousPage }">
 									<li><a
-										href="../house/findAllBypagesBack?p=${pi.pageNum-1}"
+										href="../house/findAllBypagesBack.do?p=${pi.pageNum-1}"
 										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 									</a></li>
 								</c:if>
@@ -242,17 +242,17 @@
 										<li class="active"><a href="#">${page_Num }</a></li>
 									</c:if>
 									<c:if test="${page_Num != pi.pageNum }">
-										<li><a href="../house/findAllBypagesBack?p=${page_Num }">${page_Num }</a></li>
+										<li><a href="../house/findAllBypagesBack.do?p=${page_Num }">${page_Num }</a></li>
 									</c:if>
 
 								</c:forEach>
 								<c:if test="${pi.hasNextPage }">
 									<li><a
-										href="../house/findAllBypagesBack?p=${pi.pageNum+1 }"
+										href="../house/findAllBypagesBack.do?p=${pi.pageNum+1 }"
 										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 									</a></li>
 								</c:if>
-								<li><a href="../house/findAllBypagesBack?p=${pi.pages}">末页</a></li>
+								<li><a href="../house/findAllBypagesBack.do?p=${pi.pages}">末页</a></li>
 							</ul>
 						</div>
 					</div>
@@ -268,17 +268,6 @@
 		</div>
 		<!-- @@close -->
 		<!-- 内容区域 /-->
-
-		<!-- 底部导航 -->
-		<footer class="main-footer">
-			<div class="pull-right hidden-xs">
-				<b>Version</b> 1.0.8
-			</div>
-			<strong>Copyright &copy; 2020-2024 <a
-				href="http://www.baidu.com/s?wd=西安交通大学">J2EE无敌小组</a>.
-			</strong> All rights reserved.
-		</footer>
-		<!-- 底部导航 /-->
 
 	</div>
 

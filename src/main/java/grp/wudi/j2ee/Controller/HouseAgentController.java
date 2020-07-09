@@ -1,7 +1,6 @@
 package grp.wudi.j2ee.Controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.entity.House;
@@ -74,8 +73,8 @@ public class HouseAgentController {
         }
         return null;
     }
+    
     @RequestMapping(path="/findAgentByHouseId")
-
     @CrossOrigin(origins = "*")
     public @ResponseBody
     String findAgentByHouseId(int houseId){

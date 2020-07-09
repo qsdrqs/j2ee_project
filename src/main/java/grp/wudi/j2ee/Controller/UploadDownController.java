@@ -4,7 +4,6 @@ package grp.wudi.j2ee.Controller;
 import com.alibaba.fastjson.JSON;
 import grp.wudi.j2ee.entity.House;
 import grp.wudi.j2ee.entity.Result;
-import grp.wudi.j2ee.service.HouseService;
 import grp.wudi.j2ee.service.impl.HouseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

@@ -6,7 +6,6 @@ import com.github.pagehelper.PageInfo;
 import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.service.impl.AgentServiceImpl;
 
-import net.sf.jsqlparser.expression.OracleHint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +24,7 @@ public class AgentController {
     @Autowired
     private AgentServiceImpl agentService;
 
-    @RequestMapping(path = "/findAll")
+    @RequestMapping(path = "/findAll.do")
     public ModelAndView findAll() {
         System.out.println("表现层执行了...");
         ModelAndView mv = new ModelAndView();
@@ -34,14 +33,14 @@ public class AgentController {
         mv.setViewName("agent-list");
         return mv;
     }
-    @RequestMapping(path="/findAll1")
+    @RequestMapping(path="/findAll1.do")
     public String findAll(@RequestParam(value = "p", defaultValue = "1") int p,Model model) throws Exception {
         PageInfo<Agent> pi = agentService.finAll(p);
         model.addAttribute("pi", pi);
         return "agent-list";
     }
 
-    @RequestMapping(path = "/findById")
+    @RequestMapping(path = "/findById.do")
     public ModelAndView findById(int id) {
         ModelAndView mv = new ModelAndView();
         Agent agent = agentService.findById(id);
@@ -59,22 +58,22 @@ public class AgentController {
         return mav;
     }
 
-    @RequestMapping(path = "/addagent")
+    @RequestMapping(path = "/addagent.do")
     public void addAgent(Agent agent, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("表现层执行了保存用户...");
         System.out.println("表现层从表单获取的agent :"+agent);
         agentService.addAgent(agent);
-        request.getRequestDispatcher("/agent/findAll1").forward(request, response);
+        request.getRequestDispatcher("/agent/findAll1.do").forward(request, response);
     }
 
-    @RequestMapping(path = "/deleteAgent")
+    @RequestMapping(path = "/deleteAgent.do")
     public String deleteAgent(HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println("表现层执行了删除操作");
         String id = request.getParameter("id");
         agentService.deleteAgent(Integer.parseInt(id));
-        return "redirect:/agent/findAll1";
+        return "redirect:/agent/findAll1.do";
     }
-    @RequestMapping(path = "/PreupdateAgent")
+    @RequestMapping(path = "/PreupdateAgent.do")
     public ModelAndView PreupdateAgent(int id) {
         System.out.println("业务层正在执行修改...");
         ModelAndView mv = new ModelAndView();
@@ -85,13 +84,12 @@ public class AgentController {
         return mv;
     }
 
-    @RequestMapping(path = "/updateAgent")
+    @RequestMapping(path = "/updateAgent.do")
     public String update(Agent agent) {
         System.out.println("表现层从表单接受到的信息：" + agent);
-        System.out.println("/update agent");
         System.out.println(agent);
         agentService.updateAgent(agent);
-        return "redirect:/agent/findAll1";
+        return "redirect:/agent/findAll1.do";
     }
 
     @RequestMapping(path = "/Agentlogin")

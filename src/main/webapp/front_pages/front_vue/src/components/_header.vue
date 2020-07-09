@@ -43,6 +43,7 @@
         <el-menu-item index="6-2">问题反馈</el-menu-item>
       </el-submenu> -->
       <el-menu-item :index="agentCenterIndex">经纪人中心</el-menu-item>
+      <el-menu-item index="/jobOffer">招聘信息</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -111,6 +112,7 @@ export default {
   line-height: 60px;
   margin-left: 20px;
   cursor: pointer;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
 
 .website_engname {

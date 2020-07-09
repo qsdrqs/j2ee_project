@@ -61,14 +61,14 @@
 				管理员 <small>信息修改</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="/pages/main.jsp"><i class="fa fa-dashboard"></i>首页</a></li>
-				<li><a href="/pages/user-list.jsp">管理员信息</a></li>
+				<li><a href="/main.do"><i class="fa fa-dashboard"></i>首页</a></li>
+				<li><a href="/admin/findAll.do">管理员信息</a></li>
 				<li class="active">管理员信息表单</li>
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
 			<!--FIXME!!! -->
-			<form action="/admin/edit" method="post">
+			<form action="/admin/edit.do" method="post">
 				<!-- 正文区域 -->
 				<section class="content"> <!--用户信息-->
 				<input type="hidden" name="adminId" value="${admin.adminId}" /> 
@@ -96,7 +96,7 @@
 				<div class="box-tools text-center">
 					<button type="submit" class="btn bg-maroon">保存</button>
 					<button type="button" class="btn bg-default"
-						onclick="window.location.href='/admin/findAll'">返回</button>
+						onclick="window.location.href='/admin/findAll.do'">返回</button>
 				</div>
 				<!--工具栏/--> </section>
 				<!-- 正文区域 /-->

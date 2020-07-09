@@ -102,6 +102,35 @@
 <!--			<bean class="grp.wudi.j2ee.interceptor.AdminInterceptor" />-->
 <!--		</mvc:interceptor>-->
 <!--	</mvc:interceptors>-->
+	<!-- 拦截器定义 -->
+	<mvc:interceptors>
+		<!-- 定义一个拦截器 -->
+		<mvc:interceptor>
+            <!-- 拦截.do资源 -->
+            <mvc:mapping path="/**/*.do"/>
+			<!-- 设置放行资源 -->
+			<mvc:exclude-mapping path="/admin/login.do"/>
+			<mvc:exclude-mapping path="/admin/logout.do"/>
+			
+            <bean class="grp.wudi.j2ee.interceptor.LoginInterceptor"/>
+		</mvc:interceptor>
+		
+		<!-- 定义一个拦截器 -->
+		<mvc:interceptor>
+			<!-- 拦截资源 -->
+			<mvc:mapping path="/admin/**" />
+			<!-- 设置放行资源 -->
+            <mvc:exclude-mapping path="/admin/login.do" />
+			<mvc:exclude-mapping path="/admin/logout.do" />
+			<mvc:exclude-mapping path="/admin/update.do" />
+			<mvc:exclude-mapping path="/css/**" />
+			<mvc:exclude-mapping path="/img/**" />
+			<mvc:exclude-mapping path="/plugins/**" />
+			<mvc:exclude-mapping path="/js/**" />
+
+			<bean class="grp.wudi.j2ee.interceptor.AdminInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 	<!-- <mvc:resources mapping="" location="" -->
 	<mvc:annotation-driven></mvc:annotation-driven>
 </beans>
