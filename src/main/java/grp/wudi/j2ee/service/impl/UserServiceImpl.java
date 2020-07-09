@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 		Date date = new Date();
 		user.setUserUpdatetime(date);
 		User user1 = userDao.findById(user.getUserId());
-		if(!user1.getUserPasswordsha256().equals(SHA256Util.stringToSHA256(user.getUserPasswordsha256()))) {
+		if(!user1.getUserPasswordsha256().equals(user.getUserPasswordsha256())) {
 			user.setUserPasswordsha256(SHA256Util.stringToSHA256(user.getUserPasswordsha256()));
 		}
 		return userDao.update(user);
@@ -88,5 +88,11 @@ public class UserServiceImpl implements UserService {
 		PageHelper.startPage(p, 5);
 		List<User> users = userDao.findByKeyword(user);
 		return new PageInfo<User>(users, 5);
+	}
+
+	@Override
+	public User verifyUser(String userAccount, String userPasswordsha256) {
+		userPasswordsha256 = SHA256Util.stringToSHA256(userPasswordsha256);
+        return userDao.verifyUser(userAccount, userPasswordsha256);
 	}
 }
