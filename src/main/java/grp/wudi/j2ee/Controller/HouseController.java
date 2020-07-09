@@ -2,19 +2,12 @@ package grp.wudi.j2ee.Controller;
 
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
-import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.entity.House;
-import grp.wudi.j2ee.entity.User;
-import grp.wudi.j2ee.service.HouseService;
 import grp.wudi.j2ee.service.impl.HouseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
-
-import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -122,5 +115,19 @@ public class HouseController {
         System.out.println(house);
         houseService.update(house);
         return "redirect:/house/findAllBypagesBack";
+    }
+
+    @RequestMapping(path = "/getHouseById")
+    @CrossOrigin(origins = "*")
+    public @ResponseBody
+    String findHouseById(int hid) {
+        System.out.println("表现层正在执行查询具体房源信息...");
+        System.out.println(hid);
+        House house = houseService.getHouseById(hid);
+        if (null != house) {
+            String result = JSON.toJSONString(house);
+            return result;
+        }
+        return null;
     }
 }

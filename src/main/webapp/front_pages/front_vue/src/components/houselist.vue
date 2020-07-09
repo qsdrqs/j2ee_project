@@ -2,8 +2,8 @@
   <div class='house_list'>
     <div class="search_block">
       <div class="search_types">
-        <div class="search_type" :class="{ search_type_selected:isForSell == 1 }" @click="changeType(1)">买房</div>
-        <div class="search_type" :class="{ search_type_selected:isForSell == 0 }" @click="changeType(0)">租房</div>
+        <div class="search_type" :class="{ search_type_selected:isForSell == 1 }" @click="changeType(1)">租房</div>
+        <div class="search_type" :class="{ search_type_selected:isForSell == 0 }" @click="changeType(0)">买房</div>
       </div>
       <div class="searcher">
         <div class="search_pic">
@@ -62,25 +62,36 @@
     <h3 class="result_tips">共找到<span class="blue">{{resultCount}}</span>套房子</h3>
     <div class="houselist_block" v-loading="loading">
 
-      <div class="house flex" v-for="item in houseList" :key="item.id" :hid="item.id" @click="houseDetails">
-<!--        <div class="house_img">-->
-<!--          <img :src="JSON.parse(item.image)[0]">-->
-<!--        </div>-->
+      <div class="house flex" v-for="item in houseList" :key="item.id" :hid="item.houseId" @click="houseDetails">
+        <!--        <div class="house_img">-->
+        <!--          <img :src="JSON.parse(item.image)[0]">-->
+        <!--        </div>-->
         <div class="house_info fg">
-          <div class="house_title">房子编号{{ item.address }}</div>
-<!--          <div class="house_spec">{{ item.properties }} | {{ item.room }}室{{ item.livingroom }}厅 | {{ item.area }}㎡ | {{ item.direction }} | {{ item.decoration }}</div>-->
+          <div class="house_title">{{ item.houseHead }}</div>
+          <div class="house_spec">{{ item.address }} | {{ item.houseRoomnum }}室{{ item.houseLivingroomnum }}厅 | {{
+            item.area }}㎡ | 朝向南| {{ item.decoration }}
+          </div>
 
           <div class="house_spec">{{ item.area }}㎡ | {{ item.description }}</div>
-<!--          <div class="house_spec">{{ item.floor/item.total_floor < 1/3 ? '低' : item.floor/item.total_floor < 2/3 ? '中' : '高' }}楼层(共{{ item.floor }}层){{ item.build_year }}年建塔楼 - </div>-->
+          <div class="house_spec">第{{item.floor}}层|{{ item.floor/item.houseTotalfloor < 1/3 ? '低' :
+            item.floor/item.houseTotalfloor < 2/3 ? '中' : '高' }}楼层(共{{ item.houseTotalfloor }}层)|{{ item.createTimeStr
+            }}年建塔楼 -
+          </div>
           <div class="house_spec">{{item.floor层}}</div>
-<!--          <div class="house_spec">{{ item.post_time }}发布</div>-->
+          <div class="house_spec">{{ item.createTimeStr }}发布</div>
           <div class="house_spec">
-            <span class="house_advantage">描述:{{ item.description }}</span>
+            <span class="house_advantage">地址:{{ item.address }}</span>
           </div>
         </div>
-        <div class="house_price">
-          <div class="price">¥ <span class="rmb">{{ item.unitPrice*item.area/10000 }}</span> 万</div>
-          <div class="unitprice">单价 <span style="font-weight: bold;">{{ parseInt(item.unitPrice) }}</span> 元/平米</div>
+        <div v-if="item.type==0">
+          <div class="house_price">
+            <div class="price">¥ <span class="rmb">{{ item.unitPrice*item.area/10000 }}万</span></div>
+            <div class="unitprice">单价 <span style="font-weight: bold;">{{ parseInt(item.unitPrice) }}</span> 元/平米</div>
+          </div>
+        </div>
+        <div v-else>
+          <div class="price">¥ <span class="rmb">{{ item.unitPrice }}/月</span></div>
+          <!--          <div class="unitprice">单价 <span style="font-weight: bold;">{{ parseInt(item.unitPrice) }}</span> 元/平米</div>-->
         </div>
       </div>
 
@@ -172,6 +183,7 @@ export default {
       this.$router.push('/house_list/' + num);
     },
     houseDetails: function () {
+      console.log("房源ID：" + event.currentTarget.getAttribute("hid"));
       this.$router.push(
         "/house_details/" + event.currentTarget.getAttribute("hid")
       );
