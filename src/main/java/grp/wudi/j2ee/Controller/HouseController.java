@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import sun.nio.cs.GBK;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 @Controller
 @RequestMapping(path="/house")
@@ -61,8 +63,10 @@ public class HouseController {
     public @ResponseBody
     String findAllBypagess(int p, String address, int type,
                            int minPrice, int maxPrice,
-                           int minArea, int maxArea, int hasLift) {
+                           int minArea, int maxArea, int hasLift) throws UnsupportedEncodingException {
         System.out.println("表现层正在执行分页查找房源信息...");
+        System.out.println(address);
+        address = new String(address.getBytes("ISO8859_1"),"UTF-8");
         System.out.println(address);
         System.out.println(type);
         PageInfo<House> list = houseService.findBykeywordsPages(p, address, type
@@ -112,9 +116,18 @@ public class HouseController {
     public String update(House house) {
         System.out.println("表现层从表单接受到的信息：" + house);
         System.out.println("/update agent");
-        System.out.println(house);
         houseService.update(house);
         return "redirect:/house/findAllBypagesBack";
+    }
+
+    @RequestMapping(path = "/soldout")
+    @CrossOrigin(origins = "*")
+    public @ResponseBody String setSoldOut(int houseId){
+        System.out.println("表现层正在执行修改房屋状态:"+houseId);
+        House house = houseService.getHouseById(houseId);
+        house.setStatus(3);
+        houseService.update(house);
+        return "OK!";
     }
 
     @RequestMapping(path = "/getHouseById")
@@ -126,6 +139,19 @@ public class HouseController {
         House house = houseService.getHouseById(hid);
         if (null != house) {
             String result = JSON.toJSONString(house);
+            return result;
+        }
+        return null;
+    }
+    
+    @RequestMapping(path = "/getHouseByUid")
+    @CrossOrigin(origins = "*")
+    public @ResponseBody
+    String findHouseByUid(@RequestParam(value = "id", required = true) int id ) {
+        System.out.println("表现层正在执行查询具体房源信息...");
+        List<House> houses = houseService.getHouseByUserId(id);
+        if (null != houses) {
+            String result = JSON.toJSONString(houses);
             return result;
         }
         return null;

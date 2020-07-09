@@ -15,4 +15,5 @@ public interface UserService {
 	public List<User> findAll();
 	public PageInfo<User> finAll(int p);
 	public int deleteUser(int id);
+	public User verifyUser(String userAccount, String userPasswordsha256);
 }
