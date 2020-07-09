@@ -10,31 +10,30 @@ import grp.wudi.j2ee.entity.User;
 
 import java.util.List;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring-context.xml"})
+@ContextConfiguration(locations = { "classpath:spring-context.xml" })
 public class UserServiceTest {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Test
 	public void testAdd() {
 		User user = new User();
-		user.setUserName("赵10");
+		user.setUserName("赵100");
 		user.setUserSex(1);
-		user.setUserAccount("交大彭于晏");
-		user.setUserPasswordsha256("123456789");
+		user.setUserAccount("一二三四");
+		user.setUserPasswordsha256("123456");
 		user.setUserMail("123456@qq.com");
 		user.setUserTelephone("123456");
 		userService.add(user);
 	}
-	
+
 	@Test
 	public void testGetUserById() {
 		System.out.println(userService.getUserById(10));
 	}
-	
+
 	@Test
 	public void testUpdate() {
 		User user = new User();
@@ -47,26 +46,32 @@ public class UserServiceTest {
 		user.setUserTelephone("123456");
 		userService.update(user);
 	}
-	
+
 	@Test
 	public void testGetUserByKeyword() {
 
-
-		System.out.println(userService.getUserByKeyword("赵四",1));
-
+		System.out.println(userService.getUserByKeyword("赵四", 1));
 
 	}
-	
+
 	@Test
-	public void testFindAll(){
+	public void testFindAll() {
 		List<User> list = userService.findAll();
-		for (User user:list) {
+		for (User user : list) {
 			System.out.println(user);
 		}
 	}
-	
+
 	@Test
 	public void testDeleteUser() {
 		userService.deleteUser(2);
+	}
+
+	@Test
+	public void testVerifyUser() {
+		User user = userService.verifyUser("一二三四", "123456");
+
+		System.out.println(user);
+
 	}
 }

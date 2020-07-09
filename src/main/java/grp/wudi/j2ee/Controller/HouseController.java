@@ -130,4 +130,17 @@ public class HouseController {
         }
         return null;
     }
+    
+    @RequestMapping(path = "/getHouseByUid")
+    @CrossOrigin(origins = "*")
+    public @ResponseBody
+    String findHouseByUid(@RequestParam(value = "id", required = true) int id ) {
+        System.out.println("表现层正在执行查询具体房源信息...");
+        List<House> houses = houseService.getHouseByUserId(id);
+        if (null != houses) {
+            String result = JSON.toJSONString(houses);
+            return result;
+        }
+        return null;
+    }
 }

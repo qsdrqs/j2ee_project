@@ -1,12 +1,12 @@
 <template>
 	<div class="seller_center">
-		<h2>买家中心</h2>
+    <h2>您好，{{ userAccount }}!欢迎回家</h2>
 
 		<!-- 我的订单表格 -->
 		<el-table v-loading="loading" :data="order_list" style="width: 100%; text-align: left;" stripe>
 			<el-table-column prop="title" label="房源标题">
 			</el-table-column>
-			<el-table-column prop="create_time" label="预约时间">
+			<el-table-column prop="create_time" label="发布时间">
 			</el-table-column>
 			<el-table-column prop="agent_name" label="经纪人">
 			</el-table-column>
@@ -31,58 +31,50 @@ export default {
   name: "customer_center",
   data() {
     return {
-      list_type: 0, //0为查看房源，1为查看交易
+      userAccount: sessionStorage.getItem("userAccount"),
       order_list: [],
+      currentPage: 1,
       loading: false
     };
   },
   methods: {
     getOrderList() {
       var that = this;
-      that.loading = true;
+      this.loading = true;
+      var queryString ="http://localhost:8080/house/getHouseByUid?id=" + sessionStorage.getItem("userId") ;
       this.$ajax
         .get(
-          "http://localhost:8081/house/getMyOrder?user=" +
-            sessionStorage.getItem("id")
+          queryString
         )
         .then(function(res) {
           that.loading = false;
-          that.order_list = res.data.slice(0);
+          console.log(res.data);
+          that.order_list = res.data;
           for (var i = 0; i < res.data.length; i++) {
             switch (res.data[i].status) {
               case 0:
-                that.order_list[i].status_text = "订单已关闭";
+                that.order_list[i].status_text = "审核中";
                 break;
               case 1:
-                that.order_list[i].status_text = "等待经纪人接单";
+                that.order_list[i].status_text = "审核通过";
                 break;
               case 2:
-                that.order_list[i].status_text = "经纪人已接单";
+                that.order_list[i].status_text = "审核不通过";
                 break;
               case 3:
-                that.order_list[i].status_text = "买家已看房";
-                break;
-              case 4:
-                that.order_list[i].status_text = "经纪人正协商交易";
-                break;
-              case 5:
-                that.order_list[i].status_text = "卖家已收款";
-                break;
-              case 6:
-                that.order_list[i].status_text = "买家已收楼";
-                break;
-              case 7:
-                that.order_list[i].status_text = "交易已完成";
+                that.order_list[i].status_text = "已出售";
                 break;
               default:
                 that.order_list[i].status_text = "订单状态未知";
                 break;
             }
+            that.order_list[i].create_time = res.data[i].createTimeStr;
+            that.order_list[i].title = res.data[i].houseHead;
           }
         });
     },
-    viewHouse(object, col) {
-			this.$router.push("/house_details/" + object.house_id);
+    viewHouse(object) {
+			this.$router.push("/house_details/" + object.houseId);
     },
     wantHouse(object) {
 			//下定房源
