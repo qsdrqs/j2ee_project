@@ -8,15 +8,18 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "element-ui": "^2.13.2",
     "mint-ui": "^2.2.13",
     "npm": "^5.8.0",
     "vue": "^2.5.2",
     "vue-baidu-map": "^0.20.7",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-rss-feed": "^0.2.4",
+    "x2js": "^3.4.0"
   },
   "devDependencies": {
+    "@ifuture/vuepress-plugin-rss": "^1.0.2",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",

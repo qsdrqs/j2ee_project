@@ -1,15 +1,15 @@
 <template>
 <div class="newlist">
       <div class="grid-content bg-purple-light post_details" style="margin-right: 15%; margin-left: 15%;">
-                <el-table :data="newsInfo" style="width: 100%" stripe @cell-click="openNews">
-                    <el-table-column prop="time" label="日期" width="100"></el-table-column>
-                    <el-table-column prop="title" label="新闻标题"></el-table-column>
-                </el-table>
-        </div>
-      <div class="page_block">
-      <el-pagination layout="prev, pager, next" :total="total" @current-change="changePage">
-      </el-pagination>
-    </div>
+      <el-table :data="newsList"  border style="width:100%"  @row-click="newsDetails" >
+        <el-table-column prop="pubDate" label="发布时间" width="110">
+        </el-table-column>
+        <el-table-column prop="author" label="新闻作者" width="140">
+        </el-table-column>
+        <el-table-column prop="title" label="新闻标题" >
+        </el-table-column>
+      </el-table>
+      </div>
 </div>
 
 </template>
@@ -19,33 +19,44 @@ export default {
     name:"newslist",
     data(){
         return{
-            newsInfo:[],
-            currentPage:0
+            newsList:[],
+            title:"",
+            pubDate:"",
+            author:"",
         };
     },
     methods:{
-        getNewsList(){
-            var that = this;
-            this.$ajax.get("url").then(res =>{
-                that.newsInfo=res.data[0];
-                for(var i=0;i<that.newsInfo[i].length;i++){
-                    that.newsInfo[i].time=that.newsInfo[i].post_time;
-                    that.newsInfo[i].title=that.newsInfo[i].title;
-                }
-            })
+        getNewsList: function(){
+          var that = this;
+          
+        this.$ajax.get('/api/politics.xml').then((res) => {
+          var jsonObj = this.$x2js.xml2js(res.data);
+          console.log(jsonObj.rss.channel.item);
+          that.newsList= jsonObj.rss.channel.item;
+        });
         },
         changePage: function (val) {
         this.currentPage = val;
         this.getNewsList();
         },
-        openNews(row,column,cell,evebt){
-            this.$router.push('/news_details/'+row.id)
-        },
-        created(){
+        newsDetails(row,event,column) {
+        console.log("row:" );
+        console.log(row);
+        console.log(row.description)
+        console.log("event: ");
+        console.log(event);
+        console.log("column: ");
+        console.log(column);
+        window.location.href=row.link;
+      }
+    } ,
+    created: function(){
+          console.log("Hello World!");
             this.getNewsList();
         }
-    }
-};
+        
+}
+
 </script>
 
 <style>

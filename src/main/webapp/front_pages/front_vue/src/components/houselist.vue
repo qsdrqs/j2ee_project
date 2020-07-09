@@ -125,9 +125,6 @@ export default {
     };
   },
   methods: {
-    changeCurrentPage:function(){
-      this.currentPage++;
-    },
     search: function () {
       this.currentPage = 1;
       this.getList();
