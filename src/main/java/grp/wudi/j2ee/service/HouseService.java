@@ -32,5 +32,13 @@ public interface HouseService {
 
     //上传图片路径
     public void uploadImg(String ImgName);
+    
+    public Integer getAgentId(int hid);
+    
+    List<House> allocation();
+    
+    PageInfo<House> allocation(int p);
+    
+    public int allow(House house);
 
 }
