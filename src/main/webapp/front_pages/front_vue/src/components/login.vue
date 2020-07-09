@@ -3,11 +3,11 @@
     <h2>立即登录</h2>
     <br>
     <el-form ref="form" :model="form" label-width="80px">
-      <el-form-item label="电子邮件" prop="email_address">
-        <el-input v-model="form.email_address"></el-input>
+      <el-form-item label="用戶名" prop="account">
+        <el-input v-model="form.userAccount"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input type="password" v-model="form.password"></el-input>
+        <el-input type="password" v-model="form.userPasswordsha256"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit" :loading="isLoading">{{ isLoading ? '登陆中' : '立即登录' }}</el-button>
@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       form: {
-        email_address: '',
+        account: '',
         password: ''
       },
       isLoading: false
@@ -30,20 +30,23 @@ export default {
   methods: {
     onSubmit() {
       this.isLoading = true;
+      var formData=eval("("+JSON.stringify(this.form)+")");
       this.$ajax.post(
-        'http://localhost:3333/user/login', this.form).then((res) => {
+        'http://localhost:8080/user/userLogin', this.form).then((res) => {
           console.log(res);
-        if (res.data.code == 200) {
-          sessionStorage.setItem('id', res.data.id);
-          sessionStorage.setItem('nickname', res.data.nickname);
-          window.location.href = '/';
+        if (res.data != null && res.data != "") {
+          sessionStorage.setItem('userId', res.data.userId);
+          sessionStorage.setItem('userAccount', res.data.userAccount);
+          window.location.href = '/#/customer_center';
         } else {
-          this.$alert(res.data.msg, '抱歉', {
-          confirmButtonText: '确定',
-          callback: action => {
-            this.isLoading = false;
-          }
-        });
+          this.$alert(res.data.msg, '账号或者密码错误', {
+            confirmButtonText: '确定',
+            callback: action => {
+              if (action = 'confirm') {
+                that.isLoading = false;
+              }
+            }
+          });
         }
       })
     }, 

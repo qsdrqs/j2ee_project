@@ -1,4 +1,5 @@
 <template>
+
 <div class="newlist">
       <div class="grid-content bg-purple-light post_details" style="margin-right: 15%; margin-left: 15%;">
       <el-table :data="newsList"  border style="width:100%"  @row-click="newsDetails" >
@@ -12,10 +13,13 @@
       </div>
 </div>
 
+
 </template>
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 export default {
+
     name:"newslist",
     data(){
         return{
@@ -56,6 +60,7 @@ export default {
         }
         
 }
+
 
 </script>
 
@@ -99,7 +104,6 @@ export default {
 }
 
 .cell {
-    cursor: pointer;
+  cursor: pointer;
 }
-
 </style>

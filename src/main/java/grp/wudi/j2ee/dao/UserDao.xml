@@ -68,4 +68,13 @@
 		DELETE FROM user
 		WHERE user_id = #{id}
 	</delete>
+	
+	<select id="verifyUser" resultType="grp.wudi.j2ee.entity.User">
+		SELECT
+			* 
+		FROM
+			user 
+		WHERE
+			user_account=#{userAccount} AND user_passwordsha256=#{userPasswordsha256}
+	</select>
 </mapper>
