@@ -173,8 +173,16 @@
           <a name="agent"/>
           经纪人详情
         </div>
+        <div>
+          <img :src="swiperPic[imgId]"/>
+          <br>
+          <el-rate
+    v-model="value2"
+    :colors="colors">
+  </el-rate>
         <div class="info_block">
-          <table>
+        
+          <table style="margin-left:45%">
             <tr>
               <th>经纪人姓名</th>
               <td>{{feedback.agentName}}</td>
@@ -192,6 +200,7 @@
               <td>{{ feedback.agentProfile }}</td>
             </tr>
           </table>
+        </div>
         </div>
 <!--        <div class="info_block">-->
 <!--          <div class="feedback" v-for="item in feedback" :key="item.id">-->
@@ -231,7 +240,17 @@ export default {
   name: "HouseDetails",
   data() {
     return {
+<<<<<<< HEAD
       swiperPic: ["/static/img/a1.jpg","/static/img/a2.jpg","/static/img/a3.jpg","/static/img/a4.jpg"],
+=======
+      swiperPic: [
+        "/static/img/agent_img/0.jpg",
+        "/static/img/agent_img/1.jpg",
+        "/static/img/agent_img/2.jpg",
+        "/static/img/agent_img/3.jpg"
+      ],
+      imgId:0,
+>>>>>>> job_offer
       house: {},
       // feedback: [],
       feedback:{},
@@ -243,7 +262,9 @@ export default {
       viewTime: "工作日|周末|早上9点—下午3点",
       archStyle: "普通住宅",
       houseTag: "普通住宅|精装修|地段优",
-      downpayment: 0
+      downpayment: 0,
+      value2: null,
+        colors: ['#99A9BF', '#F7BA2A', '#FF9900'] 
 
     };
   },
@@ -252,8 +273,14 @@ export default {
   },
   methods: {
     initInfo() {
+      
       var that = this;
+<<<<<<< HEAD
       console.log("房源ID是:" + this.$route.params.id);
+=======
+      that.imgId=Math.ceil(Math.random()*3);
+      console.log("房源ID是:" + this.$route.params.id)
+>>>>>>> job_offer
       var houseId = this.$route.params.id;
       that.swiperPic.length=0;
       for(var i=1;i<=4;i++){
