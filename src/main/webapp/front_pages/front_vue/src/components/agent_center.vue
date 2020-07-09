@@ -12,7 +12,7 @@
 
 			<!-- 我的订单 -->
       <el-table v-loading="loading" :data="orderList" style="width: 100%; text-align: left;" stripe
-                :hidden="list_type == 2" @cellclick="viewHouse" :cell-style="red_cell">
+                :hidden="list_type == 0" @cellclick="viewHouse" :cell-style="red_cell">
         <el-table-column prop="createTimeStr" label="发布日期">
         </el-table-column>
         <el-table-column prop="houseHead" label="房源标题">
@@ -142,10 +142,10 @@ export default {
           // }
           switch (res.data[i].type) {
             case 0:
-              that.orderList[i].status_text = "售";
+              that.orderList[i].status_text = "售卖";
               break;
             case 1:
-              that.orderList[i].status_text = "租";
+              that.orderList[i].status_text = "出租";
               break;
             default:
               that.orderList[i].status_text = "未知";
