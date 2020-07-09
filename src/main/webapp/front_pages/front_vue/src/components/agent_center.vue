@@ -12,7 +12,7 @@
 
 			<!-- 我的订单 -->
       <el-table v-loading="loading" :data="orderList" style="width: 100%; text-align: left;" stripe
-                :hidden="list_type == 0" @cellclick="viewHouse" :cell-style="red_cell">
+                :hidden="list_type == 2" @cellclick="viewHouse" :cell-style="red_cell">
         <el-table-column prop="createTimeStr" label="发布日期">
         </el-table-column>
         <el-table-column prop="houseHead" label="房源标题">
@@ -54,7 +54,9 @@
 				<el-table-column prop="operate" label="操作">
 					<template slot-scope="scope">
 						<el-button @click="viewHouse(scope.row)" type="text" size="small">查看</el-button>
-						<el-button @click="getOrder(scope.row)" type="text" size="small" :class="{ hidden: scope.row.status != 1 }">接单</el-button>
+            <el-button @click="getOrder(scope.row)" type="text" size="small" :class="{ hidden: scope.row.status != 1 }">
+              接单
+            </el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -108,13 +110,46 @@ export default {
           }
           console.log("价格=" + res.data[i].unitPrice);
 
+
+          // switch (res.data[i].status) {
+          //   case 0:
+          //     that.orderList[i].status_text = "订单已关闭";
+          //     break;
+          //   case 1:
+          //     that.orderList[i].status_text = "等待经纪人接单";
+          //     break;
+          //   case 2:
+          //     that.orderList[i].status_text = "您已接单";
+          //     break;
+          //   case 3:
+          //     that.orderList[i].status_text = "已带看房源";
+          //     break;
+          //   case 4:
+          //     that.orderList[i].status_text = "请协商交易";
+          //     break;
+          //   case 5:
+          //     that.orderList[i].status_text = "卖家已收款";
+          //     break;
+          //   case 6:
+          //     that.orderList[i].status_text = "买家已收楼";
+          //     break;
+          //   case 7:
+          //     that.orderList[i].status_text = "交易已完成";
+          //     break;
+          //   default:
+          //     that.orderList[i].status_text = "订单状态未知";
+          //     break;
+          // }
           switch (res.data[i].type) {
             case 0:
-              that.orderList[i].status_text = "售卖房源";
-              console.log();
+              that.orderList[i].status_text = "售";
               break;
             case 1:
-              that.orderList[i].status_text = "出租房源";
+              that.orderList[i].status_text = "租";
+              break;
+            default:
+              that.orderList[i].status_text = "未知";
+
               break;
           }
         }
@@ -123,7 +158,7 @@ export default {
     //查看房子详情
     viewHouse(object) {
       this.$router.push("/house_details/" + object.house_id);
-    },
+		},
     //接单
     getOrder(object) {
       var that = this;

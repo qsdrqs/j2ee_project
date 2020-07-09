@@ -3,12 +3,15 @@
     <div class="news_details" >
         <el-container>
             <el-header>
-                <h2>biaotii
-                </h2>
+                <h2>biaotii</h2>
             </el-header>
             <el-main>neirong
                 <el-button :plain="true" @click="openHtml">shiyong</el-button>
             </el-main>
+             <br>
+            <el-aside>
+                <el-button :plain="true" icon="el-icon-arrow-left" @click="backToList" style="color:#ffffff,background-color:#409EFF">返回</el-button>
+            </el-aside>
         </el-container>
     </div>
 </template>
@@ -32,9 +35,11 @@ export default {
                     alert("shibai");
                 }
             })
-            
-        }}
-
+        },
+        backToList(){
+            this.$router.back(-1);
+        }
+    }
 }
 </script>
 

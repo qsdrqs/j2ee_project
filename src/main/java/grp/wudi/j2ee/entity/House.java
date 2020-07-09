@@ -40,7 +40,78 @@ public class House {
     private Date createTime;
     private String createTimeStr;
     private String houseHead;
+    private Integer houseRoomnum;
+    private Integer houseLivingroomnum;
+    private Integer houseTotalfloor;
+    private String houseDecoration;
+    private String decorationdesc;
+    private String sellingPoint;
+    private String surroundings;
+    private String traffic;
 
+    public String getDecorationdesc() {
+        return decorationdesc;
+    }
+
+    public void setDecorationdesc(String decorationdesc) {
+        this.decorationdesc = decorationdesc;
+    }
+
+    public String getSellingPoint() {
+        return sellingPoint;
+    }
+
+    public void setSellingPoint(String sellingPoint) {
+        this.sellingPoint = sellingPoint;
+    }
+
+    public String getSurroundings() {
+        return surroundings;
+    }
+
+    public void setSurroundings(String surroundings) {
+        this.surroundings = surroundings;
+    }
+
+    public String getTraffic() {
+        return traffic;
+    }
+
+    public void setTraffic(String traffic) {
+        this.traffic = traffic;
+    }
+
+    public Integer getHouseRoomnum() {
+        return houseRoomnum;
+    }
+
+    public void setHouseRoomnum(Integer houseRoomnum) {
+        this.houseRoomnum = houseRoomnum;
+    }
+
+    public Integer getHouseLivingroomnum() {
+        return houseLivingroomnum;
+    }
+
+    public void setHouseLivingroomnum(Integer houseLivingroomnum) {
+        this.houseLivingroomnum = houseLivingroomnum;
+    }
+
+    public Integer getHouseTotalfloor() {
+        return houseTotalfloor;
+    }
+
+    public void setHouseTotalfloor(Integer houseTotalfloor) {
+        this.houseTotalfloor = houseTotalfloor;
+    }
+
+    public String getHouseDecoration() {
+        return houseDecoration;
+    }
+
+    public void setHouseDecoration(String houseDecoration) {
+        this.houseDecoration = houseDecoration;
+    }
 
     public Date getCreateTime() {
         return createTime;
@@ -162,6 +233,14 @@ public class House {
                 ", createTime=" + createTime +
                 ", createTimeStr='" + createTimeStr + '\'' +
                 ", houseHead='" + houseHead + '\'' +
+                ", houseRoomnum=" + houseRoomnum +
+                ", houseLivingroomnum=" + houseLivingroomnum +
+                ", houseTotalfloor=" + houseTotalfloor +
+                ", houseDecoration='" + houseDecoration + '\'' +
+                ", decorationdesc='" + decorationdesc + '\'' +
+                ", sellingPoint='" + sellingPoint + '\'' +
+                ", surroundings='" + surroundings + '\'' +
+                ", traffic='" + traffic + '\'' +
                 '}';
     }
 

@@ -38,7 +38,7 @@ public class HouseServiceTest {
     @Test
     public void findByIdTest(){
 
-        System.out.println(houseService.getHouseById(2));
+        System.out.println(houseService.getHouseById(1));
     }
     
     @Test

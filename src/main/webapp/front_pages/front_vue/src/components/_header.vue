@@ -13,7 +13,8 @@
           <span :class="{ hidden: !nickname }">{{ nickname }}</span>。
           <a v-if="nickname" href="javascript: void(0)" @click="logout">注销</a>
         </div>
-        <div class="website_name" @click="toIndex">二手房交易系统</div>
+        <div class="website_name" @click="toIndex" >
+          <img src="/static/img/logo.png" width="64px" height="53" style="border-radius: 8px; vertical-align:bottom;"/>iHouse 爱浩斯</div>
         <div class="website_engname" @click="toIndex">Secondhand Apartment Trading Platform</div>
       </div>
     </div>

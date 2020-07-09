@@ -1,5 +1,6 @@
 package grp.wudi.j2ee.service;
 
+import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.entity.House;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -76,4 +77,10 @@ public class HouseAgentServiceTest {
     public void deleteHouseTest(){
         houseAgentService.deleteRelation(3);
     }
+    @Test
+    public void testFindAgentByHouseId(){
+        Agent agent = houseAgentService.findAgentByHouseId(1);
+        System.out.println(agent);
+    }
+
 }

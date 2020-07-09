@@ -35,10 +35,13 @@
 	<mvc:interceptors>
 		<!-- 定义一个拦截器 -->
 		<mvc:interceptor>
-			<!-- 拦截所有资源 -->
-			<mvc:mapping path="/**/"/>
+            <!-- 拦截所有资源 -->
+            <mvc:mapping path="/**/"/>
+
 
 			<!-- 设置放行资源 -->
+
+			<mvc:exclude-mapping path="/house/getHouseById"/>
 			<mvc:exclude-mapping path="/admin/login.do"/>
 			<mvc:exclude-mapping path="/agent/Agentlogin"/>
 			<mvc:exclude-mapping path="/house/findAllBypages"/>
@@ -48,14 +51,13 @@
 			<mvc:exclude-mapping path="/js/**" />
 			<mvc:exclude-mapping path="/houseAgent/findHouseByAgent"/>
 			<mvc:exclude-mapping path="/admin/login.do" />
-      <mvc:exclude-mapping path="/house/soldout" />
-			
-			
-			
+            <mvc:exclude-mapping path="/house/soldout" />
 			
 			<mvc:exclude-mapping path="/picture/upload"/>
+			<mvc:exclude-mapping path="/**/houseAgent/findAgentByHouseId"/>
 
-			<bean class="grp.wudi.j2ee.interceptor.LoginInterceptor"/>
+
+            <bean class="grp.wudi.j2ee.interceptor.LoginInterceptor"/>
 		</mvc:interceptor>
 		
 		<!-- 定义一个拦截器 -->
@@ -64,7 +66,8 @@
 			<mvc:mapping path="/admin/**" />
 
 			<!-- 设置放行资源 -->
-			<mvc:exclude-mapping path="/admin/login.do" />
+
+            <mvc:exclude-mapping path="/admin/login.do" />
 			<mvc:exclude-mapping path="/admin/logout.do" />
 			<mvc:exclude-mapping path="/admin/update" />
 			<mvc:exclude-mapping path="/css/**" />

@@ -1,7 +1,7 @@
 <template>
   <div class="house_details" v-loading="initing">
     <div class="general">
-      <div class="title">{{ house.title }}</div>
+      <div class="title">{{ house.houseHead }}</div>
       <div class="desc">{{ house.description }}</div>
       <div class="border_bottom">
         <el-button type="success" @click="bookThisHouse">预约此房</el-button>
@@ -17,44 +17,57 @@
       </div>
       <div class="details">
         <div class="flex borderbottom detailsblock">
-          <div class="fg price">
-            <span class="rmb">{{ house.price/10000 }}</span>万
-          </div>
-          <div class="average_price">
-            <div class="q0">{{ parseInt(house.unit_price) }}元/平米</div>
-            <div class="q1">首付90万 税费6万(仅供参考)
-              <a href="#">详情</a>
+          <div v-if="house.type==0">
+            <div class="fg price">
+              <span class="rmb">{{totalPrice}}</span>万
+            </div>
+            <div class="average_price">
+              <div class="q0">{{house.unitPrice }}元/平米</div>
+              <div class="q1">首付{{downpayment}}万 税费6万(仅供参考)
+              </div>
             </div>
           </div>
+          <div v-else>
+            <div class="fg price">
+              <span class="rmb">{{ house.unitPrice }}</span>元/月
+            </div>
+            <div class="average_price">
+              <div class="q1">租房之前请先与经纪人联系，看房需谨慎
+              </div>
+            </div>
+          </div>
+
+
         </div>
         <div class="flex borderbottom detailsblock">
           <div class="fg">
-            <div class="b1top">{{ house.room_num }}室{{ house.livingroom_num }}厅</div>
-            <div class="b1bottom">{{ house.floor/house.total_floor
-              < 1/3 ? '低' : house.floor/house.total_floor < 2/3 ? '中' : '高' }}楼层/共{{ house.total_floor }}层</div>
+            <div class="b1top">{{ house.houseRoomnum }}室{{ house.houseLivingroomnum }}厅</div>
+            <div class="b1bottom">第{{house.floor}}层/{{ house.floor/house.houseTotalfloor
+              < 1/3 ? '低' : house.floor/house.houseTotalfloor < 2/3 ? '中' : '高' }}楼层/共{{ house.houseTotalfloor }}层
             </div>
+          </div>
             <div class="fg">
               <div class="b1top">{{ house.direction }}</div>
               <div class="b1bottom">{{ house.decoration }}</div>
             </div>
             <div class="fg">
               <div class="b1top">{{ house.area }}平米</div>
-              <div class="b1bottom">{{ house.build_year }}/塔楼</div>
+              <div class="b1bottom">{{ house.createTimeStr }}/年建塔楼</div>
             </div>
           </div>
           <div class="borderbottom detailsblock">
             <table>
               <tr>
-                <th>小区名称</th>
-                <td>{{ house.properties }}</td>
+                <th>具体地址</th>
+                <td>{{ house.address }}</td>
               </tr>
               <tr>
                 <th>看房时间</th>
-                <td>{{ house.view_time }}</td>
+                <td>{{ viewTime }}</td>
               </tr>
               <tr>
                 <th>房源编号</th>
-                <td>{{ house.id }}</td>
+                <td>{{ house.houseId }}</td>
               </tr>
             </table>
           </div>
@@ -70,61 +83,62 @@
             <tr>
               <th>基本属性</th>
               <th>房屋户型</th>
-              <td>{{ house.room_num }}室{{ house.livingroom_num }}厅{{ house.kitchen_num }}厨{{ house.bathroom_num }}卫</td>
+              <td>{{ house.houseRoomnum }}室{{ house.houseLivingroomnum }}厅1厨2卫</td>
               <th>所在楼层</th>
-              <td>{{ house.floor/house.total_floor
-                < 1/3 ? '低' : house.floor/house.total_floor < 2/3 ? '中' : '高' }}楼层/共{{ house.total_floor }}层</td>
+              <td>第{{house.floor}}层/{{ house.floor/house.houseTotalfloor
+                < 1/3 ? '低' : house.floor/house.houseTotalfloor < 2/3 ? '中' : '高' }}楼层/共{{ house.houseTotalfloor }}层
+              </td>
             </tr>
             <tr>
               <th></th>
               <th>建筑面积</th>
-              <td>{{ house.area }}</td>
+              <td>{{ house.area }}平米</td>
               <th>套内面积</th>
-              <td>{{ house.inside_area == 0 ? '暂无数据' : house.inside_area }}</td>
+              <td>{{innerArea}}平米</td>
             </tr>
             <tr>
               <th></th>
               <th>房屋朝向</th>
-              <td>{{ house.direction }}</td>
+              <td>坐北朝南</td>
               <th>建筑类型</th>
-              <td>{{ house.construction_type }}</td>
+              <td>{{archStyle}}</td>
             </tr>
             <tr>
               <th></th>
               <th>装修情况</th>
-              <td>{{ house.decoration }}</td>
-              <th>梯户比例</th>
-              <td>{{ house.lift }}梯{{ house.house_per_floor }}户</td>
+              <td>{{ house.houseDecoration }}</td>
+              <th>有无电梯</th>
+              <td>{{house.hasLiftStr}}</td>
             </tr>
             <br>
-            <tr>
-              <th>交易属性</th>
-              <th>挂牌时间</th>
-              <td>{{ house.post_time}}</td>
-              <th>交易权属</th>
-              <td>{{ house.trading_right }}</td>
-            </tr>
-            <tr>
-              <th></th>
-              <th>上次交易</th>
-              <td>{{ house.last_trade }}</td>
-              <th>房屋用途</th>
-              <td>{{ house.house_usage==1?'普通住宅':house.house_usage==2?'别墅':house.house_usage==3?'商用':house.house_usage==4?'商住两用':'四合院' }}</td>
-            </tr>
-            <tr>
-              <th></th>
-              <th>产权年限</th>
-              <td>{{ house.age_limit }}</td>
-              <th>房屋年限</th>
-              <td>{{ house.house_age }}</td>
-            </tr>
-            <tr>
-              <th></th>
-              <th>抵押信息</th>
-              <td>{{ house.mortgage }}</td>
-              <th>产权所属</th>
-              <td>{{ house.house_right }}</td>
-            </tr>
+            <!--            <tr>-->
+            <!--              <th>交易属性</th>-->
+            <!--              <th>挂牌时间</th>-->
+            <!--              <td>{{ house.post_time}}</td>-->
+            <!--              <th>交易权属</th>-->
+            <!--              <td>{{ house.trading_right }}</td>-->
+            <!--            </tr>-->
+            <!--            <tr>-->
+            <!--              <th></th>-->
+            <!--              <th>上次交易</th>-->
+            <!--              <td>{{ house.last_trade }}</td>-->
+            <!--              <th>房屋用途</th>-->
+            <!--              <td>{{ house.house_usage==1?'普通住宅':house.house_usage==2?'别墅':house.house_usage==3?'商用':house.house_usage==4?'商住两用':'四合院' }}</td>-->
+            <!--            </tr>-->
+            <!--            <tr>-->
+            <!--              <th></th>-->
+            <!--              <th>产权年限</th>-->
+            <!--              <td>{{ house.age_limit }}</td>-->
+            <!--              <th>房屋年限</th>-->
+            <!--              <td>{{ house.house_age }}</td>-->
+            <!--            </tr>-->
+            <!--            <tr>-->
+            <!--              <th></th>-->
+            <!--              <th>抵押信息</th>-->
+            <!--              <td>{{ house.mortgage }}</td>-->
+            <!--              <th>产权所属</th>-->
+            <!--              <td>{{ house.house_right }}</td>-->
+            <!--            </tr>-->
           </table>
         </div>
 
@@ -135,19 +149,19 @@
           <table>
             <tr>
               <th>房源标签</th>
-              <td>{{ house.house_label }}</td>
+              <td>{{houseTag}}</td>
             </tr>
             <tr>
               <th>装修描述</th>
-              <td>{{ house.decoration_desc }}</td>
+              <td>{{ house.description }}</td>
             </tr>
             <tr>
               <th>核心卖点</th>
-              <td>{{ house.main_sellpoint }}</td>
+              <td>{{ house.sellingPoint }}</td>
             </tr>
             <tr>
               <th>周边配套</th>
-              <td>{{ house.facility }}</td>
+              <td>{{ house.surroundings }}</td>
             </tr>
             <tr>
               <th>交通出行</th>
@@ -156,20 +170,40 @@
           </table>
         </div>
         <div class="info_title">
-          经纪人反馈
+          经纪人详情
         </div>
         <div class="info_block">
-          <div class="feedback" v-for="item in feedback" :key="item.id">
-            <div class="agentname">{{ item.agent_name }}</div>
-            <div class="comment">{{ item.content }}</div>
-            <div class="comment_time">{{ item.post_time }}</div>
-          </div>
+          <table>
+            <tr>
+              <th>经纪人姓名</th>
+              <td>{{feedback.agentName}}</td>
+            </tr>
+            <tr>
+              <th>联系电话</th>
+              <td>{{ feedback.agentTel }}</td>
+            </tr>
+            <tr>
+              <th>E-mail</th>
+              <td>{{ feedback.agentEmail }}</td>
+            </tr>
+            <tr>
+              <th>自我介绍</th>
+              <td>{{ feedback.agentProfile }}</td>
+            </tr>
+          </table>
         </div>
+<!--        <div class="info_block">-->
+<!--          <div class="feedback" v-for="item in feedback" :key="item.id">-->
+<!--            <div class="agentname">{{ item.agentName }}</div>-->
+<!--            <div class="comment">{{ item.content }}</div>-->
+<!--            <div class="comment_time">{{ item.post_time }}</div>-->
+<!--          </div>-->
+<!--        </div>-->
         <div class="info_title">
           周边地图
         </div>
         <div class="info_block" id="container">
-          <baidu-map class="map" :zoom="zoom" :center="house.properties">
+          <baidu-map class="map" :zoom="zoom" :center="house.address">
           </baidu-map>
           <div class="map_button" style="bottom: 30px; right: 10px;" @click="addZoom">＋</div>
           <div class="map_button" style="bottom: 30px; right: 50px;" @click="minusZoom">－</div>
@@ -198,10 +232,18 @@ export default {
     return {
       swiperPic: [],
       house: {},
-      feedback: [],
+      // feedback: [],
+      feedback:{},
       recommend: [],
       zoom: 3,
-      initing: true
+      initing: true,
+      totalPrice: 0,
+      innerArea: 0,
+      viewTime: "工作日|周末|早上9点—下午3点",
+      archStyle: "普通住宅",
+      houseTag: "普通住宅|精装修|地段优",
+      downpayment: 0
+
     };
   },
   created: function() {
@@ -210,24 +252,41 @@ export default {
   methods: {
     initInfo() {
       var that = this;
+      console.log("房源ID是:" + this.$route.params.id)
+      var houseId = this.$route.params.id;
       this.$ajax
         .get(
-          "http://localhost:3333/house/getHouse?hid=" + this.$route.params.id
+          "http://localhost:8080/house/getHouseById?hid=" + this.$route.params.id
         )
-        .then(function(res) {
-          res.data.post_time = res.data.post_time.slice(0, 10);
-          res.data.last_trade = res.data.last_trade.slice(0, 10);
+        .then(function (res) {
+          console.log("收到的信息：" + res.data);
+          console.log("房源信息的创建时间：" + res.data.createTimeStr);
+          var unitprice = res.data.unitPrice;
+          var area = res.data.area;
+
+          if (0 == res.data.type) {
+            that.totalPrice = unitprice * area / 10000;
+
+          }
+          that.downpayment = that.totalPrice * 0.3;
+          that.innerArea = area * 0.8;
+          console.log("后：" + that.totalPrice);
+
+          // res.data.post_time = res.data.post_time.slice(0, 10);
+          // res.data.last_trade = res.data.last_trade.slice(0, 10);
           that.house = res.data;
-          that.swiperPic = JSON.parse(res.data.image);
+          //TODO:图片
+          // that.swiperPic = JSON.parse(res.data.image);
           that.initing = false;
           that.zoom = 15;
         });
       this.$ajax
         .get(
-          "http://localhost:3333/house/getHouseFeedback?hid=" +
-            this.$route.params.id
+          "http://localhost:8080/houseAgent/findAgentByHouseId/?houseId=" +houseId
         )
         .then(function(res) {
+          console.log("响应得到的数据主体："+res.data);
+          console.log(res.data.agentName);
           that.feedback = res.data;
         });
       this.$ajax
