@@ -112,9 +112,18 @@ public class HouseController {
     public String update(House house) {
         System.out.println("表现层从表单接受到的信息：" + house);
         System.out.println("/update agent");
-        System.out.println(house);
         houseService.update(house);
         return "redirect:/house/findAllBypagesBack";
+    }
+
+    @RequestMapping(path = "/soldout")
+    @CrossOrigin(origins = "*")
+    public @ResponseBody String setSoldOut(int houseId){
+        System.out.println("表现层正在执行修改房屋状态:"+houseId);
+        House house = houseService.getHouseById(houseId);
+        house.setStatus(3);
+        houseService.update(house);
+        return "OK!";
     }
 
     @RequestMapping(path = "/getHouseById")
