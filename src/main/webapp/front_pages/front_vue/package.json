@@ -15,7 +15,8 @@
     "vue": "^2.5.2",
     "vue-baidu-map": "^0.20.7",
     "vue-router": "^3.0.1",
-    "vue-rss-feed": "^0.2.4"
+    "vue-rss-feed": "^0.2.4",
+    "x2js": "^3.4.0"
   },
   "devDependencies": {
     "@ifuture/vuepress-plugin-rss": "^1.0.2",

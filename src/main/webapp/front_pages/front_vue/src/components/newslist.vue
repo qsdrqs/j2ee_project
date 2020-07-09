@@ -1,15 +1,15 @@
 <template>
 <div class="newlist">
       <div class="grid-content bg-purple-light post_details" style="margin-right: 15%; margin-left: 15%;">
-                <el-table :data="newsInfo" style="width: 100%" @cell-click="openNews">
-                    <el-table-column prop="newsinfo" label="日期" width="100"></el-table-column>
-                    <el-table-column prop="title" label="新闻标题"></el-table-column>
-                </el-table>
-        </div>
-      <div class="page_block">
-      <el-pagination layout="prev, pager, next" :total="total" @current-change="changePage">
-      </el-pagination>
-    </div>
+      <el-table :data="newsList"  border style="width:100%"  @row-click="newsDetails" >
+        <el-table-column prop="pubDate" label="发布时间" width="110">
+        </el-table-column>
+        <el-table-column prop="author" label="新闻作者" width="140">
+        </el-table-column>
+        <el-table-column prop="title" label="新闻标题" >
+        </el-table-column>
+      </el-table>
+      </div>
 </div>
 
 </template>
@@ -19,37 +19,44 @@ export default {
     name:"newslist",
     data(){
         return{
-            newsInfo:"",
+            newsList:[],
             title:"",
-            currentPage: 1,
-            total: 0,
-            pageSize:10,
+            pubDate:"",
+            author:"",
         };
     },
     methods:{
         getNewsList: function(){
           var that = this;
           
-          this.$axios
-        .get('https://rsshub.app/bilibili/ranking/0/3?limit=10.atom')
-        .then(function (res) {
-          console.log(res);
-          that.newsInfo = res.data.channel.title;
+        this.$ajax.get('/api/politics.xml').then((res) => {
+          var jsonObj = this.$x2js.xml2js(res.data);
+          console.log(jsonObj.rss.channel.item);
+          that.newsList= jsonObj.rss.channel.item;
         });
         },
-        // changePage: function (val) {
-        // this.currentPage = val;
-        // this.getNewsList();
-        // },
-        // openNews(row,column,cell,evebt){
-        //     this.$router.push('/news_details/'+row.id)
-        // },
-        created: function(){
+        changePage: function (val) {
+        this.currentPage = val;
+        this.getNewsList();
+        },
+        newsDetails(row,event,column) {
+        console.log("row:" );
+        console.log(row);
+        console.log(row.description)
+        console.log("event: ");
+        console.log(event);
+        console.log("column: ");
+        console.log(column);
+        window.location.href=row.link;
+      }
+    } ,
+    created: function(){
           console.log("Hello World!");
             this.getNewsList();
         }
-    }
-};
+        
+}
+
 </script>
 
 <style>
