@@ -49,13 +49,16 @@
 							class="fa fa-circle-o"></i> 用户管理
 					</a></li>
 					<li class="system-setting"><a
-						<%--						href="${pageContext.request.contextPath}/user/findAll1.do?page=1&pageSize=3"> <i--%>
 							href="../agent/findAll1.do">
 							<i class="fa fa-circle-o"></i> 经纪人管理
 					</a></li>
 
 					<li class="system-setting"><a href="../house/findAllBypagesBack.do">
 							<i class="fa fa-circle-o"></i> 房源管理
+					</a></li>
+					
+					<li class="system-setting"><a href="../house/allowcation.do">
+							<i class="fa fa-circle-o"></i> 房源分配
 					</a></li>
 
 				</ul></li>

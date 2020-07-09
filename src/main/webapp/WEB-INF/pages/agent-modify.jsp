@@ -168,7 +168,7 @@
 				<div class="box-tools text-center">
 					<button type="submit" class="btn bg-maroon">保存</button>
 					<button type="button" class="btn bg-default"
-						onclick="../agent/findAll1.do">返回</button>
+						onclick="location.href='../agent/findAll1.do'">返回</button>
 				</div>
 				<!--工具栏/--> </section>
 				<!-- 正文区域 /-->

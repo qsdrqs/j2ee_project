@@ -129,4 +129,5 @@ public class AdminController {
 		adminService.update(admin);
 		return "redirect:/admin/findAll.do";
 	}
+	
 }
