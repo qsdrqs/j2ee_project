@@ -77,13 +77,13 @@
 				<li><a href="../main.do"><i
 						class="fa fa-dashboard"></i>首页</a></li>
 				<li><a
-					href="../admin/findAll">管理员信息管理</a></li>
+					href="../admin/findAll.do">管理员信息管理</a></li>
 				<li class="active">管理员信息表单</li>
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
 			<!--FIXME!!! -->
-			<form action="../admin/add"
+			<form action="../admin/add.do"
 				method="post">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
@@ -115,7 +115,7 @@
 				<div class="box-tools text-center">
 					<button type="submit" class="btn bg-maroon">保存</button>
 					<button type="button" class="btn bg-default"
-						onclick="window.location.href='/admin/findAll'">返回</button>
+						onclick="window.location.href='/admin/findAll.do'">返回</button>
 				</div>
 				<!--工具栏/--> </section>
 				<!-- 正文区域 /-->

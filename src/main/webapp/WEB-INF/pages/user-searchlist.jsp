@@ -75,7 +75,7 @@
 					数据管理 <small>数据列表</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+					<li><a href="../main.do"><i class="fa fa-dashboard"></i> 首页</a></li>
 					<li><a href="#">数据管理</a></li>
 					<li class="active">数据列表</li>
 				</ol>
@@ -97,7 +97,7 @@
 								<div class="form-group form-inline">
 									<div class="btn-group">
 										<button type="button" class="btn btn-default" title="新建"
-											onclick="location.href='../pages/user-add.jsp'">
+											onclick="location.href='../user/userAdd.do.jsp'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										<button type="button" class="btn btn-default" id="user_delete"
@@ -105,7 +105,7 @@
 											<i class="fa fa-trash-o"></i> 删除
 										</button>
 										<button type="button" class="btn btn-default" title="刷新"
-											onclick="location.href='../user/search?msg=${param.msg }&p=${param.p }'">
+											onclick="location.href='../user/search.do?msg=${param.msg }&p=${param.p }'">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 									</div>
@@ -152,11 +152,11 @@
 											<td>${user.userUpdatetimeStr }</td>
 											<td class="text-center">
 												<button type="button" class="btn bg-olive btn-xs"
-													onclick="window.location.href='/user/order?id=${user.userId }'">订单</button>
+													onclick="window.location.href='/user/order.do?id=${user.userId }'">订单</button>
 												<button type="button" class="btn bg-olive btn-xs"
-													onclick="window.location.href='/user/update?id=${user.userId }'">编辑</button>
+													onclick="window.location.href='/user/update.do?id=${user.userId }'">编辑</button>
 												<button type="button" class="btn bg-olive btn-xs"
-													onclick="window.location.href='/user/delete?id=${user.userId }'">删除</button>
+													onclick="window.location.href='/user/delete.do?id=${user.userId }'">删除</button>
 											</td>
 										</tr>
 									</c:forEach>
@@ -168,7 +168,7 @@
 								<div class="form-group form-inline">
 									<div class="btn-group">
 										<button type="button" class="btn btn-default" title="新建"
-											onclick="location.href='../pages/user-add.jsp'">
+											onclick="location.href='../user/userAdd.do'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										<button type="button" class="btn btn-default" id="user_delete"
@@ -176,7 +176,7 @@
 											<i class="fa fa-trash-o"></i> 删除
 										</button>
 										<button type="button" class="btn btn-default" title="刷新"
-											onclick="location.href='../user/search?msg=${param.msg }&p=${param.p }'">
+											onclick="location.href='../user/search.do?msg=${param.msg }&p=${param.p }'">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 									</div>
@@ -203,9 +203,9 @@
 						</div>
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="../user/search?msg=${param.msg }&p=1">首页</a></li>
+								<li><a href="../user/search.do?msg=${param.msg }&p=1">首页</a></li>
 								<c:if test="${pi.hasPreviousPage }">
-									<li><a href="../user/search?msg=${param.msg }&p=${pi.pageNum-1}"
+									<li><a href="../user/search.do?msg=${param.msg }&p=${pi.pageNum-1}"
 										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 									</a></li>
 								</c:if>
@@ -214,16 +214,16 @@
 										<li class="active"><a href="#">${page_Num }</a></li>
 									</c:if>
 									<c:if test="${page_Num != pi.pageNum }">
-										<li><a href="../user/search?msg=${param.msg }&p=${page_Num }">${page_Num }</a></li>
+										<li><a href="../user/search.do?msg=${param.msg }&p=${page_Num }">${page_Num }</a></li>
 									</c:if>
 
 								</c:forEach>
 								<c:if test="${pi.hasNextPage }">
-									<li><a href="../user/search?msg=${param.msg }&p=${pi.pageNum+1 }"
+									<li><a href="../user/search.do?msg=${param.msg }&p=${pi.pageNum+1 }"
 										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 									</a></li>
 								</c:if>
-								<li><a href="../user/search?msg=${param.msg }&p=${pi.pages}">末页</a></li>
+								<li><a href="../user/search.do?msg=${param.msg }&p=${pi.pages}">末页</a></li>
 							</ul>
 						</div>
 					</div>
@@ -231,7 +231,7 @@
 					<div class="box-tools text-center">
 						<button type="submit" class="btn bg-maroon">保存</button>
 						<button type="button" class="btn bg-default"
-							onclick="window.location.href='/user/findAll'">返回</button>
+							onclick="window.location.href='/user/findAll.do'">返回</button>
 					</div>
 				</div>
 			</section>
@@ -336,9 +336,9 @@
 				if(e.keyCode == 13){
 					var msg1 = $("#search1").val();
 					if(msg1 == ""){
-						window.location.href = "/user/findAll"
+						window.location.href = "/user/findAll.do"
 					}else{
-						window.location.href = "/user/search?msg="+msg1
+						window.location.href = "/user/search.do?msg="+msg1
 					}
 				}
 			});
@@ -347,9 +347,9 @@
 				if(e.keyCode == 13){
 					var msg1 = $("#search2").val();
 					if(msg1 == ""){
-						window.location.href = "/user/findAll"
+						window.location.href = "/user/findAll.do"
 					}else{
-						window.location.href = "/user/search?msg="+msg1
+						window.location.href = "/user/search.do?msg="+msg1
 					}
 				}
 			});

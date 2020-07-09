@@ -32,7 +32,7 @@ public class UserController {
 	/**
 	 * 查询所有用户信息
 	 */
-	@RequestMapping(path = "/findAll")
+	@RequestMapping(path = "/findAll.do")
 	public String findAll(@RequestParam(value = "p", defaultValue = "1") int p, Model model) throws Exception {
 		PageInfo<User> pi = userService.finAll(p);
 		model.addAttribute("pi", pi);
@@ -42,7 +42,7 @@ public class UserController {
 	/**
 	 * 模糊查询用户信息
 	 */
-	@RequestMapping(path = "/search")
+	@RequestMapping(path = "/search.do")
 	public String search(String msg, @RequestParam(value = "p", defaultValue = "1") int p, Model model)
 			throws Exception {
 		PageInfo<User> pi = userService.getUserByKeyword(msg, p);
@@ -54,26 +54,26 @@ public class UserController {
 	/**
 	 * 删除用户信息
 	 */
-	@RequestMapping(path = "/delete")
+	@RequestMapping(path = "/delete.do")
 	public String delete(@RequestParam(value = "id", required = true) int id) {
 		userService.deleteUser(id);
-		return "redirect:/user/findAll";
+		return "redirect:/user/findAll.do";
 	}
 
 	/**
 	 * 修改用户信息
 	 */
-	@RequestMapping(path = "/update")
+	@RequestMapping(path = "/update.do")
 	public String update(@RequestParam(value = "id", required = true) int id, Model model) {
 		User user = userService.getUserById(id);
 		model.addAttribute("user", user);
 		return "user-update";
 	}
 
-	@PostMapping("/update")
+	@PostMapping("/update.do")
 	public String update(User user) {
 		userService.update(user);
-		return "redirect:/user/findAll";
+		return "redirect:/user/findAll.do";
 	}
 
 	/*
@@ -85,17 +85,16 @@ public class UserController {
 		return mav;
 	}
 
-	@RequestMapping(path = "/add")
+	@RequestMapping(path = "/add.do")
 	public String addAuser(User user) {
 		userService.add(user);
-		return "redirect:/user/findAll";
+		return "redirect:/user/findAll.do";
 	}
 
 	/*
 	 * 查看用户订单
 	 */
-	@RequestMapping(path = "/order")
-	@CrossOrigin(origins = "*")
+	@RequestMapping(path = "/order.do")
 	public String trackOrder(@RequestParam(value = "id", required = true) int id,
 			@RequestParam(value = "p", defaultValue = "1") int p, Model model) {
 		PageInfo<House> pi = houseService.getHouseByUserId(id, p);

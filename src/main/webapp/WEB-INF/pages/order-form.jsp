@@ -75,7 +75,7 @@
 					数据管理 <small>数据列表</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+					<li><a href="/mian.do"><i class="fa fa-dashboard"></i> 首页</a></li>
 					<li><a href="#">数据管理</a></li>
 					<li class="active">数据列表</li>
 				</ol>
@@ -101,7 +101,7 @@
 											<i class="fa fa-trash-o"></i> 删除
 										</button>
 										<button type="button" class="btn btn-default" title="刷新"
-											onclick="location.href='../user/order?id=${param.id}&p=${param.p }'">
+											onclick="location.href='../user/order.do?id=${param.id}&p=${param.p }'">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 									</div>
@@ -153,11 +153,11 @@
 													</c:when>
 													<c:otherwise>
 														<button type="button" class="btn bg-olive btn-xs"
-															onclick="location.href='../house/Preupdate?id=${house.houseId}'">审核</button>
+															onclick="location.href='../house/Preupdate.do?id=${house.houseId}'">审核</button>
 													</c:otherwise>
 												</c:choose> 
 												<button type="button" class="btn bg-olive btn-xs"
-													onclick="window.location.href='/house/delete?id=${house.houseId }'">删除</button>
+													onclick="window.location.href='/house/delete.do?id=${house.houseId }'">删除</button>
 											</td>
 										</tr>
 									</c:forEach>
@@ -173,7 +173,7 @@
 											<i class="fa fa-trash-o"></i> 删除
 										</button>
 										<button type="button" class="btn btn-default" title="刷新"
-											onclick="location.href='../user/order?id=${param.id}&p=${param.p }'">
+											onclick="location.href='../user/order.do?id=${param.id}&p=${param.p }'">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 									</div>
@@ -228,7 +228,7 @@
 					<div class="box-tools text-center">
 						<button type="submit" class="btn bg-maroon">保存</button>
 						<button type="button" class="btn bg-default"
-							onclick="window.location.href='/user/findAll'">返回</button>
+							onclick="window.location.href='/user/findAll.do'">返回</button>
 					</div>
 				</div>
 			</section>
@@ -331,9 +331,9 @@
 				if(e.keyCode == 13){
 					var msg1 = $("#search1").val();
 					if(msg1 == ""){
-						window.location.href = "/user/findAll"
+						window.location.href = "/user/findAll.do"
 					}else{
-						window.location.href = "/user/search?msg="+msg1
+						window.location.href = "/user/search.do?msg="+msg1
 					}
 				}
 			});
@@ -342,9 +342,9 @@
 				if(e.keyCode == 13){
 					var msg1 = $("#search2").val();
 					if(msg1 == ""){
-						window.location.href = "/user/findAll"
+						window.location.href = "/user/findAll.do"
 					}else{
-						window.location.href = "/user/search?msg="+msg1
+						window.location.href = "/user/search.do?msg="+msg1
 					}
 				}
 			});

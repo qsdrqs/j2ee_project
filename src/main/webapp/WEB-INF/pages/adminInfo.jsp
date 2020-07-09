@@ -61,14 +61,14 @@
 				管理员 <small>信息修改</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="/pages/main.jsp"><i class="fa fa-dashboard"></i>首页</a></li>
-				<li><a href="/pages/user-list.jsp">管理员信息</a></li>
+				<li><a href="/main.do"><i class="fa fa-dashboard"></i>首页</a></li>
+				<li><a href="/admin/update.do">管理员信息</a></li>
 				<li class="active">管理员信息表单</li>
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
 			<!--FIXME!!! -->
-			<form action="/admin/update" method="post">
+			<form action="/admin/update.do" method="post">
 				<!-- 正文区域 -->
 				<section class="content"> <!--用户信息-->
 				<div class="panel panel-default">
