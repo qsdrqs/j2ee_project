@@ -170,15 +170,35 @@
           </table>
         </div>
         <div class="info_title">
-          经纪人反馈
+          经纪人详情
         </div>
         <div class="info_block">
-          <div class="feedback" v-for="item in feedback" :key="item.id">
-            <div class="agentname">{{ item.agent_name }}</div>
-            <div class="comment">{{ item.content }}</div>
-            <div class="comment_time">{{ item.post_time }}</div>
-          </div>
+          <table>
+            <tr>
+              <th>经纪人姓名</th>
+              <td>{{feedback.agentName}}</td>
+            </tr>
+            <tr>
+              <th>联系电话</th>
+              <td>{{ feedback.agentTel }}</td>
+            </tr>
+            <tr>
+              <th>E-mail</th>
+              <td>{{ feedback.agentEmail }}</td>
+            </tr>
+            <tr>
+              <th>自我介绍</th>
+              <td>{{ feedback.agentProfile }}</td>
+            </tr>
+          </table>
         </div>
+<!--        <div class="info_block">-->
+<!--          <div class="feedback" v-for="item in feedback" :key="item.id">-->
+<!--            <div class="agentname">{{ item.agentName }}</div>-->
+<!--            <div class="comment">{{ item.content }}</div>-->
+<!--            <div class="comment_time">{{ item.post_time }}</div>-->
+<!--          </div>-->
+<!--        </div>-->
         <div class="info_title">
           周边地图
         </div>
@@ -212,7 +232,8 @@ export default {
     return {
       swiperPic: [],
       house: {},
-      feedback: [],
+      // feedback: [],
+      feedback:{},
       recommend: [],
       zoom: 3,
       initing: true,
@@ -232,6 +253,7 @@ export default {
     initInfo() {
       var that = this;
       console.log("房源ID是:" + this.$route.params.id)
+      var houseId = this.$route.params.id;
       this.$ajax
         .get(
           "http://localhost:8080/house/getHouseById?hid=" + this.$route.params.id
@@ -260,10 +282,11 @@ export default {
         });
       this.$ajax
         .get(
-          "http://localhost:3333/house/getHouseFeedback?hid=" +
-            this.$route.params.id
+          "http://localhost:8080/houseAgent/findAgentByHouseId/?houseId=" +houseId
         )
         .then(function(res) {
+          console.log("响应得到的数据主体："+res.data);
+          console.log(res.data.agentName);
           that.feedback = res.data;
         });
       this.$ajax

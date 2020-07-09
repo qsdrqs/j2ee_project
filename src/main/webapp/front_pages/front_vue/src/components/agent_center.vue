@@ -12,7 +12,7 @@
 
 			<!-- 我的订单 -->
       <el-table v-loading="loading" :data="orderList" style="width: 100%; text-align: left;" stripe
-                :hidden="list_type == 0" @cellclick="viewHouse" :cell-style="red_cell">
+                :hidden="list_type == 2" @cellclick="viewHouse" :cell-style="red_cell">
         <el-table-column prop="createTimeStr" label="发布日期">
         </el-table-column>
         <el-table-column prop="houseHead" label="房源标题">

@@ -3,6 +3,7 @@ package grp.wudi.j2ee.Controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.entity.House;
 import grp.wudi.j2ee.entity.User;
 import grp.wudi.j2ee.service.impl.HouseAgentServiceImpl;
@@ -50,6 +51,20 @@ public class HouseAgentController {
                 String result = JSON.toJSONString(jsonList);
                 return result;
             }
+        }
+        return null;
+    }
+    @RequestMapping(path="/findAgentByHouseId")
+
+    @CrossOrigin(origins = "*")
+    public @ResponseBody
+    String findAgentByHouseId(int houseId){
+        System.out.println("表现层正在执行朝招经纪人信息...");
+        Agent agent = houseAgentService.findAgentByHouseId(houseId);
+        if(null!=agent){
+            String result = JSON.toJSONString(agent);
+            System.out.println(result);
+            return result;
         }
         return null;
     }

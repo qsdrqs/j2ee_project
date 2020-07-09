@@ -1,5 +1,6 @@
 package grp.wudi.j2ee.dao;
 
+import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.entity.House;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public interface HouseAgentDao {
     public void updateRelation(House houseAgent);
     //删除指定的房源-经纪人对应关系
     public void deleteRelation(int houseId);
+    //根据房源Id找经纪人
+    public Agent findAgentByHouseId(int houseId);
 
 
 }

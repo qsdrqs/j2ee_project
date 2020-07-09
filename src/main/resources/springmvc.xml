@@ -40,6 +40,7 @@
 
 
 			<!-- 设置放行资源 -->
+
 			<mvc:exclude-mapping path="/house/getHouseById"/>
 			<mvc:exclude-mapping path="/admin/login.do"/>
 			<mvc:exclude-mapping path="/agent/Agentlogin"/>
@@ -51,6 +52,7 @@
 			<mvc:exclude-mapping path="/houseAgent/findHouseByAgent"/>
 			<mvc:exclude-mapping path="/admin/login.do" />
 			<mvc:exclude-mapping path="/picture/upload"/>
+			<mvc:exclude-mapping path="/**/houseAgent/findAgentByHouseId"/>
 
 
             <bean class="grp.wudi.j2ee.interceptor.LoginInterceptor"/>
