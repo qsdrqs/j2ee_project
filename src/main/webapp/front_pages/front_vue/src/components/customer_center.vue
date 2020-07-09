@@ -42,7 +42,7 @@ export default {
       that.loading = true;
       this.$ajax
         .get(
-          "http://localhost:3333/house/getMyOrder?user=" +
+          "http://localhost:8081/house/getMyOrder?user=" +
             sessionStorage.getItem("id")
         )
         .then(function(res) {
