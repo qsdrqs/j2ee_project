@@ -9,7 +9,6 @@ import Header from './components/_header'
 import Footer from './components/_footer'
 import axios from 'axios'
 import BaiduMap from 'vue-baidu-map'
-import VueResource from 'vue-resource';
 
 import x2js from 'x2js'
 
