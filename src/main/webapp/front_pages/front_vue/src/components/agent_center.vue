@@ -6,6 +6,7 @@
         <el-radio-group v-model="list_type" @change="getList">
           <el-radio-button label="1">我的房源</el-radio-button>
           <el-radio-button label="2">已完成</el-radio-button>
+          <el-radio-button label="0">个人信息修改</el-radio-button>
           <!--<el-radio-button label="0">待接订单</el-radio-button>-->
         </el-radio-group>
       </div>
@@ -43,24 +44,33 @@
         </el-table-column>
       </el-table>
 
-			<!-- 待接订单表格 -->
-			<el-table v-loading="loading" :data="orderList" style="width: 100%; text-align: left;" stripe :hidden="list_type != 0" @cellclick="viewHouse">
-				<el-table-column prop="title" label="房源标题">
-				</el-table-column>
-				<el-table-column prop="buyer_name" label="买家">
-				</el-table-column>
-				<el-table-column prop="create_time" label="创建时间">
-				</el-table-column>
-				<el-table-column prop="operate" label="操作">
-					<template slot-scope="scope">
-						<el-button @click="viewHouse(scope.row)" type="text" size="small">查看</el-button>
-            <el-button @click="getOrder(scope.row)" type="text" size="small" :class="{ hidden: scope.row.status != 1 }">
-              接单
-            </el-button>
-					</template>
-				</el-table-column>
-			</el-table>
-		</div>
+			<!-- 个人信息修改 -->
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
+      <el-form-item label="姓名" prop="name">
+        <el-input v-model="ruleForm.name"></el-input>
+      </el-form-item>
+      <el-form-item label="性别" prop="sex">
+        <el-select v-model="ruleForm.sex">
+          <el-option label="女" value="female"></el-option>
+          <el-option label="男" value="male"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="电话" prop="telephone">
+        <el-input v-model="ruleForm.telephone"></el-input>
+      </el-form-item>
+      <el-form-item label="邮箱" prop="">
+        <el-input v-model="ruleForm.email"></el-input>
+      </el-form-item>
+       <el-form-item label="个人简介" prop="desc">
+        <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+       </el-form-item>
+
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('ruleForm')">确定</el-button>
+        <el-button @click="resetForm('ruleForm')">重置</el-button>
+      </el-form-item>
+    </el-form>
+
 	</div>
 </template>
 <script>
@@ -68,6 +78,24 @@ export default {
   name: "AgentCenter",
   data() {
     return {
+      ruleForm:{
+        name: 'name',
+        sex: '男',
+        telephone: '1235',
+        email: '123@123.com',
+        desc: '还行'
+      },
+      rules: {
+        name: [
+          { required: true, message: '名字不能为空', trigger: 'blur' },
+          { min: 1,max: 20, message: '名字别太长！', trigger: 'blur' }
+        ],
+        telephone: [
+          { required: true, message: '电话不能为空', trigger: 'blur' },
+          { min: 5,max: 13, message: '电话号码不正确', trigger: 'blur' }
+        ],
+
+      }
       agentName: sessionStorage.getItem("agentName"),
       list_type: 1,
       loading: false,
