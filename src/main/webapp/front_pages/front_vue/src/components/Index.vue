@@ -15,7 +15,7 @@
                             <span>新闻</span>
                             <el-button type="text" class="fr" @click="viewMoreNews">更多</el-button>
                         </div>
-                        <el-table :data="newsList.slice(0,4)" style="width: 100%" stripe @row-click="newsDetails" max-height="250px" >
+                        <el-table :data="newsList.slice(0,2)" style="width: 100%" stripe @row-click="newsDetails" max-height="250px" >
                             <el-table-column prop="pubDate" label="日期" width="100"></el-table-column>
                             <el-table-column prop="title" label="新闻标题"></el-table-column>
                         </el-table>
