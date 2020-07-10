@@ -39,7 +39,6 @@
             <mvc:mapping path="/**/*.do"/>
 			<!-- 设置放行资源 -->
 			<mvc:exclude-mapping path="/admin/login.do"/>
-			<mvc:exclude-mapping path="/admin/logout.do"/>
 			
             <bean class="grp.wudi.j2ee.interceptor.LoginInterceptor"/>
 		</mvc:interceptor>
@@ -52,10 +51,6 @@
             <mvc:exclude-mapping path="/admin/login.do" />
 			<mvc:exclude-mapping path="/admin/logout.do" />
 			<mvc:exclude-mapping path="/admin/update.do" />
-			<mvc:exclude-mapping path="/css/**" />
-			<mvc:exclude-mapping path="/img/**" />
-			<mvc:exclude-mapping path="/plugins/**" />
-			<mvc:exclude-mapping path="/js/**" />
 
 			<bean class="grp.wudi.j2ee.interceptor.AdminInterceptor" />
 		</mvc:interceptor>
