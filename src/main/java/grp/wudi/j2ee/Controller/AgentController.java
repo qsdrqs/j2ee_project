@@ -132,11 +132,12 @@ public class AgentController {
         Agent agent = new Agent();
         agent.setAgentId(Integer.parseInt((String)jsonData.get("id")) );
         agent.setAgentName((String)jsonData.get("name"));
-        if((String)jsonData.get("sex") == "男"){
-            agent.setAgentSex(1);
+        System.out.println((String)jsonData.get("sex"));
+        if((String)jsonData.get("sex") == "female"){
+            agent.setAgentSex(0);
         }
         else{
-            agent.setAgentSex(0);
+            agent.setAgentSex(1);
         }
         agent.setAgentTel((String)jsonData.get("telephone"));
         agent.setAgentEmail((String)jsonData.get("email"));

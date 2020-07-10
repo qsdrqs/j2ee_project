@@ -81,10 +81,10 @@ export default {
     return {
       ruleForm:{
         name: '',
-        sex: '男',
-        telephone: '1235',
-        email: '123@123.com',
-        desc: '还行'
+        sex: 'male',
+        telephone: '',
+        email: '',
+        desc: ''
       },
       rules: {
         name: [
@@ -109,11 +109,28 @@ export default {
   },
   methods: {
     submitForm(form){
+      var numpatt=new RegExp("[^0-9]");
+      if(numpatt.test(form.telephone)){
+        this.$message({
+          message: "电话必须为数字！",
+          type: 'error'
+        })
+        return;
+      }
+      var emailpatt=new RegExp(".@.*\.")
+      if(!emailpatt.test(form.email)){
+        this.$message({
+          message: "邮箱格式不正确！",
+          type: 'error'
+        })
+        return;
+      }
       var url = "http://localhost:8080/agent/updateAgent";
       form.id=sessionStorage.getItem("agentId");
       this.$ajax.post(url, form).then(res => {
-        if (res.data == "OK!") {
-          that.$message({
+        if (res.status == 200) {
+          console.log("OK!");
+          this.$message({
             message: '更新成功',
             type: 'success'
           })
