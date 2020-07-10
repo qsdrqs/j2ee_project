@@ -119,4 +119,41 @@ public class UserController {
 		}
 	}
 
+	/**
+	 *
+	 */
+
+	@RequestMapping(path = "/getUserInfo")
+	@CrossOrigin(origins = "*")
+	public @ResponseBody String  getUserInfo(int id){
+		System.out.println("表现层正在执行...查询用户信息");
+		User user = userService.getUserById(id);
+		if(null!=user){
+			String result = JSON.toJSONString(user);
+			return result;
+		}
+		return null;
+	}
+
+	@RequestMapping(path = "/updateUser")
+	@CrossOrigin(origins = "*")
+	public @ResponseBody String updateUser(@RequestBody String data){
+		JSONObject jsonData = JSONObject.parseObject(data);
+		User user = new User();
+		user.setUserId(Integer.parseInt((String)jsonData.get("id")));
+		user.setUserName((String)jsonData.get("name"));
+		System.out.println((String)jsonData.get("sex"));
+		if((String)jsonData.get("sex") == "female"){
+			user.setUserSex(0);
+		}
+		else{
+			user.setUserSex(1);
+		}
+		user.setUserTelephone((String)jsonData.get("telephone"));
+		user.setUserMail((String)jsonData.get("email"));
+		user.setUserPasswordsha256((String)jsonData.get("password"));
+		userService.update(user);
+		return "OK!";
+	}
+
 }

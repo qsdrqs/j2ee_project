@@ -181,7 +181,7 @@
     :colors="colors">
   </el-rate>
         <div class="info_block">
-        
+
           <table style="margin-left:45%">
             <tr>
               <th>经纪人姓名</th>
@@ -261,7 +261,7 @@ export default {
       houseTag: "普通住宅|精装修|地段优",
       downpayment: 0,
       value2: null,
-        colors: ['#99A9BF', '#F7BA2A', '#FF9900'] 
+        colors: ['#99A9BF', '#F7BA2A', '#FF9900']
 
     };
   },
@@ -274,7 +274,7 @@ export default {
       that.imgId=Math.ceil(Math.random()*3);
       console.log("房源ID是:" + this.$route.params.id)
       var houseId = this.$route.params.id;
-      that.swiperPic.length=0;
+      //that.swiperPic.length=0;
       for(var i=1;i<=4;i++){
         that.swiperPic.push("/static/img/"+houseId+"/"+"a"+i+".jpg");
         console.log(that.swiperPic[i]);
@@ -285,8 +285,19 @@ export default {
         )
         .then(function (res) {
 
-          console.log("收到的信息：" + res.data);
+          console.log(res.data);
           console.log("房源信息的创建时间：" + res.data.createTimeStr);
+          var tmp=res.data.housePicture;
+          console.log(tmp);
+          tmp=tmp.substring(1,tmp.length-1);
+          var pictureList=tmp.split(',');
+          for (var i = 0; i < pictureList.length; i++) {
+            pictureList[i] = pictureList[i].substring(1,pictureList[i].length-1);
+          }
+          console.log(pictureList);
+          console.log(that.swiperPic);
+          that.swiperPic=pictureList;
+          console.log(that.swiperPic);
           var unitprice = res.data.unitPrice;
           var area = res.data.area;
 

@@ -1,30 +1,43 @@
 package grp.wudi.j2ee.Controller;
 
 import com.alibaba.fastjson.JSON;
+
 import com.alibaba.fastjson.JSONArray;
+
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 
 import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.entity.House;
+
+import grp.wudi.j2ee.service.HouseAgentService;
+
 import grp.wudi.j2ee.entity.Result;
+
 import grp.wudi.j2ee.service.impl.AgentServiceImpl;
+import grp.wudi.j2ee.service.impl.HouseAgentServiceImpl;
 import grp.wudi.j2ee.service.impl.HouseServiceImpl;
+import grp.wudi.j2ee.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping(path="/house")
 public class HouseController {
-    @Autowired
-    private HouseServiceImpl houseService;
-    @Autowired
-    private AgentServiceImpl agentService;
+
+	@Autowired
+	private HouseServiceImpl houseService;
+	@Autowired
+	private AgentServiceImpl agentService;
+	@Autowired
+	private HouseAgentServiceImpl houseAgentService;
+
     @RequestMapping(path = "/findAllHouse.do")
     public ModelAndView findAll(){
         ModelAndView mv = new ModelAndView();
@@ -33,6 +46,7 @@ public class HouseController {
         mv.setViewName("house-list");
         return mv;
     }
+
 
 
     /**
@@ -171,12 +185,59 @@ public class HouseController {
 
 	@RequestMapping(path = "/getHouseByUid")
 	@CrossOrigin(origins = "*")
-	public @ResponseBody String findHouseByUid(@RequestParam(value = "id", required = true) int id) {
-		System.out.println("表现层正在执行查询具体房源信息...");
-		List<House> houses = houseService.getHouseByUserId(id);
-		if (null != houses) {
-			String result = JSON.toJSONString(houses);
-			return result;
+	public @ResponseBody String findHouseByUid(@RequestParam(value = "id", required = true) int id,int type) {
+		System.out.println("表现层正在执行用户查询自己的房源信息...");
+		if(type==1){
+			System.out.println("类型是："+type);
+			List<House> houses = houseService.getHouseByUserId(id);
+			if (null != houses) {
+
+				List<JSONObject> jsonList = new ArrayList<JSONObject>();
+				for (House house:houses) {
+					JSONObject tmp = (JSONObject)JSONObject.toJSON(house);
+					int houseId = house.getHouseId();
+					Agent agent = houseAgentService.findAgentByHouseId(houseId);
+					if(null!=agent){
+						System.out.println(agent);
+						tmp.put("agentName",agent.getAgentName());
+						tmp.put("tel",agent.getAgentTel());
+					}else {
+
+						tmp.put("agentName","未分配");
+						tmp.put("tel","未知");
+					}
+					jsonList.add(tmp);
+				}
+				String result = JSON.toJSONString(jsonList);
+				return result;
+			}
+		}
+		if (type == 2) {
+			System.out.println("类型是："+type);
+			List<House> houses = houseService.getHouseByUserId(id);
+			if (null != houses) {
+
+				List<JSONObject> jsonList = new ArrayList<JSONObject>();
+				for (House house:houses) {
+					if (house.getStatus()==3){
+						JSONObject tmp = (JSONObject)JSONObject.toJSON(house);
+						int houseId = house.getHouseId();
+						Agent agent = houseAgentService.findAgentByHouseId(houseId);
+						if(null!=agent){
+							System.out.println(agent);
+							tmp.put("agentName",agent.getAgentName());
+							tmp.put("tel",agent.getAgentTel());
+						}else {
+
+							tmp.put("agentName","未分配");
+							tmp.put("tel","未知");
+						}
+						jsonList.add(tmp);
+						String result = JSON.toJSONString(jsonList);
+						return result;
+					}
+				}
+			}
 		}
 		return null;
 	}

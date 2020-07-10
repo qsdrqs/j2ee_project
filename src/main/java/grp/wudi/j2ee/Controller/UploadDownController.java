@@ -28,16 +28,13 @@ public class UploadDownController {
 
     /**
      * 文件上传
-     * @param picture
-     * @param request
-     * @return
      */
     @RequestMapping("/upload")
     @CrossOrigin(origins = "*")
     public String upload(@RequestParam("picture") MultipartFile picture, HttpServletRequest request) {
         System.out.println("表现层在执行上传图片");
         //获取文件在服务器的储存位置
-        String path = request.getSession().getServletContext().getRealPath("/picture");
+        String path = request.getSession().getServletContext().getRealPath("/front_pages/front_vue/static/picture");
         File filePath = new File(path);
         System.out.println("文件的保存路径：" + path);
         if (!filePath.exists() && !filePath.isDirectory()) {
@@ -76,7 +73,7 @@ public class UploadDownController {
             house.setHousePicture(path+fileName);
 
             //将文件在服务器的存储路径返回
-            Result result = new Result(true,"/upload/" + fileName);
+            Result result = new Result(true,"/static/picture/" + fileName);
             String json=JSON.toJSONString(result);
             return json;
         } catch (IOException e) {
