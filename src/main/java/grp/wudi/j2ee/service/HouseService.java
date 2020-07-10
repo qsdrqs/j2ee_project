@@ -29,16 +29,14 @@ public interface HouseService {
     //获取图片路径
     public String downloadImg(int houseId);
 
+    public int addHouseFront(House house);
 
-    //上传图片路径
-    public void uploadImg(String ImgName);
-    
     public Integer getAgentId(int hid);
-    
+
     List<House> allocation();
-    
+
     PageInfo<House> allocation(int p);
-    
+
     public int allow(House house);
 
 }

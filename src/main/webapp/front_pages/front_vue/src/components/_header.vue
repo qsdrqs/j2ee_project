@@ -20,18 +20,14 @@
     </div>
     <el-menu :default-active="activeIndex" class="el-menu" mode="horizontal" router>
       <el-menu-item index="/">主页</el-menu-item>
-      <el-submenu index="/house_list">
-        <template slot="title">我在找房</template>
-        <el-menu-item index="/house_list/1">我要买房</el-menu-item>
-        <el-menu-item index="/house_list/0">我要租房</el-menu-item>
-      </el-submenu>
+      <el-menu-item index="/house_list/1">我在找房</el-menu-item>
       <el-submenu index="/post_house">
         <template slot="title">我有房子</template>
-        <el-menu-item index="/post_house/1">我要出售</el-menu-item>
-        <el-menu-item index="/post_house/0">我要出租</el-menu-item>
+        <el-menu-item :index="sellCenterIndex">我要出售</el-menu-item>
+        <el-menu-item :index="rentCenterIndex">我要出租</el-menu-item>
       </el-submenu>
-      <el-menu-item index="/customer_center">买家中心</el-menu-item>
-      <el-menu-item index="/seller_center">卖家中心</el-menu-item>
+      <el-menu-item :index="customerCenterIndex">用户中心</el-menu-item> 
+      <!-- <el-menu-item index="/seller_center">卖家中心</el-menu-item> -->
       <!-- <el-submenu index="5">
         <template slot="title">个人中心</template>
         <el-menu-item index="5-1">房屋意向</el-menu-item>
@@ -54,9 +50,12 @@ export default {
   data() {
     return {
       activeIndex: this.$route.path,
-      nickname: sessionStorage.getItem("nickname"),
+      nickname: sessionStorage.getItem("user_id"),
       input: "",
-      agentCenterIndex: sessionStorage.getItem('agent_id') ? '/agent_center' : '/agent_login'
+      agentCenterIndex: sessionStorage.getItem('agent_id') ? '/agent_center' : '/agent_login',
+      customerCenterIndex: sessionStorage.getItem('user_id') ? '/customer_center' : '/login',
+      sellCenterIndex: sessionStorage.getItem('user_id') ? '/post_house/1' : '/login',
+      rentCenterIndex: sessionStorage.getItem('user_id') ? '/post_house/0' : '/login',
     };
   },
   methods: {

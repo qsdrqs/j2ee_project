@@ -16,10 +16,13 @@
 			</el-table-column>
 			<el-table-column prop="create_time" label="发布时间">
 			</el-table-column>
+
 			<el-table-column prop="agentName" label="经纪人">
+
 			</el-table-column>
 			<el-table-column prop="tel" label="经纪人联系电话">
 			</el-table-column>
+      -->
 			<el-table-column prop="status_text" label="状态">
 <!--        <el-tag type="0" size="small" :class="{ hidden: scope.row.status != 0 }">已完成</el-tag>-->
 <!--        <el-tag type="1" size="small" :class="{ hidden: scope.row.status != 1 }">已完成</el-tag>-->

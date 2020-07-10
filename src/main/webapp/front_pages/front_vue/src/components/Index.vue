@@ -15,7 +15,7 @@
                             <span>新闻</span>
                             <el-button type="text" class="fr" @click="viewMoreNews">更多</el-button>
                         </div>
-                        <el-table :data="newsList.slice(0,4)" style="width: 100%" stripe @row-click="newsDetails" max-height="250px" >
+                        <el-table :data="newsList.slice(0,2)" style="width: 100%" stripe @row-click="newsDetails" max-height="250px" >
                             <el-table-column prop="pubDate" label="日期" width="100"></el-table-column>
                             <el-table-column prop="title" label="新闻标题"></el-table-column>
                         </el-table>
@@ -75,21 +75,17 @@ export default {
           that.newsList= jsonObj.rss.channel.item;
           })
           },
-    // getList() {
-    //   var that = this;
-    //   this.$ajax.get("http://localhost:3333/house/index").then(res => {
-    //     that.hotApartment = res.data[0];
-    //     that.newApartment = res.data[1];
-    //     for (var i = 0; i < that.hotApartment.length; i++) {
-    //         that.hotApartment[i].time = that.hotApartment[i].post_time.slice(0, 10);
-    //         that.hotApartment[i].title = (that.hotApartment[i].is_for_sell ? '[出售]' : '[出租]') + that.hotApartment[i].title;
-    //     }
-    //     for (var i = 0; i < that.newApartment.length; i++) {
-    //         that.newApartment[i].time = that.newApartment[i].post_time.slice(0, 10);
-    //         that.newApartment[i].title = (that.newApartment[i].is_for_sell ? '[出售]' : '[出租]') + that.newApartment[i].title;
-    //     }
-    //      });
-    //   },
+     getList() {
+       var that = this;
+       this.$ajax.get("http://localhost:8080/house/findAllBypages?p=1").then(res => {
+         
+         that.newApartment = res.data[1];
+         for (var i = 0; i < that.newApartment.length; i++) {
+             that.newApartment[i].time = that.newApartment[i].post_time.slice(0, 10);
+             that.newApartment[i].title = (that.newApartment[i].is_for_sell ? '[出售]' : '[出租]') + that.newApartment[i].title;
+         }
+          });
+      },
   getImage() { 
     
 for (var i = 0; i < 3; i++) {
