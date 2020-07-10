@@ -23,8 +23,8 @@
       <el-menu-item index="/house_list/1">我在找房</el-menu-item>
       <el-submenu index="/post_house">
         <template slot="title">我有房子</template>
-        <el-menu-item index="/post_house/1">我要出售</el-menu-item>
-        <el-menu-item index="/post_house/0">我要出租</el-menu-item>
+        <el-menu-item :index="sellCenterIndex">我要出售</el-menu-item>
+        <el-menu-item :index="rentCenterIndex">我要出租</el-menu-item>
       </el-submenu>
       <el-menu-item :index="customerCenterIndex">用户中心</el-menu-item> 
       <!-- <el-menu-item index="/seller_center">卖家中心</el-menu-item> -->
@@ -53,7 +53,9 @@ export default {
       nickname: sessionStorage.getItem("user_id"),
       input: "",
       agentCenterIndex: sessionStorage.getItem('agent_id') ? '/agent_center' : '/agent_login',
-      customerCenterIndex: sessionStorage.getItem('user_id') ? '/customer_center' : '/login'
+      customerCenterIndex: sessionStorage.getItem('user_id') ? '/customer_center' : '/login',
+      sellCenterIndex: sessionStorage.getItem('user_id') ? '/post_house/1' : '/login',
+      rentCenterIndex: sessionStorage.getItem('user_id') ? '/post_house/0' : '/login',
     };
   },
   methods: {
