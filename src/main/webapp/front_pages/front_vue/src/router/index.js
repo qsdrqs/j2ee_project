@@ -62,7 +62,7 @@ export default new Router({
     {
       path: '/seller_center',
       name: '卖家中心',
-      component: SellerCenter
+      component: SellerCenter,
     },
     {
       path: '/agent_login',
