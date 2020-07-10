@@ -284,8 +284,7 @@
           //将返回的文件储存路径赋值picture字段
           this.form.picture = file.response.message;
 
-          //存储多个picture路径
-          // this.form.fileList.push(file.response.message);
+          this.form.fileList.push(file.response.message);
         }
       },
 

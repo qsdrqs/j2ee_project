@@ -1,6 +1,7 @@
 package grp.wudi.j2ee.Controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import grp.wudi.j2ee.entity.House;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.util.List;
 
 @Controller
@@ -161,8 +163,9 @@ public class HouseController {
 
 
         //此处有问题，多个图片的路径还无法读取
-        String housePicture = (String)jsonData.get("picture");
-//        String housePicture = (String)jsonData.get("fileList");
+        //String housePicture = (String)jsonData.get("picture");
+        JSONArray tmp = (JSONArray)jsonData.get("fileList");
+        String housePicture = tmp.toJSONString();
         System.out.println(housePicture);
 
 
