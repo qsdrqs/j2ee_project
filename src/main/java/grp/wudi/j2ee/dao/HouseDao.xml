@@ -136,13 +136,13 @@
         has_lift,
         type,
         house_head,
-        house_roomnun,
+        house_roomnum,
         house_livingroomnum,
         house_decoration,
-        decorationdesc,
-        selling_point
+
+        selling_point,
         surroundings,
-        teaffic)
+        traffic)
         VALUE (
         #{userId},
         #{housePicture},
@@ -154,13 +154,13 @@
         #{hasLift},
         #{type},
         #{houseHead},
-        #{houseRoomnun},
+        #{houseRoomnum},
         #{houseLivingroomnum},
         #{houseDecoration},
-        #{decorationdesc},
-        #{sellingPoint}
+
+        #{sellingPoint},
         #{surroundings},
-        #{teaffic})
+        #{traffic})
     </insert>
 
 </mapper>

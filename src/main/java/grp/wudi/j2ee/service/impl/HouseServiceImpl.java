@@ -110,7 +110,7 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public int addHouseFront(House house) {
-        return houseDao.updateHouse(house);
+        return houseDao.addHouseFront(house);
     }
 
 
