@@ -206,7 +206,7 @@ public class HouseController {
 
 
 
-    
+
     @RequestMapping(path = "/getHouseByUid")
     @CrossOrigin(origins = "*")
     public @ResponseBody
@@ -219,5 +219,4 @@ public class HouseController {
         }
         return null;
     }
-
 }

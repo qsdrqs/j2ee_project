@@ -31,4 +31,12 @@ public interface HouseService {
 
     public int addHouseFront(House house);
 
+    public Integer getAgentId(int hid);
+
+    List<House> allocation();
+
+    PageInfo<House> allocation(int p);
+
+    public int allow(House house);
+
 }

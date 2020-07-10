@@ -32,6 +32,14 @@ public interface HouseDao {
 
     public int addHouseFront(House house);
 
+    // 获取房源经纪人
+    public Integer getAgent(int id);
 
+
+	// 根据房源状态查找房源信息
+	public List<House> findByStatus();
+
+	// 添加分配信息
+	public int allocation(House house);
 
 }

@@ -6,6 +6,7 @@
         <el-radio-group v-model="list_type" @change="getList">
           <el-radio-button label="1">我的房源</el-radio-button>
           <el-radio-button label="2">已完成</el-radio-button>
+          <el-radio-button label="0">个人信息修改</el-radio-button>
           <!--<el-radio-button label="0">待接订单</el-radio-button>-->
         </el-radio-group>
       </div>
@@ -43,31 +44,62 @@
         </el-table-column>
       </el-table>
 
-			<!-- 待接订单表格 -->
-			<el-table v-loading="loading" :data="orderList" style="width: 100%; text-align: left;" stripe :hidden="list_type != 0" @cellclick="viewHouse">
-				<el-table-column prop="title" label="房源标题">
-				</el-table-column>
-				<el-table-column prop="buyer_name" label="买家">
-				</el-table-column>
-				<el-table-column prop="create_time" label="创建时间">
-				</el-table-column>
-				<el-table-column prop="operate" label="操作">
-					<template slot-scope="scope">
-						<el-button @click="viewHouse(scope.row)" type="text" size="small">查看</el-button>
-            <el-button @click="getOrder(scope.row)" type="text" size="small" :class="{ hidden: scope.row.status != 1 }">
-              接单
-            </el-button>
-					</template>
-				</el-table-column>
-			</el-table>
-		</div>
+			<!-- 个人信息修改 -->
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" :hidden="list_type != 0" style="text-align: left">
+      <el-form-item label="姓名" prop="name">
+        <el-input v-model="ruleForm.name"></el-input>
+      </el-form-item>
+      <el-form-item label="性别" prop="sex">
+        <el-select v-model="ruleForm.sex" type="flex" >
+          <el-option label="女" value="female"></el-option>
+          <el-option label="男" value="male"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="电话" prop="telephone">
+        <el-input v-model="ruleForm.telephone"></el-input>
+      </el-form-item>
+      <el-form-item label="邮箱" prop="email">
+        <el-input v-model="ruleForm.email"></el-input>
+      </el-form-item>
+       <el-form-item label="个人简介" prop="desc">
+        <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+       </el-form-item>
+
+      <el-form-item>
+        <el-button type="primary" @click="submitForm(ruleForm)">确定</el-button>
+        <el-button @click="getAgentInfo()">重置</el-button>
+      </el-form-item>
+    </el-form>
+
 	</div>
+</div>
 </template>
 <script>
 export default {
   name: "AgentCenter",
   data() {
     return {
+      ruleForm:{
+        name: '',
+        sex: 'male',
+        telephone: '',
+        email: '',
+        desc: ''
+      },
+      rules: {
+        name: [
+          { required: true, message: '名字不能为空', trigger: 'blur' },
+          { min: 1,max: 20, message: '名字别太长！', trigger: 'blur' }
+        ],
+        telephone: [
+          { required: true, message: '电话不能为空', trigger: 'blur' },
+          { min: 5,max: 13, message: '电话号码不正确', trigger: 'blur' }
+        ],
+        email: [
+          { required: true, message: '邮箱不能为空', trigger: 'blur' },
+        ]
+
+      },
       agentName: sessionStorage.getItem("agentName"),
       list_type: 1,
       loading: false,
@@ -76,6 +108,35 @@ export default {
     };
   },
   methods: {
+    submitForm(form){
+      var numpatt=new RegExp("[^0-9]");
+      if(numpatt.test(form.telephone)){
+        this.$message({
+          message: "电话必须为数字！",
+          type: 'error'
+        })
+        return;
+      }
+      var emailpatt=new RegExp(".@.*\.")
+      if(!emailpatt.test(form.email)){
+        this.$message({
+          message: "邮箱格式不正确！",
+          type: 'error'
+        })
+        return;
+      }
+      var url = "http://localhost:8080/agent/updateAgent";
+      form.id=sessionStorage.getItem("agentId");
+      this.$ajax.post(url, form).then(res => {
+        if (res.status == 200) {
+          console.log("OK!");
+          this.$message({
+            message: '更新成功',
+            type: 'success'
+          })
+        }
+      });
+    },
     red_cell({ row, column, rowIndex, columnIndex }) {
       if (column.label == "房源类型") {
         return "color:red";
@@ -83,6 +144,7 @@ export default {
     },
     getList() {
       var that = this;
+      this.getAgentInfo();
       var id = sessionStorage.getItem("agentId");
       console.log(id);
       console.log(this.list_type);
@@ -212,6 +274,26 @@ export default {
             });
         }
       });
+    },
+    getAgentInfo(){
+      var that = this;
+      that.ruleForm.name = sessionStorage.getItem("agentName");
+      var id = sessionStorage.getItem("agentId");
+      var url =
+        "http://localhost:8080/agent/AgentInfo?id=" + id;
+      this.$ajax.get(url).then(res => {
+        console.log(res);
+        if (res.data.agentSex == 0) {
+          that.ruleForm.sex = "女";
+        }
+        else{
+          that.ruleForm.sex = "男";
+        }
+        that.ruleForm.telephone = res.data.agentTel;
+        that.ruleForm.email = res.data.agentEmail;
+        that.ruleForm.desc = res.data.agentProfile;
+      })
+
     },
     //评论房子
     feedbackHouse(object) {

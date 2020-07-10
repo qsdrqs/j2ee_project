@@ -59,7 +59,7 @@ public class AgentServiceImpl implements AgentService {
         }
         Agent agent1 = dao.findById(agent.getAgentId());
         System.out.println("处理更新前：" + agent);
-        if (!agent1.getAgentPassword().equals(agent.getAgentPassword())) {
+        if (!agent1.getAgentPassword().equals(agent.getAgentPassword()) && agent.getAgentPassword() != null) {
             agent.setAgentPassword(SHA256Util.stringToSHA256(agent.getAgentPassword()));
         }
         return dao.updateAgent(agent);

@@ -240,9 +240,7 @@ export default {
   name: "HouseDetails",
   data() {
     return {
-<<<<<<< HEAD
-      swiperPic: ["/static/img/a1.jpg","/static/img/a2.jpg","/static/img/a3.jpg","/static/img/a4.jpg"],
-=======
+      //swiperPic: ["/static/img/a1.jpg","/static/img/a2.jpg","/static/img/a3.jpg","/static/img/a4.jpg"],
       swiperPic: [
         "/static/img/agent_img/0.jpg",
         "/static/img/agent_img/1.jpg",
@@ -250,7 +248,6 @@ export default {
         "/static/img/agent_img/3.jpg"
       ],
       imgId:0,
->>>>>>> job_offer
       house: {},
       // feedback: [],
       feedback:{},
@@ -273,14 +270,9 @@ export default {
   },
   methods: {
     initInfo() {
-      
       var that = this;
-<<<<<<< HEAD
-      console.log("房源ID是:" + this.$route.params.id);
-=======
       that.imgId=Math.ceil(Math.random()*3);
       console.log("房源ID是:" + this.$route.params.id)
->>>>>>> job_offer
       var houseId = this.$route.params.id;
       that.swiperPic.length=0;
       for(var i=1;i<=4;i++){

@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -144,5 +141,26 @@ public class HouseServiceTest {
         System.out.println(imglogo);
     }
 
+    @Test
+    public void testGetAgentId() {
+        System.out.println(houseService.getAgentId(10));
+    }
 
+    @Test
+    public void testAllocation() {
+        System.out.println(houseService.allocation());
+    }
+    
+    @Test
+    public void testAllocation1() {
+        System.out.println(houseService.allocation(1));
+    }
+    
+    @Test
+    public void testAllow() {
+        House house = new House();
+        house.setHouseId(50);
+        house.setAgentId(78);
+        houseService.allow(house);
+    }
 }

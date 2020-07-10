@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -99,14 +100,50 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public String downloadImg(int houseId) {
+//        String name = houseDao.getImgName(houseId);
+//        String path = HouseService.class.getResource("/").getPath();
         House house = houseDao.findById(houseId);
         String path = house.getHousePicture();
         return path;
-    }
 
+    }
 
     @Override
     public int addHouseFront(House house) {
         return houseDao.updateHouse(house);
+    }
+
+
+
+
+
+
+
+    @Override
+    public Integer getAgentId(int hid) {
+        return houseDao.getAgent(hid);
+
+    }
+
+    @Override
+    public List<House> allocation() {
+        List<House> houses = new ArrayList<House>();
+        for (House house : houseDao.findByStatus()) {
+            if (null == getAgentId(house.getHouseId()))
+                houses.add(house);
+        }
+        return houses;
+    }
+
+    @Override
+    public PageInfo<House> allocation(int p) {
+        PageHelper.startPage(p, 5);
+        List<House> houses = allocation();
+        return new PageInfo<House>(houses, 5);
+    }
+
+    @Override
+    public int allow(House house) {
+        return houseDao.allocation(house);
     }
 }
