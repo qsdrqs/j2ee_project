@@ -174,7 +174,7 @@
           经纪人详情
         </div>
         <div>
-          <img :src="swiperPic[imgId]"/>
+          <img :src="a_swiperPic[imgId]"/>
           <br>
           <el-rate
     v-model="value2"
@@ -241,7 +241,7 @@ export default {
   data() {
     return {
       //swiperPic: ["/static/img/a1.jpg","/static/img/a2.jpg","/static/img/a3.jpg","/static/img/a4.jpg"],
-      swiperPic: [
+      a_swiperPic: [
         "/static/img/agent_img/0.jpg",
         "/static/img/agent_img/1.jpg",
         "/static/img/agent_img/2.jpg",
