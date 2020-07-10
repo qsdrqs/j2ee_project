@@ -49,7 +49,6 @@ public class HouseAgentServiceImpl implements HouseAgentService {
     @Override
     public Agent findAgentByHouseId(int houseId){
         Agent agent = houseAgentDao.findAgentByHouseId(houseId);
-        agent.setAgentPassword(null);
         return agent;
     }
 }

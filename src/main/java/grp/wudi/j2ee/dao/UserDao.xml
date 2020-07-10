@@ -53,14 +53,17 @@
 	<update id="update"
 		parameterType="grp.wudi.j2ee.entity.User">
 		UPDATE user
-		SET 
+		<set>
 		user_name=#{userName}, 
 		user_sex=#{userSex},
+		<if test="userAccount != null">
 		user_account = #{userAccount},
+		</if>
 		user_passwordsha256 = #{userPasswordsha256},
 		user_mail = #{userMail},
 		user_telephone = #{userTelephone},
 		user_updatetime = #{userUpdatetime}
+		</set>
 		WHERE user_id = #{userId}
 	</update>
 	
