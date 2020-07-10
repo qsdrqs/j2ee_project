@@ -78,18 +78,34 @@
     </insert>
 
     <update id="updateHouse" parameterType="grp.wudi.j2ee.entity.House">
-        UPDATE house SET
+        UPDATE house
+      <set>
+        <if test="userId != 0">
         user_id = #{userId},
+        </if>
+        <if test="housePicture != null">
         house_picture = #{housePicture},
+        </if>
+        <if test="address != null">
         address = #{address},
+        </if>
+        <if test="unitPrice != 0">
         unit_price = #{unitPrice},
-        area = #{area},
-        status = #{status},
-        floor = #{floor},
+        </if>
+        <if test="area != 0">
+            area = #{area},
+        </if>
+            status = #{status},
+        <if test="floor != 0">
+            floor = #{floor},
+        </if>
+        <if test="description != null">
         description = #{description},
-        has_lift = #{hasLift},
-        type = #{type}
+        </if>
+            has_lift = #{hasLift},
+            type = #{type}
         WHERE house_id = #{houseId}
+      </set>
     </update>
 
     <delete id="deleteHouse" parameterType="int">
@@ -137,6 +153,7 @@
         type,
         house_head,
         house_roomnum,
+        house_totalfloor,
         house_livingroomnum,
         house_decoration,
 
@@ -155,6 +172,7 @@
         #{type},
         #{houseHead},
         #{houseRoomnum},
+        #{houseTotalfloor},
         #{houseLivingroomnum},
         #{houseDecoration},
 

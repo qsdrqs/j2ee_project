@@ -219,7 +219,7 @@ export default {
     },
     //查看房子详情
     viewHouse(object) {
-      this.$router.push("/house_details/" + object.house_id);
+      this.$router.push("/house_details/" + object.houseId);
 		},
     //接单
     getOrder(object) {

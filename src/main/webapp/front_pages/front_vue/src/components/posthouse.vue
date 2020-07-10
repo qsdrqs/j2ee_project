@@ -48,9 +48,9 @@
       <!--			<el-form-item label="卫生间数" prop="bathroom_num">-->
       <!--				<el-input v-model="form.bathroom_num"></el-input>-->
       <!--			</el-form-item>-->
-      <!--			<el-form-item label="总楼层数" prop="total_floor">-->
-      <!--				<el-input v-model="form.total_floor"></el-input>-->
-      <!--			</el-form-item>-->
+            <el-form-item label="总楼层数" prop="total_floor">
+              <el-input v-model="form.total_floor"></el-input>
+            </el-form-item>
       <el-form-item label="所在楼层" prop="floor">
         <el-input v-model="form.floor"></el-input>
       </el-form-item>
@@ -197,7 +197,7 @@
       return {
         form: {
           is_for_sell: this.$route.params.ifs,
-          user: sessionStorage.getItem("id"),
+          userId: sessionStorage.getItem("userId"),
           title: "",
           description: "",
           // price: "",
@@ -206,7 +206,7 @@
           livingroom_num: "",
           // kitchen_num: "",
           // bathroom_num: "",
-          // total_floor: "",
+          total_floor: "",
           floor: "",
           // build_year: "",
           properties: "",

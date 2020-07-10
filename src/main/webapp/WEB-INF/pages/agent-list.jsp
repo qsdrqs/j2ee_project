@@ -193,7 +193,6 @@
 											onclick="location.href='../agent/PreupdateAgent.do?id=${agent.agentId}'">编辑</button>
 
 
-											<button type="button" class="btn bg-olive btn-xs">详情</button>
 
 
 													<button type="button" class="btn bg-olive btn-xs"

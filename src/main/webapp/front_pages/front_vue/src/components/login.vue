@@ -38,6 +38,7 @@ export default {
           sessionStorage.setItem('userId', res.data.userId);
           sessionStorage.setItem('userAccount', res.data.userAccount);
           window.location.href = '/#/customer_center';
+          location.reload();
         } else {
           this.$alert(res.data.msg, '账号或者密码错误', {
             confirmButtonText: '确定',

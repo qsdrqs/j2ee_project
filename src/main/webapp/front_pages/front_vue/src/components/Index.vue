@@ -15,7 +15,7 @@
                             <span>新闻</span>
                             <el-button type="text" class="fr" @click="viewMoreNews">更多</el-button>
                         </div>
-                        <el-table :data="newsList.slice(0,2)" style="width: 100%" stripe @row-click="newsDetails" max-height="250px" >
+                        <el-table :data="newsList.slice(0,5)" style="width: 100%" stripe @row-click="newsDetails"  >
                             <el-table-column prop="pubDate" label="日期" width="100"></el-table-column>
                             <el-table-column prop="title" label="新闻标题"></el-table-column>
                         </el-table>
@@ -28,8 +28,8 @@
                     <el-button type="text" class="fr" @click="viewMoreHouse">更多</el-button>
                   </div>
                   <el-table :data="newApartment" style="width: 100%" stripe @cell-click="openNewApartment">
-                    <el-table-column prop="housetime" label="发布日期" width="100"></el-table-column>
-                    <el-table-column prop="housetitle" label="房屋信息"></el-table-column>
+                    <el-table-column prop="createTimeStr" label="发布日期" width="100"></el-table-column>
+                    <el-table-column prop="houseHead" label="房屋信息"></el-table-column>
                   </el-table>
                 </div>
               </el-col>
@@ -77,14 +77,11 @@ export default {
           },
      getList() {
        var that = this;
-       this.$ajax.get("http://localhost:8080/house/findAllBypages?p=1").then(res => {
+       this.$ajax.get("http://localhost:8080/house/indexHouse?p=1").then(res => {
          
-         that.newApartment = res.data[1];
-         for (var i = 0; i < that.newApartment.length; i++) {
-             that.newApartment[i].time = that.newApartment[i].post_time.slice(0, 10);
-             that.newApartment[i].title = (that.newApartment[i].is_for_sell ? '[出售]' : '[出租]') + that.newApartment[i].title;
-         }
-          });
+         console.log(res.data);
+         that.newApartment = res.data.list;
+        });
       },
   getImage() { 
     
@@ -116,7 +113,7 @@ for (var i = 0; i < 3; i++) {
       }
   },
   created() {
-    // this.getList();
+    this.getList();
     this.getImage();
     this.getNewsList();
   },

@@ -117,10 +117,10 @@
 							<input type="text" class="form-control" name="address"
 								   placeholder="" value="${house.address}" readonly="readonly">
 						</div>
-						<div class="col-md-2 title">图片</div>
+						<div class="col-md-2 title">装修情况</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="housePicture"
-								   placeholder="" value="${house.housePicture}" readonly="readonly">
+							<input type="text" class="form-control" name="houseDecoration"
+								   placeholder="" value="${house.houseDecoration}" readonly="readonly">
 						</div>
 
 

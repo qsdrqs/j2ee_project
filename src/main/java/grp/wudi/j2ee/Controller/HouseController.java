@@ -98,6 +98,22 @@ public class HouseController {
     }
 
 
+    @RequestMapping(path = "/indexHouse")
+    @CrossOrigin(origins = "*")
+    public @ResponseBody String findAllInIndex(int p){
+        System.out.println(p);
+        PageInfo<House> list = houseService.findAll(p);
+        System.out.println("表现层正在执行分页查找房源信息...");
+        System.out.println(list);
+        if (null != list) {
+            String result = JSON.toJSONString(list);
+            System.out.println(list);
+            return result;
+        }
+        return null;
+    }
+
+
 
     /**
      * 审核房屋信息
@@ -133,6 +149,7 @@ public class HouseController {
 	@RequestMapping(path = "/update.do")
 	public String update(House house) {
 		System.out.println("表现层从表单接受到的信息：" + house);
+    house.setHousePicture(null);
 		houseService.update(house);
 		return "redirect:/house/findAllBypagesBack.do";
 	}
@@ -256,8 +273,7 @@ public class HouseController {
         JSONObject jsonData = JSONObject.parseObject(data);
 
         //还未更新登录拦截器，用户id手动设置
-//        int userId = Integer.parseInt((String)jsonData.get("user"));
-        int userId = 44;
+        int userId = Integer.parseInt((String)jsonData.get("userId"));
 
 
 
@@ -276,9 +292,11 @@ public class HouseController {
         int area = Integer.parseInt((String) jsonData.get("area"));
 
         int floor = Integer.parseInt((String)jsonData.get("floor"));
+        int totalFloor = Integer.parseInt((String)jsonData.get("total_floor"));
         String description =(String)jsonData.get("description");
         int hasLift = Integer.parseInt((String) jsonData.get("lift"));
         int type = Integer.parseInt((String) jsonData.get("is_for_sell"));
+        type = type==1 ? 0 : 1;
 
         String houseHead = (String)jsonData.get("title");
 
@@ -298,6 +316,7 @@ public class HouseController {
         house.setUnitPrice(unitPrice);
         house.setArea(area);
         house.setFloor(floor);
+        house.setHouseTotalfloor(totalFloor);
         house.setDescription(description);
         house.setHasLift(hasLift);
         house.setType(type);

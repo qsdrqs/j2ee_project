@@ -39,6 +39,7 @@ export default {
           sessionStorage.setItem('agentId', res.data.agentId);
           sessionStorage.setItem('agentName', res.data.agentName);
           window.location.href = '/#/agent_center';
+          location.reload();
         } else {
           this.$alert(res.data.msg, '账号或者密码错误', {
             confirmButtonText: '确定',

@@ -174,7 +174,7 @@
           经纪人详情
         </div>
         <div>
-          <img :src="a_swiperPic[imgId]"/>
+          <img :src="a_swiperPic[imgId]" style="zoom:200%"/>
           <br>
           <el-rate
     v-model="value2"
@@ -247,6 +247,7 @@ export default {
         "/static/img/agent_img/2.jpg",
         "/static/img/agent_img/3.jpg"
       ],
+      swiperPic: [],
       imgId:0,
       house: {},
       // feedback: [],

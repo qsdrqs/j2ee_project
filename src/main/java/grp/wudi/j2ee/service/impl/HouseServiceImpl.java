@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +41,8 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public House getHouseById(int id) {
+        System.out.println("service层打印日志！");
+        System.out.println(houseDao.findById(id));
         return houseDao.findById(id);
     }
     
@@ -50,6 +53,7 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public int add(House house) {
+        house.setCreateTime(new Date());
         return houseDao.addHouse(house);
     }
 
@@ -92,6 +96,7 @@ public class HouseServiceImpl implements HouseService {
         house.setMinArea(minArea);
         house.setMaxArea(maxArea);
         house.setHasLift(hasLift);
+        house.setStatus(1);
         PageHelper.startPage(p, 2);
         List<House> houses = houseDao.findByKeyword(house);
         return new PageInfo<House>(houses, 3);
@@ -110,6 +115,7 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public int addHouseFront(House house) {
+        house.setCreateTime(new Date());
         return houseDao.addHouseFront(house);
     }
 
@@ -137,8 +143,8 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public PageInfo<House> allocation(int p) {
-        PageHelper.startPage(p, 5);
         List<House> houses = allocation();
+        PageHelper.startPage(p, 5);
         return new PageInfo<House>(houses, 5);
     }
 
