@@ -4,8 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
+
+import grp.wudi.j2ee.entity.Agent;
 import grp.wudi.j2ee.entity.House;
 import grp.wudi.j2ee.entity.Result;
+import grp.wudi.j2ee.service.impl.AgentServiceImpl;
 import grp.wudi.j2ee.service.impl.HouseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.util.List;
 
 @Controller
@@ -21,6 +23,8 @@ import java.util.List;
 public class HouseController {
     @Autowired
     private HouseServiceImpl houseService;
+    @Autowired
+    private AgentServiceImpl agentService;
     @RequestMapping(path = "/findAllHouse.do")
     public ModelAndView findAll(){
         ModelAndView mv = new ModelAndView();
@@ -101,47 +105,82 @@ public class HouseController {
 //    }
 
 
-    @RequestMapping(path = "/Preupdate.do")
-    public ModelAndView PreupdateAgent(int id) {
-        System.out.println("业务层正在执行修改...");
-        ModelAndView mv = new ModelAndView();
-        House house = houseService.getHouseById(id);
-        System.out.println("从数据库得到的agent信息"+house);
-        mv.addObject("house", house);
-        mv.setViewName("house-update");
-        return mv;
-    }
+	@RequestMapping(path = "/Preupdate.do")
+	public ModelAndView PreupdateAgent(int id) {
+		System.out.println("业务层正在执行修改...");
+		ModelAndView mv = new ModelAndView();
+		House house = houseService.getHouseById(id);
+		System.out.println("从数据库得到的agent信息" + house);
+		mv.addObject("house", house);
+		mv.setViewName("house-update");
+		return mv;
+	}
 
-    @RequestMapping(path = "/update.do")
-    public String update(House house) {
-        System.out.println("表现层从表单接受到的信息：" + house);
-        houseService.update(house);
-        return "redirect:/house/findAllBypagesBack.do";
-    }
+	@RequestMapping(path = "/update.do")
+	public String update(House house) {
+		System.out.println("表现层从表单接受到的信息：" + house);
+		houseService.update(house);
+		return "redirect:/house/findAllBypagesBack.do";
+	}
 
-    @RequestMapping(path = "/soldout")
-    @CrossOrigin(origins = "*")
-    public @ResponseBody String setSoldOut(int houseId){
-        System.out.println("表现层正在执行修改房屋状态:"+houseId);
-        House house = houseService.getHouseById(houseId);
-        house.setStatus(3);
-        houseService.update(house);
-        return "OK!";
-    }
+	@RequestMapping(path = "/allowcation.do")
+	public String allowcation(@RequestParam(value = "p", defaultValue = "1") int p, Model model) {
+		PageInfo<House> pi = houseService.allocation(p);
+		model.addAttribute("pi", pi);
+		return "allocation-list";
+	}
 
-    @RequestMapping(path = "/getHouseById")
-    @CrossOrigin(origins = "*")
-    public @ResponseBody
-    String findHouseById(int hid) {
-        System.out.println("表现层正在执行查询具体房源信息...");
-        System.out.println(hid);
-        House house = houseService.getHouseById(hid);
-        if (null != house) {
-            String result = JSON.toJSONString(house);
-            return result;
-        }
-        return null;
-    }
+	@RequestMapping("/allow.do")
+	public String houseAllow(@RequestParam(value = "id", required = true) int id,
+			@RequestParam(value = "p", defaultValue = "1") int p, Model model) {
+		PageInfo<Agent> pi = agentService.finAll(p);
+		model.addAttribute("pi", pi);
+		return "house-allow";
+
+	}
+
+	@PostMapping("/allow.do")
+	public String allow(House house) {
+		houseService.allow(house);
+		return "redirect:/house/allowcation.do";
+
+	}
+
+	@RequestMapping(path = "/soldout")
+	@CrossOrigin(origins = "*")
+	public @ResponseBody String setSoldOut(int houseId) {
+		System.out.println("表现层正在执行修改房屋状态:" + houseId);
+		House house = houseService.getHouseById(houseId);
+		house.setStatus(3);
+		houseService.update(house);
+		return "OK!";
+	}
+
+	@RequestMapping(path = "/getHouseById")
+	@CrossOrigin(origins = "*")
+	public @ResponseBody String findHouseById(int hid) {
+		System.out.println("表现层正在执行查询具体房源信息...");
+		System.out.println(hid);
+		House house = houseService.getHouseById(hid);
+		if (null != house) {
+			String result = JSON.toJSONString(house);
+			return result;
+		}
+		return null;
+	}
+
+	@RequestMapping(path = "/getHouseByUid")
+	@CrossOrigin(origins = "*")
+	public @ResponseBody String findHouseByUid(@RequestParam(value = "id", required = true) int id) {
+		System.out.println("表现层正在执行查询具体房源信息...");
+		List<House> houses = houseService.getHouseByUserId(id);
+		if (null != houses) {
+			String result = JSON.toJSONString(houses);
+			return result;
+		}
+		return null;
+	}
+
 
 
     @RequestMapping(path = "/newHouse")
@@ -227,20 +266,4 @@ public class HouseController {
 
     }
 
-
-
-
-
-    @RequestMapping(path = "/getHouseByUid")
-    @CrossOrigin(origins = "*")
-    public @ResponseBody
-    String findHouseByUid(@RequestParam(value = "id", required = true) int id ) {
-        System.out.println("表现层正在执行查询具体房源信息...");
-        List<House> houses = houseService.getHouseByUserId(id);
-        if (null != houses) {
-            String result = JSON.toJSONString(houses);
-            return result;
-        }
-        return null;
-    }
 }
