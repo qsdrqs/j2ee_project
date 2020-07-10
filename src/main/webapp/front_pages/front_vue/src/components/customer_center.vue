@@ -8,10 +8,12 @@
 			</el-table-column>
 			<el-table-column prop="create_time" label="发布时间">
 			</el-table-column>
+      <!--
 			<el-table-column prop="agent_name" label="经纪人">
 			</el-table-column>
 			<el-table-column prop="buyer_name" label="买家">
 			</el-table-column>
+      -->
 			<el-table-column prop="status_text" label="状态">
 			</el-table-column>
 			<el-table-column prop="operate" label="操作">

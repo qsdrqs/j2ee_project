@@ -130,11 +130,9 @@ public class HouseController {
 
 	@RequestMapping("/allow.do")
 	public String houseAllow(@RequestParam(value = "id", required = true) int id,
-			@RequestParam(value = "p", defaultValue = "1") int p, Model model1, Model model2) {
-		House house = houseService.getHouseById(id);
-		model1.addAttribute("house", house);
+			@RequestParam(value = "p", defaultValue = "1") int p, Model model) {
 		PageInfo<Agent> pi = agentService.finAll(p);
-		model2.addAttribute("pi", pi);
+		model.addAttribute("pi", pi);
 		return "house-allow";
 
 	}
@@ -142,7 +140,7 @@ public class HouseController {
 	@PostMapping("/allow.do")
 	public String allow(House house) {
 		houseService.allow(house);
-		return "redirect:/house/allocation.do";
+		return "redirect:/house/allowcation.do";
 
 	}
 
