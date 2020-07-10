@@ -1,6 +1,7 @@
 package grp.wudi.j2ee.Controller;
 
 
+import com.alibaba.fastjson.JSON;
 import grp.wudi.j2ee.entity.House;
 import grp.wudi.j2ee.entity.Result;
 import grp.wudi.j2ee.service.impl.HouseServiceImpl;
@@ -33,7 +34,7 @@ public class UploadDownController {
      */
     @RequestMapping("/upload")
     @CrossOrigin(origins = "*")
-    public Result upload(@RequestParam("picture") MultipartFile picture, HttpServletRequest request) {
+    public String upload(@RequestParam("picture") MultipartFile picture, HttpServletRequest request) {
         System.out.println("表现层在执行上传图片");
         //获取文件在服务器的储存位置
         String path = request.getSession().getServletContext().getRealPath("/picture");
@@ -75,11 +76,15 @@ public class UploadDownController {
             house.setHousePicture(path+fileName);
 
             //将文件在服务器的存储路径返回
-            return new Result(true,"/upload/" + fileName);
+            Result result = new Result(true,"/upload/" + fileName);
+            String json=JSON.toJSONString(result);
+            return json;
         } catch (IOException e) {
             System.out.println("上传失败");
             e.printStackTrace();
-            return new Result(false, "上传失败");
+            Result result = new Result(false, "上传失败");
+            String json=JSON.toJSONString(result);
+            return json;
         }
     }
 }

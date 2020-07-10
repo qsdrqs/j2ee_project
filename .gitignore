@@ -37,3 +37,6 @@ j2ee.iml
 #maven runner
 mvnw
 mvnw.cmd
+
+
+node_modules/

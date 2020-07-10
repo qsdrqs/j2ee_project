@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
  http://www.springframework.org/schema/beans/spring-beans.xsd
  http://www.springframework.org/schema/mvc
  http://www.springframework.org/schema/mvc/spring-mvc.xsd
@@ -12,15 +12,15 @@
 	<!--开启注解扫描 配置创建只扫描controller注解 spring 容器要扫描的包 -->
 	<!-- <context:component-scan base-package="cn.itcast"> -->
 	<context:component-scan
-		base-package="grp.wudi.j2ee">
+			base-package="grp.wudi.j2ee">
 		<!-- 制定扫包规则 ,只扫描使用@Controller 注解的 JAVA 类 -->
 		<context:include-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
+								expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
 	<!-- 配置视图解析器 -->
 	<bean id="internalResourceViewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/pages/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
@@ -35,20 +35,20 @@
 	<mvc:interceptors>
 		<!-- 定义一个拦截器 -->
 		<mvc:interceptor>
-            <!-- 拦截.do资源 -->
-            <mvc:mapping path="/**/*.do"/>
+			<!-- 拦截.do资源 -->
+			<mvc:mapping path="/**/*.do"/>
 			<!-- 设置放行资源 -->
 			<mvc:exclude-mapping path="/admin/login.do"/>
-			
-            <bean class="grp.wudi.j2ee.interceptor.LoginInterceptor"/>
+
+			<bean class="grp.wudi.j2ee.interceptor.LoginInterceptor"/>
 		</mvc:interceptor>
-		
+
 		<!-- 定义一个拦截器 -->
 		<mvc:interceptor>
 			<!-- 拦截资源 -->
 			<mvc:mapping path="/admin/**" />
 			<!-- 设置放行资源 -->
-            <mvc:exclude-mapping path="/admin/login.do" />
+			<mvc:exclude-mapping path="/admin/login.do" />
 			<mvc:exclude-mapping path="/admin/logout.do" />
 			<mvc:exclude-mapping path="/admin/update.do" />
 

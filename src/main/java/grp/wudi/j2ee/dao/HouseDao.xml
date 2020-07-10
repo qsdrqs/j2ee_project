@@ -101,23 +101,66 @@
         SELECT house_picture FROM house
         WHERE house_id = #{house_id}
     </select>
-    
+
+
     <select id="getAgent" parameterType="int" resultType="Integer">
         SELECT
         	agent_id
-        FROM 
+        FROM
         	house_agent
-        WHERE 
+        WHERE
         	house_id = #{id}
     </select>
-    
+
     <select id="findByStatus" resultType="grp.wudi.j2ee.entity.House">
         select  * from house where status = 1
     </select>
-    
+
     <insert id="allocation" parameterType="grp.wudi.j2ee.entity.House" >
         INSERT INTO
         house_agent(house_id,agent_id)
         VALUE (#{houseId},#{agentId})
     </insert>
+
+
+    <insert id="addHouseFront" keyProperty="houseId" useGeneratedKeys="true" parameterType="grp.wudi.j2ee.entity.House" >
+        INSERT INTO
+        house(
+        user_id,
+        house_picture,
+        address,
+        unit_price,
+        area,
+        floor,
+        description,
+        has_lift,
+        type,
+        house_head,
+        house_roomnum,
+        house_livingroomnum,
+        house_decoration,
+
+        selling_point,
+        surroundings,
+        traffic)
+        VALUE (
+        #{userId},
+        #{housePicture},
+        #{address},
+        #{unitPrice},
+        #{area},
+        #{floor},
+        #{description},
+        #{hasLift},
+        #{type},
+        #{houseHead},
+        #{houseRoomnum},
+        #{houseLivingroomnum},
+        #{houseDecoration},
+
+        #{sellingPoint},
+        #{surroundings},
+        #{traffic})
+    </insert>
+
 </mapper>
