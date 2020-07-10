@@ -86,8 +86,15 @@
           <el-option label="毛胚房" value="毛胚房"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="电梯数量" prop="lift">
-        <el-input v-model="form.lift"></el-input>
+<!--      <el-form-item label="电梯数量" prop="lift">-->
+<!--        <el-input v-model="form.lift"></el-input>-->
+<!--      </el-form-item>-->
+
+      <el-form-item label="有无电梯">
+        <el-radio-group v-model="form.lift" style="width: 100%;">
+          <el-radio label="1">有</el-radio>
+          <el-radio label="0">无</el-radio>
+        </el-radio-group>
       </el-form-item>
       <!--			<el-form-item label="每层房数" prop="house_per_floor">-->
       <!--				<el-input v-model="form.house_per_floor"></el-input>-->
@@ -134,14 +141,14 @@
       <el-form-item label="交通出行" prop="traffic">
         <el-input v-model="form.traffic"></el-input>
       </el-form-item>
-      <el-form-item label="图片上传">
+      <el-form-item label="发布照片">
         <el-upload
           class="upload-demo"
           action="/ap/picture/upload"
 
           ref="/upload"
           name="picture"
-          :limit="3"
+          :limit="5"
           :on-exceed="onExceed"
           :before-upload="beforeUpload"
 
@@ -306,7 +313,7 @@
       onExceed(files, fileList) {
         this.$message({
           type: 'info',
-          message: '最多只能上传一个图片',
+          message: '最多只能上传五张照片',
           duration: 6000
         });
       },
