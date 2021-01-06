@@ -8,7 +8,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "element-ui": "^2.13.2",
     "mint-ui": "^2.2.13",
     "npm": "^5.8.0",
